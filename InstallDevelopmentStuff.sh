@@ -30,6 +30,7 @@ sudo apt-get install -y -q ctags > /dev/null
 echo "[Installing OpenSSL]"
 sudo apt-get install -y -q openssl > /dev/null
 echo "[Installing OpenSSH client + server]"
+
 sudo apt-get install -y -q openssh-client openssh-server > /dev/null
 echo "[Installing Python 2.7.*]"
 sudo apt-get install -y -q python > /dev/null
@@ -111,3 +112,4 @@ sudo apt autoremove -y -q > /dev/null
 sudo apt clean -y -q > /dev/null
 sudo apt-get -y -q autoclean > /dev/null
 echo "[Done!]"
+
