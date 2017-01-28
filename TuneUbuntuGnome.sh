@@ -120,20 +120,28 @@ echo "[ ...Showing minimize-maximize icons]"
 echo "[ ...]"
 #TODO
 
-echo "[Adding Gnome shell extensions]"
-echo "[Installing 'Paper' Gnome theme]"
+echo "[Installing 'Paper' GTK theme, icons and cursors]"
 sudo add-apt-repository -y ppa:snwh/pulp &> /dev/null
 sudo apt-get update -y -q &> /dev/null
-echo "[ ... Installing 'Paper' icons]"
 sudo apt-get install -y -q paper-icon-theme > /dev/null
-echo "[ ... Installing 'Paper' GTK theme]"
 sudo apt-get install -y -q paper-gtk-theme > /dev/null
-echo "[ ... Installing 'Paper' cursors]"
 sudo apt-get install -y -q paper-cursor-theme > /dev/null
+echo "[Installing 'Flatabulous' GTK theme, icons and cursors]"
+sudo add-apt-repository -y ppa:noobslab/themes &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q flatabulous-theme > /dev/null
+sudo add-apt-repository -y ppa:noobslab/icons &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q ultra-flat-icons > /dev/null
+
+
+echo "[Adding Gnome shell extensions]"
 
 echo "[Configuring Gnome shell]"
 # TODO: new tab instead of window
 # TODO: bell
+
+echo "[Configuring Terminal]"
 
 echo "[Installing Guake (Ctr+F12)]"
 sudo apt-get install -y -q guake > /dev/null
