@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author: Javier Carretero Casado
 
-# TODO: Check we are using Ubuntu GNOME, otherwise exit saying why
+# TODO: Check we are using Ubuntu Unity, otherwise exit saying why
 
 echo "[Updating list of available packages]"
 sudo apt update -y -q &> /dev/null
@@ -15,11 +15,11 @@ echo "[Installing Dconf-tools]"
 sudo apt-get install -y -q dconf-cli > /dev/null
 sudo apt-get install -y -q dconf-editor > /dev/null
 
-echo "[Installing Gnome's gconf-editor]"
-sudo apt-get install -y -q gconf-editor > /dev/null
+#echo "[Installing Gnome's gconf-editor]"
+#sudo apt-get install -y -q gconf-editor > /dev/null
 
-echo "[Installing Gnome's tweak tool]"
-sudo apt-get install -y -q gnome-tweak-tool > /dev/null
+echo "[Installing Unity tweak tool]"
+sudo apt-get install -y -q unity-tweak-tool > /dev/null
 
 echo "[Installing Synaptic package manager]"
 sudo apt-get install -y -q synaptic > /dev/null
@@ -35,11 +35,12 @@ sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q spotify-client > /dev/null
 #TODO: add spotify to dock bar
 
-echo "[Installing Chrome]"
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &> /dev/null
-sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q google-chrome-stable > /dev/null
+# REVIEW CHROME
+#echo "[Installing Chrome]"
+#wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &> /dev/null
+#sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q google-chrome-stable > /dev/null
 #TODO: add chrome to dock bar
 
 echo "[Installing Transmission for bittorrents]"
@@ -133,7 +134,7 @@ sudo apt-get install -y -q flatabulous-theme > /dev/null
 sudo add-apt-repository -y ppa:noobslab/icons &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q ultra-flat-icons > /dev/null
-
+#TODO: activate flatabulous theme, icons
 
 echo "[Adding Gnome shell extensions]"
 
@@ -219,3 +220,5 @@ sudo apt clean -y -q &> /dev/null
 sudo apt-get -y -q autoclean &> /dev/null
 echo "[ DONE! Log out from this session and login again to see all the changes. Hope it works! ]"
 
+# LINKS:
+# http://askubuntu.com/questions/22313/what-is-dconf-what-is-its-function-and-how-do-i-use-it

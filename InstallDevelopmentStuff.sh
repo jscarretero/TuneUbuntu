@@ -21,6 +21,10 @@ echo "[Installing Curl]"
 sudo apt-get install -y -q curl > /dev/null
 echo "[Installing Wget]"
 sudo apt-get install -y -q wget > /dev/null
+echo "[Installing Tmux]"
+sudo apt-get install -y -q tmux > /dev/null
+echo "[Installing Screen]"
+sudo apt-get install -y -q screen > /dev/null
 echo "[Installing Nmap]"
 sudo apt-get install -y -q nmap > /dev/null
 echo "[Installing Bash]"
