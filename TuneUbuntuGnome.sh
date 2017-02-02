@@ -1,7 +1,10 @@
 #!/bin/bash
-# Author: Javier Carretero Casado
+# Author:  Javier Carretero Casado
+# License:
 
-# TODO: Check we are using Ubuntu Unity, otherwise exit saying why
+
+# TODO??: Check we are using Ubuntu Unity, otherwise exit saying why
+# TODO: install git!
 
 echo "[Updating list of available packages]"
 sudo apt update -y -q &> /dev/null
@@ -11,12 +14,12 @@ echo "[Upgrading system packages. This will take a while...]"
 sudo apt -y -q upgrade &> /dev/null
 
 echo
-echo "[Installing Dconf-tools]"
+echo "[Installing Dconf tools]"
 sudo apt-get install -y -q dconf-cli > /dev/null
 sudo apt-get install -y -q dconf-editor > /dev/null
 
-#echo "[Installing Gnome's gconf-editor]"
-#sudo apt-get install -y -q gconf-editor > /dev/null
+echo "[Installing Gconf-editor]"
+sudo apt-get install -y -q gconf-editor > /dev/null
 
 echo "[Installing Unity tweak tool]"
 sudo apt-get install -y -q unity-tweak-tool > /dev/null
@@ -33,7 +36,6 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB31
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list > /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q spotify-client > /dev/null
-#TODO: add spotify to dock bar
 
 # REVIEW CHROME
 #echo "[Installing Chrome]"
@@ -41,7 +43,6 @@ sudo apt-get install -y -q spotify-client > /dev/null
 #sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 #sudo apt-get update -y -q &> /dev/null
 #sudo apt-get install -y -q google-chrome-stable > /dev/null
-#TODO: add chrome to dock bar
 
 echo "[Installing Transmission for bittorrents]"
 sudo apt-get install -y -q transmission > /dev/null
@@ -51,7 +52,6 @@ echo "[Installing QBitTorrent]"
 sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q qbittorrent > /dev/null
-#TODO: add qbitrorrent to dock bar
 
 echo "[Installing Oracle's VirtualBox]"
 sudo apt-get install -y -q virtualbox-qt > /dev/null
@@ -182,6 +182,7 @@ echo "[Installing Gedit]"
 killall gedit &> /dev/null
 sudo apt-get install -y -q gedit > /dev/null
 echo "[Configuring Gedit]"
+gsettings set org.gnome.gedit.preferences.editor wrap-mode 'none'
 gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
 gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
 gsettings set org.gnome.gedit.preferences.editor insert-spaces true
@@ -204,16 +205,50 @@ gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 9'
 
 echo "[Adding Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
+
 echo "[Configuring dock bar]"
-# TODO: add icons
-# TODO: configure effects + size
+# Auto-Start
+mkdir $HOME/.config/autostart/
+cat <<EOF > $HOME/.config/autostart/docky.desktop
+[Desktop Entry]
+Name=Docky
+Type=Application
+Exec=docky
+Terminal=false
+Icon=docky
+Comment=The finest dock no money can buy.
+NoDisplay=false
+Categories=Utility;
+X-GNOME-Autostart-enabled=true
+EOF
+
+#Configure docklets (Trash, Desktop, Weather)
+gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Plugins ['Trash','Desktop','Weather']
+
+#Add launch icons (.desktop files)
+gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers ['file:///usr/share/applications/gnome-terminal.desktop','file:///usr/share/applications/nautilus.desktop','file:///usr/share/applications/google-chrome.desktop','file:///usr/share/applications/spotify.desktop','file:///usr/share/ubuntu/applications/org.gnome.Software.desktop','file:///usr/share/applications/qBittorrent.desktop','file:///usr/share/applications/gnome-calculator.desktop']
+gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList  ['/usr/share/applications/gnome-terminal.desktop','/usr/share/applications/nautilus.desktop','/usr/share/applications/google-chrome.desktop','/usr/share/applications/spotify.desktop','/usr/share/ubuntu/applications/org.gnome.Software.desktop','/usr/share/applications/qBittorrent.desktop','/usr/share/applications/gnome-calculator.desktop','TrashCan','Desktop','WeatherDockItem']
+
+#Configure effects + size
+gconftool-2 --type string --set /apps/docky-2/Docky/Services/ThemeService/Theme 'Transparent'
+gconftool-2 --type Boolean --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/ThreeDimensional True
+gconftool-2 --type Integer --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/IconSize 75
+gconftool-2 --type Float --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/ZoomPercent 2.1
+gconftool-2 --type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Autohide 'Intellihide'
+gconftool-2 --type Boolean --set /apps/docky-2/Docky/Items/DockyItem/ShowDockyItem False
+gconftool-2 --type list --list-type string --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Location ['Barcelona, Spain']
+gconftool-2 --type Boolean --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Metric 'True'
+gconftool-2 --type Integer --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Timeout 60
+
+echo "[Hiding Unity dock (will not disable it)]"
+#TODO
 
 echo "[Changing timezone to Europe/Madrid"
 sudo timedatectl set-timezone Europe/Madrid
 # sudo dpkg-reconfigure tzdata   # This will bring up a new window where the user can select it
 
-#echo "[Changing keyboard layout to 'es']"
-#sudo setxkbmap -layout es  #DOES NOT WORK
+echo "[Changing keyboard layout to 'es']"
+sudo setxkbmap -layout es  #DOES NOT WORK
 
 sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
