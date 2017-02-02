@@ -108,19 +108,24 @@ echo "[Installing GIT client]" #gitkraken? gitk?
 echo "[Installing new Fonts]" #!!!!
 #TODO
 
-#echo "[Configuring terminal aspect]"
-#TODO: use tabs instead of new windows
+echo "[Configuring terminal aspect]"
+gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
+gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
 #TODO: install tmux? terminator? screen?
-#TODO: disable beep
 
 echo "[Configuring keyboard delays - rates]"
-gsettings set org.gnome.desktop.peripherals.keyboard delay 145
+gsettings set org.gnome.desktop.peripherals.keyboard delay 140
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 22
 gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
-echo "[Configuring Gnome]"
-echo "[ ...Showing minimize-maximize icons]"
-echo "[ ...]"
+echo "[Configuring Unity aspect]"
+gsettings set org.gnome.desktop.interface gtk-theme 'Flatabulous'
+gsettings set org.gnome.desktop.interface icon-theme 'Paper'
+
+
+#echo "[Configuring Gnome]"
+#echo "[ ...Showing minimize-maximize icons]"
+#echo "[ ...]"
 #TODO
 
 echo "[Installing 'Paper' GTK theme, icons and cursors]"
@@ -143,8 +148,6 @@ echo "[Adding Gnome shell extensions]"
 #echo "[Configuring Gnome shell]"
 # TODO: new tab instead of window
 # TODO: bell
-
-#echo "[Configuring Terminal]"
 
 echo "[Installing Guake (Ctr+F12)]"
 sudo apt-get install -y -q guake > /dev/null
@@ -217,8 +220,6 @@ gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 9'
 
 echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
-
-#echo "[Configuring dock bar]"
 # Auto-Start
 mkdir $HOME/.config/autostart/
 cat <<EOF > $HOME/.config/autostart/docky.desktop
@@ -233,16 +234,13 @@ NoDisplay=false
 Categories=Utility;
 X-GNOME-Autostart-enabled=true
 EOF
-
 #Configure docklets (Trash, Desktop, Weather)
 #gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Plugins ['Trash','Desktop','Weather']
-
 #Add launch icons (.desktop files)
 gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers ['file:///usr/share/applications/gnome-terminal.desktop','file:///usr/share/applications/nautilus.desktop','file:///usr/share/applications/google-chrome.desktop','file:///usr/share/applications/spotify.desktop','file:///usr/share/ubuntu/applications/org.gnome.Software.desktop','file:///usr/share/applications/qBittorrent.desktop','file:///usr/share/applications/gnome-calculator.desktop']
 gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList  ['/usr/share/applications/gnome-terminal.desktop','/usr/share/applications/nautilus.desktop','/usr/share/applications/google-chrome.desktop','/usr/share/applications/spotify.desktop','/usr/share/ubuntu/applications/org.gnome.Software.desktop','/usr/share/applications/qBittorrent.desktop','/usr/share/applications/gnome-calculator.desktop','TrashCan','Desktop','WeatherDockItem']
-
 #Configure effects + size
-gconftool-2 --type string --set /apps/docky-2/Docky/Services/ThemeService/Theme 'Transparent'
+gconftool-2 --type string --set /apps/docky-2/Docky/Services/ThemeService/Theme 'Air'
 gconftool-2 --type Boolean --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/ThreeDimensional True
 gconftool-2 --type Integer --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/IconSize 75
 gconftool-2 --type Float --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/ZoomPercent 2.1
