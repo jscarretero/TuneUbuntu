@@ -6,6 +6,11 @@ PkgCleanup ()      { sudo apt-get -f install && sudo apt-get autoremove && sudo 
 PkgUpdate()        { sudo apt update -y -q ; }
 PkgUpdateUpgrade() { sudo apt-get upgrade && sudo apt-get dist-upgrade ; }
 
+
+# TODO: pycharm
+# TODO: tkdiff alternative
+# TODO: qt for python
+
 echo "[Updating list of available packages]"
 sudo apt update -y -q
 
@@ -34,7 +39,6 @@ sudo apt-get install -y -q ctags > /dev/null
 echo "[Installing OpenSSL]"
 sudo apt-get install -y -q openssl > /dev/null
 echo "[Installing OpenSSH client + server]"
-
 sudo apt-get install -y -q openssh-client openssh-server > /dev/null
 echo "[Installing Python 2.7.*]"
 sudo apt-get install -y -q python > /dev/null
@@ -106,8 +110,6 @@ sudo apt-get install build-essential autoconf automake libtool ¿cmake?
     echo 'export PATH="$PATH:/opt/dstat/bin"' >> ~/.bashrc
     popd
     '''
-
-# Papiex
 
 # compressors-decompressors + GUI
 

@@ -2,14 +2,11 @@
 # Author:  Javier Carretero Casado
 # License:
 
-
 # TODO??: Check we are using Ubuntu Unity, otherwise exit saying why
-# TODO: install git!
 
 echo "[Updating list of available packages]"
 sudo apt update -y -q &> /dev/null
 
-#echo
 #echo "[Upgrading system packages. This will take a while...]"
 #sudo apt -y -q upgrade &> /dev/null
 
@@ -69,11 +66,10 @@ sudo apt-get install -y -q virtualbox-qt > /dev/null
 echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
 sudo apt-get install -y -q vlc &> /dev/null
 
-echo "[Installing Atom editor]"
-sudo add-apt-repository -y ppa:webupd8team/atom &> /dev/null
-sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q atom > /dev/null
-#echo "[Configuring Atom editor]"
+#echo "[Installing Atom editor]"
+#sudo add-apt-repository -y ppa:webupd8team/atom &> /dev/null
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q atom > /dev/null
 #TODO: same as nano (tabs to spaces, 4 spaces, max column)
 
 echo "[Installing Darktable photo editor]"
@@ -90,7 +86,7 @@ sudo apt-get install -y -q gdebi > /dev/null
 sudo gdebi -q -n remarkable_1.87_all.deb > /dev/null                        #FIXME with latest file name
 \rm remarkable_1.87_all.deb
 
-echo "[Installing git]"
+echo "[Installing Git]"
 sudo apt-get install -y -q git > /dev/null
 
 echo "[Installing GIT client]" #gitkraken? gitk?
@@ -118,16 +114,6 @@ gsettings set org.gnome.desktop.peripherals.keyboard delay 140
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 22
 gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
-echo "[Configuring Unity aspect]"
-gsettings set org.gnome.desktop.interface gtk-theme 'Flatabulous'
-gsettings set org.gnome.desktop.interface icon-theme 'Paper'
-
-
-#echo "[Configuring Gnome]"
-#echo "[ ...Showing minimize-maximize icons]"
-#echo "[ ...]"
-#TODO
-
 echo "[Installing 'Paper' GTK theme, icons and cursors]"
 sudo add-apt-repository -y ppa:snwh/pulp &> /dev/null
 sudo apt-get update -y -q &> /dev/null
@@ -141,40 +127,50 @@ sudo apt-get install -y -q flatabulous-theme > /dev/null
 sudo add-apt-repository -y ppa:noobslab/icons &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q ultra-flat-icons > /dev/null
-#TODO: activate flatabulous theme, icons
 
-echo "[Adding Gnome shell extensions]"
+echo "[Configuring Unity aspect]"
+gsettings set org.gnome.desktop.interface gtk-theme 'Flatabulous'
+gsettings set org.gnome.desktop.interface icon-theme 'Paper'
+gsettings set com.canonical.indicator.datetime show-date true
+gsettings set com.canonical.indicator.datetime show-year true
+gsettings set com.canonical.indicator.power show-percentage true
+gsettings set com.canonical.indicator.power show-time true
+gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 
+#echo "[Adding Gnome shell extensions]"
 #echo "[Configuring Gnome shell]"
 # TODO: new tab instead of window
 # TODO: bell
+#echo "[Configuring Gnome]"
+#echo "[ ...Showing minimize-maximize icons]"
+#echo "[ ...]"
+#TODO
 
 echo "[Installing Guake (Ctr+F12)]"
 sudo apt-get install -y -q guake > /dev/null
-gconftool-2 --type /apps/guake/general/window_height
-gconftool-2 --type /apps/guake/general/window_height_f
-gconftool-2 --type /apps/guake/general/window_width
-gconftool-2 --type /apps/guake/general/window_width_f
-gconftool-2 --type /apps/guake/style/background/transparency
-gconftool-2 --type /apps/guake/general/use_visible_bell
-gconftool-2 --type /apps/guake/general/window_losefocus
-gconftool-2 --type /apps/guake/general/window_ontop
-gconftool-2 --type /apps/guake/style/font/palette_name
-gconftool-2 --type /apps/guake/style/font/style
-gconftool-2 --type /apps/guake/general/use_popup
+gconftool-2 --type Integer --set /apps/guake/general/window_height  100
+gconftool-2 --type Float   --set /apps/guake/general/window_height_f 100
+gconftool-2 --type Integer --set /apps/guake/general/window_width 100
+gconftool-2 --type Float   --set /apps/guake/general/window_width_f 100
+gconftool-2 --type Integer --set /apps/guake/style/background/transparency 0
+gconftool-2 --type Boolean --set /apps/guake/general/use_visible_bell  True
+gconftool-2 --type Boolean --set /apps/guake/general/window_losefocus False
+gconftool-2 --type Boolean --set /apps/guake/general/window_ontop False
+gconftool-2 --type string  --set /apps/guake/style/font/palette_name 'Dracula'
+gconftool-2 --type string  --set /apps/guake/style/font/style 'Monospace 11'
+gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
 #Add guake to startup applications
 sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
 echo "[Changing wallpaper]"
+#TODO
 #wget -q -o "$HOME/Pictures/wallpaper.jpg" http://www.elviajeroazul.top/wp-content/uploads/2016/07/atardecer-magico-fondos-4k-hd-elviajeroazul.top-13.jpg
 #if [$? -eq 0 ] ; then
 #    gsettings set org.gnome.desktop.background picture-uri "$HOME/Pictures/wallpaper.jpg"
 #fi
+
 echo "[Changing lockscreen wallpaper]"
-# TODO
 echo "[Changing welcome wallpaper]"
-# TODO
-echo "[Disabling annoying beep sounds]"
 # TODO
 
 echo "[Installing Nano]"
@@ -254,6 +250,7 @@ echo "[Hiding Unity dock (will not disable it)]"
 #http://askubuntu.com/questions/643028/shell-script-to-remove-unity-launcherif-present-in-ubuntu-14-04-and-or-the-xf
 dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1   #0 to enable back
 dconf write /org/compiz/profiles/unity/plugins/unityshell/edge-responsiveness 0  #2 to enable back
+#TODO: remove package! (add a script so that the user can revert back!)
 
 echo "[Changing timezone to Europe/Madrid]"
 sudo timedatectl set-timezone Europe/Madrid
@@ -266,6 +263,16 @@ sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
 sudo apt-get -y -q autoclean &> /dev/null
 echo "[ DONE! Log out from this session and login again to see all the changes. Hope it works! ]"
+
+# TODO
+# Pomodoro utility
+# Cleanup utility
+# Malware utility?
+# Antivirus utility?
+# Skype?
+# Dropbox?
+# More utilities (PDF viewer+editor, GIMP, photo editor, audio editor, comic viewer, screencast recorder
+#                 compressor utilities, ebook reader, e-mail client, ...)
 
 # LINKS:
 # http://askubuntu.com/questions/22313/what-is-dconf-what-is-its-function-and-how-do-i-use-it
