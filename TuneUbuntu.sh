@@ -56,13 +56,13 @@ sudo apt-get install -y -q qbittorrent > /dev/null
 echo "[Installing Oracle's VirtualBox]"
 sudo apt-get install -y -q virtualbox-qt > /dev/null
 
-echo "[Installing Restricted extras and addons (including codecs)]"
+#echo "[Installing Restricted extras and addons (including codecs)]"
 #TODO: check what they are installing
-sudo apt-get install -y -q ubuntu-restricted-extras                  #interactive!!
-sudo apt-get install -y -q ubuntu-restricted-addons > /dev/null
-sudo apt-get install -y -q libdvdcss2 libdvdnav4 libdvdread4  > /dev/null
-sudo apt-get install -y -q libdvd-pkg > /dev/null
-sudo dpkg-reconfigure libdvd-pkg > /dev/null
+#sudo apt-get install -y -q ubuntu-restricted-extras                  #interactive!!
+#sudo apt-get install -y -q ubuntu-restricted-addons > /dev/null
+#sudo apt-get install -y -q libdvdcss2 libdvdnav4 libdvdread4  > /dev/null
+#sudo apt-get install -y -q libdvd-pkg > /dev/null
+#sudo dpkg-reconfigure libdvd-pkg > /dev/null
 #echo "[Installing Flash Player (flash will soon be unsupported)]"
 #sudo apt-get install flashplugin-installer #Not needed for Chrome #already installed by restricted-extras
 
@@ -73,7 +73,7 @@ echo "[Installing Atom editor]"
 sudo add-apt-repository -y ppa:webupd8team/atom &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q atom > /dev/null
-echo "[Configuring Atom editor]"
+#echo "[Configuring Atom editor]"
 #TODO: same as nano (tabs to spaces, 4 spaces, max column)
 
 echo "[Installing Darktable photo editor]"
@@ -110,7 +110,7 @@ echo "[Installing new Fonts]" #!!!!
 echo "[Installing new Icon sets]" # ????
 #TODO?
 
-echo "[Configuring terminal aspect]"
+#echo "[Configuring terminal aspect]"
 #TODO: use tabs instead of new windows
 #TODO: install tmux? terminator? screen?
 #TODO: disable beep
@@ -142,16 +142,25 @@ sudo apt-get install -y -q ultra-flat-icons > /dev/null
 
 echo "[Adding Gnome shell extensions]"
 
-echo "[Configuring Gnome shell]"
+#echo "[Configuring Gnome shell]"
 # TODO: new tab instead of window
 # TODO: bell
 
-echo "[Configuring Terminal]"
+#echo "[Configuring Terminal]"
 
 echo "[Installing Guake (Ctr+F12)]"
 sudo apt-get install -y -q guake > /dev/null
 echo "[Configuring Guake]"
-# TODO:!!!
+gconftool-2 --type /apps/guake/general/window_height
+gconftool-2 --type /apps/guake/general/window_height_f
+gconftool-2 --type /apps/guake/general/window_width
+gconftool-2 --type /apps/guake/general/window_width_f
+gconftool-2 --type /apps/guake/style/background/transparency
+gconftool-2 --type /apps/guake/general/use_visible_bell
+gconftool-2 --type /apps/guake/general/window_losefocus
+gconftool-2 --type /apps/guake/general/window_ontop
+gconftool-2 --type /apps/guake/style/font/palette_name
+gconftool-2 --type /apps/guake/style/font/style
 # TODO: Add guake to startup applications
 
 echo "[Changing wallpaper]"
@@ -168,7 +177,7 @@ echo "[Disabling annoying beep sounds]"
 
 echo "[Installing Nano]"
 sudo apt-get install -y -q nano > /dev/null
-echo "[Configuring Nano]"
+#echo "[Configuring Nano]"
  echo "include \"/usr/share/nano/*.nanorc\"" >> ~/.nanorc
  echo "set autoindent" >> ~/.nanorc
  echo "set cut" >> ~/.nanorc
@@ -185,7 +194,7 @@ echo "[Installing Gedit]"
 # http://askubuntu.com/questions/571877/how-to-change-gedit-preferences-from-terminal
 killall gedit &> /dev/null
 sudo apt-get install -y -q gedit > /dev/null
-echo "[Configuring Gedit]"
+#echo "[Configuring Gedit]"
 gsettings set org.gnome.gedit.preferences.editor wrap-mode 'none'
 gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
 gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
@@ -210,7 +219,7 @@ gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 9'
 echo "[Adding Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
 
-echo "[Configuring dock bar]"
+#echo "[Configuring dock bar]"
 # Auto-Start
 mkdir $HOME/.config/autostart/
 cat <<EOF > $HOME/.config/autostart/docky.desktop
@@ -227,7 +236,7 @@ X-GNOME-Autostart-enabled=true
 EOF
 
 #Configure docklets (Trash, Desktop, Weather)
-gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Plugins ['Trash','Desktop','Weather']
+#gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Plugins ['Trash','Desktop','Weather']
 
 #Add launch icons (.desktop files)
 gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers ['file:///usr/share/applications/gnome-terminal.desktop','file:///usr/share/applications/nautilus.desktop','file:///usr/share/applications/google-chrome.desktop','file:///usr/share/applications/spotify.desktop','file:///usr/share/ubuntu/applications/org.gnome.Software.desktop','file:///usr/share/applications/qBittorrent.desktop','file:///usr/share/applications/gnome-calculator.desktop']
