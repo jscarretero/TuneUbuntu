@@ -90,8 +90,12 @@ sudo apt-get install -y -q gdebi > /dev/null
 sudo gdebi -q -n remarkable_1.87_all.deb > /dev/null                        #FIXME with latest file name
 \rm remarkable_1.87_all.deb
 
+echo "[Installing git]"
+sudo apt-get install -y -q git > /dev/null
+
 echo "[Installing GIT client]" #gitkraken? gitk?
 #TODO
+
 
 #TODO: NO: use bash-it instead!!
 #echo "[Installing Oh-my-zsh]"
