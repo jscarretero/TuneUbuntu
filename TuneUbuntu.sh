@@ -37,12 +37,12 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q spotify-client > /dev/null
 
-# REVIEW CHROME
-#echo "[Installing Chrome]"
-#wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &> /dev/null
-#sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-#sudo apt-get update -y -q &> /dev/null
-#sudo apt-get install -y -q google-chrome-stable > /dev/null
+echo "[Installing Chrome]"
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &> /dev/null
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q google-chrome-stable > /dev/null
+sudo rm /etc/apt/sources.list.d/google.list
 
 echo "[Installing Transmission for bittorrents]"
 sudo apt-get install -y -q transmission > /dev/null
@@ -107,8 +107,6 @@ echo "[Installing GIT client]" #gitkraken? gitk?
 
 echo "[Installing new Fonts]" #!!!!
 #TODO
-echo "[Installing new Icon sets]" # ????
-#TODO?
 
 #echo "[Configuring terminal aspect]"
 #TODO: use tabs instead of new windows
@@ -150,7 +148,6 @@ echo "[Adding Gnome shell extensions]"
 
 echo "[Installing Guake (Ctr+F12)]"
 sudo apt-get install -y -q guake > /dev/null
-echo "[Configuring Guake]"
 gconftool-2 --type /apps/guake/general/window_height
 gconftool-2 --type /apps/guake/general/window_height_f
 gconftool-2 --type /apps/guake/general/window_width
@@ -161,7 +158,9 @@ gconftool-2 --type /apps/guake/general/window_losefocus
 gconftool-2 --type /apps/guake/general/window_ontop
 gconftool-2 --type /apps/guake/style/font/palette_name
 gconftool-2 --type /apps/guake/style/font/style
-# TODO: Add guake to startup applications
+gconftool-2 --type /apps/guake/general/use_popup
+#Add guake to startup applications
+sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
 echo "[Changing wallpaper]"
 #wget -q -o "$HOME/Pictures/wallpaper.jpg" http://www.elviajeroazul.top/wp-content/uploads/2016/07/atardecer-magico-fondos-4k-hd-elviajeroazul.top-13.jpg
@@ -216,7 +215,7 @@ gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 9'
   popd &> /dev/null
   \rm -rf gedit-trailsave
 
-echo "[Adding Docky dock bar]"
+echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
 
 #echo "[Configuring dock bar]"
@@ -258,7 +257,7 @@ echo "[Hiding Unity dock (will not disable it)]"
 dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1   #0 to enable back
 dconf write /org/compiz/profiles/unity/plugins/unityshell/edge-responsiveness 0  #2 to enable back
 
-echo "[Changing timezone to Europe/Madrid"
+echo "[Changing timezone to Europe/Madrid]"
 sudo timedatectl set-timezone Europe/Madrid
 # sudo dpkg-reconfigure tzdata   # This will bring up a new window where the user can select it
 
