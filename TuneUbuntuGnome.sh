@@ -9,9 +9,9 @@
 echo "[Updating list of available packages]"
 sudo apt update -y -q &> /dev/null
 
-echo
-echo "[Upgrading system packages. This will take a while...]"
-sudo apt -y -q upgrade &> /dev/null
+#echo
+#echo "[Upgrading system packages. This will take a while...]"
+#sudo apt -y -q upgrade &> /dev/null
 
 echo
 echo "[Installing Dconf tools]"
