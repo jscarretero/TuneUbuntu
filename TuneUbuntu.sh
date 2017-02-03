@@ -4,6 +4,9 @@
 
 # TODO??: Check we are using Ubuntu Unity, otherwise exit saying why
 
+desktopEenv=$(echo $XDG_CURRENT_DESKTOP)
+#TODO: Unity - GNOME - not defined
+
 echo "[Updating list of available packages]"
 sudo apt update -y -q &> /dev/null
 
@@ -101,56 +104,6 @@ echo "[Installing GIT client]" #gitkraken? gitk?
 #echo "[...Changing fonts]"
 #echo "[...Changing color schemes]"s
 
-echo "[Installing new Fonts (Powerline)]"
-git clone https://github.com/powerline/fonts.git  &> /dev/null
-cd fonts
-./install.sh &> /dev/null
-cd ..
-\rm -rf ./fonts
-sudo apt-get install -y -q fonts-powerline > /dev/null
-
-echo "[Configuring terminal aspect]"
-gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
-gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
-#TODO: install tmux? terminator? screen?
-
-echo "[Configuring keyboard delays - rates]"
-gsettings set org.gnome.desktop.peripherals.keyboard delay 140
-gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 22
-gsettings set org.gnome.desktop.peripherals.keyboard repeat true
-
-echo "[Installing 'Paper' GTK theme, icons and cursors]"
-sudo add-apt-repository -y ppa:snwh/pulp &> /dev/null
-sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q paper-icon-theme > /dev/null
-sudo apt-get install -y -q paper-gtk-theme > /dev/null
-sudo apt-get install -y -q paper-cursor-theme > /dev/null
-echo "[Installing 'Flatabulous' GTK theme, icons and cursors]"
-sudo add-apt-repository -y ppa:noobslab/themes &> /dev/null
-sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q flatabulous-theme > /dev/null
-sudo add-apt-repository -y ppa:noobslab/icons &> /dev/null
-sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q ultra-flat-icons > /dev/null
-
-echo "[Configuring Unity aspect]"
-gsettings set org.gnome.desktop.interface gtk-theme 'Flatabulous'
-gsettings set org.gnome.desktop.interface icon-theme 'Paper'
-gsettings set com.canonical.indicator.datetime show-date true
-gsettings set com.canonical.indicator.datetime show-year true
-gsettings set com.canonical.indicator.power show-percentage true
-gsettings set com.canonical.indicator.power show-time true
-gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
-
-#echo "[Adding Gnome shell extensions]"
-#echo "[Configuring Gnome shell]"
-# TODO: new tab instead of window
-# TODO: bell
-#echo "[Configuring Gnome]"
-#echo "[ ...Showing minimize-maximize icons]"
-#echo "[ ...]"
-#TODO
-
 echo "[Installing Guake (Ctr+F12)]"
 sudo apt-get install -y -q guake > /dev/null
 gconftool-2 --type Integer --set /apps/guake/general/window_height  100
@@ -167,9 +120,6 @@ gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
 #Add guake to startup applications
 sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
-echo "[Changing wallpaper]"
-gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Vi%C3%B1uela.jpg
-
 echo "[Installing Nano]"
 sudo apt-get install -y -q nano > /dev/null
 #echo "[Configuring Nano]"
@@ -183,7 +133,6 @@ sudo apt-get install -y -q nano > /dev/null
  echo "set morespace" >> ~/.nanorc
  echo "unset nonewlines" >> ~/.nanorc
  echo "set tabstospaces" >> ~/.nanorc
-
 
 echo "[Installing Gedit]"
 # http://askubuntu.com/questions/571877/how-to-change-gedit-preferences-from-terminal
@@ -228,9 +177,9 @@ Categories=Utility;
 X-GNOME-Autostart-enabled=true
 EOF
 #Configure docklets (Trash, Desktop, Weather)
-#gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Plugins ['Trash','Desktop','Weather']
+gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Plugins ['Trash','Desktop','Weather']
 #Add launch icons (.desktop files)
-gconftool-2 --type Boolean --set /apps/docky-2/Docky/Interface/DockPreferences/FirstRun False 
+gconftool-2 --type Boolean --set /apps/docky-2/Docky/Interface/DockPreferences/FirstRun False
 gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers ['file:///usr/share/applications/gnome-terminal.desktop','file:///usr/share/applications/nautilus.desktop','file:///usr/share/applications/google-chrome.desktop','file:///usr/share/applications/spotify.desktop','file:///usr/share/ubuntu/applications/org.gnome.Software.desktop','file:///usr/share/applications/qBittorrent.desktop','file:///usr/share/applications/gnome-calculator.desktop']
 gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList  ['/usr/share/applications/gnome-terminal.desktop','/usr/share/applications/nautilus.desktop','/usr/share/applications/google-chrome.desktop','/usr/share/applications/spotify.desktop','/usr/share/ubuntu/applications/org.gnome.Software.desktop','/usr/share/applications/qBittorrent.desktop','/usr/share/applications/gnome-calculator.desktop','TrashCan','Desktop','WeatherDockItem']
 #Configure effects + size
@@ -240,15 +189,70 @@ gconftool-2 --type Integer --set /apps/docky-2/Docky/Interface/DockPreferences/D
 gconftool-2 --type Float --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/ZoomPercent 2.1
 gconftool-2 --type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Autohide 'Intellihide'
 gconftool-2 --type Boolean --set /apps/docky-2/Docky/Items/DockyItem/ShowDockyItem False
-gconftool-2 --type list --list-type string --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Location ['Barcelona, Spain']
+gconftool-2 --type list --list-type string --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Location ['Barcelona\, spain']
 gconftool-2 --type Boolean --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Metric True
 gconftool-2 --type Integer --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Timeout 60
+
+
+echo "[Installing new Fonts (Powerline)]"
+git clone https://github.com/powerline/fonts.git  &> /dev/null
+cd fonts
+./install.sh &> /dev/null
+cd ..
+\rm -rf ./fonts
+sudo apt-get install -y -q fonts-powerline > /dev/null
+
+echo "[Configuring terminal aspect]"
+gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
+gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
+#TODO: install tmux? terminator? screen?
+
+echo "[Configuring keyboard delays - rates]"
+gsettings set org.gnome.desktop.peripherals.keyboard delay 140
+gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 22
+gsettings set org.gnome.desktop.peripherals.keyboard repeat true
+
+echo "[Installing 'Paper' GTK theme, icons and cursors]"
+sudo add-apt-repository -y ppa:snwh/pulp &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q paper-icon-theme > /dev/null
+sudo apt-get install -y -q paper-gtk-theme > /dev/null
+sudo apt-get install -y -q paper-cursor-theme > /dev/null
+echo "[Installing 'Flatabulous' GTK theme, icons and cursors]"
+sudo add-apt-repository -y ppa:noobslab/themes &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q flatabulous-theme > /dev/null
+sudo add-apt-repository -y ppa:noobslab/icons &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q ultra-flat-icons > /dev/null
+
+echo "[Configuring Unity aspect]"
+gsettings set org.gnome.desktop.interface gtk-theme 'Flatabulous'
+gsettings set org.gnome.desktop.interface icon-theme 'Paper'
+gsettings set com.canonical.indicator.datetime show-date true
+gsettings set com.canonical.indicator.datetime show-year true
+gsettings set com.canonical.indicator.power show-percentage true
+gsettings set com.canonical.indicator.power show-time true
+gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
+gsettings set org.gtk.Settings.FileChooser show-hidden true
+
+#echo "[Adding Gnome shell extensions]"
+#echo "[Configuring Gnome shell]"
+# TODO: new tab instead of window
+# TODO: bell
+#echo "[Configuring Gnome]"
+#echo "[ ...Showing minimize-maximize icons]"
+#echo "[ ...]"
+#TODO
 
 echo "[Hiding Unity dock (will not disable it)]"
 #http://askubuntu.com/questions/643028/shell-script-to-remove-unity-launcherif-present-in-ubuntu-14-04-and-or-the-xf
 dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1   #0 to enable back
 dconf write /org/compiz/profiles/unity/plugins/unityshell/edge-responsiveness 0  #2 to enable back
-#TODO: remove package! (add a script so that the user can revert back!)
+gsettings set com.canonical.Unity.Launcher favorites [] #gsettings reset com.canonical.Unity.Launcher favorites
+
+echo "[Changing wallpaper]"
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Vi%C3%B1uela.jpg
 
 echo "[Changing timezone to Europe/Madrid]"
 sudo timedatectl set-timezone Europe/Madrid
