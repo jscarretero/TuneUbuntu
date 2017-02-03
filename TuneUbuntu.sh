@@ -101,8 +101,13 @@ echo "[Installing GIT client]" #gitkraken? gitk?
 #echo "[...Changing fonts]"
 #echo "[...Changing color schemes]"s
 
-echo "[Installing new Fonts]" #!!!!
-#TODO
+echo "[Installing new Fonts (Powerline)]"
+git clone https://github.com/powerline/fonts.git  &> /dev/null
+cd fonts
+./install.sh &> /dev/null
+cd ..
+\rm -rf ./fonts
+sudo apt-get install -y -q fonts-powerline > /dev/null
 
 echo "[Configuring terminal aspect]"
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
@@ -163,15 +168,7 @@ gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
 sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
 echo "[Changing wallpaper]"
-#TODO
-#wget -q -o "$HOME/Pictures/wallpaper.jpg" http://www.elviajeroazul.top/wp-content/uploads/2016/07/atardecer-magico-fondos-4k-hd-elviajeroazul.top-13.jpg
-#if [$? -eq 0 ] ; then
-#    gsettings set org.gnome.desktop.background picture-uri "$HOME/Pictures/wallpaper.jpg"
-#fi
-
-echo "[Changing lockscreen wallpaper]"
-echo "[Changing welcome wallpaper]"
-# TODO
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Vi%C3%B1uela.jpg
 
 echo "[Installing Nano]"
 sudo apt-get install -y -q nano > /dev/null
@@ -205,7 +202,7 @@ gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
 gsettings set org.gnome.gedit.preferences.editor use-default-font true
 gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 9'
   # Trim trailing whitespaces when saving files
-  git clone https://github.com/jonleighton/gedit-trailsave &> /dev/null
+  git clone https://github.com/jonleighton/gedit-trailsavec
   pushd . &> /dev/null
   cd gedit-trailsave  && ./install.sh &> /dev/null
   plugins=`gsettings get org.gnome.gedit.plugins active-plugins` ; plugins=${plugins::-1} ;
