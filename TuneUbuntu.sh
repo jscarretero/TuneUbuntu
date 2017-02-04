@@ -2,9 +2,9 @@
 # Author:  Javier Carretero Casado
 # License:
 
-# TODO??: Check we are using Ubuntu Unity, otherwise exit saying why
+# TODO??: Check we are using linux ubuntu Unity, otherwise exit
 
-desktopEenv=$(echo $XDG_CURRENT_DESKTOP)
+desktopEnv=$(echo $XDG_CURRENT_DESKTOP)
 #TODO: Unity - GNOME - not defined
 
 echo "[Updating list of available packages]"
@@ -70,9 +70,9 @@ echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
 sudo apt-get install -y -q vlc &> /dev/null
 
 #echo "[Installing Atom editor]"
-#sudo add-apt-repository -y ppa:webupd8team/atom &> /dev/null
-#sudo apt-get update -y -q &> /dev/null
-#sudo apt-get install -y -q atom > /dev/null
+sudo add-apt-repository -y ppa:webupd8team/atom &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q atom > /dev/null
 #TODO: same as nano (tabs to spaces, 4 spaces, max column)
 
 echo "[Installing Darktable photo editor]"
@@ -193,7 +193,6 @@ gconftool-2 --type list --list-type string --set /apps/docky-2/WeatherDocklet/We
 gconftool-2 --type Boolean --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Metric True
 gconftool-2 --type Integer --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Timeout 60
 
-
 echo "[Installing new Fonts (Powerline)]"
 git clone https://github.com/powerline/fonts.git  &> /dev/null
 cd fonts
@@ -206,6 +205,8 @@ echo "[Configuring terminal aspect]"
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
 #TODO: install tmux? terminator? screen?
+# Ctrl+PageDown for Next Tab
+# Ctrl+PageUp for Previous Tab
 
 echo "[Configuring keyboard delays - rates]"
 gsettings set org.gnome.desktop.peripherals.keyboard delay 140
@@ -226,7 +227,7 @@ sudo add-apt-repository -y ppa:noobslab/icons &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q ultra-flat-icons > /dev/null
 
-echo "[Configuring Unity aspect]"
+echo "[Configuring general aspect]"
 gsettings set org.gnome.desktop.interface gtk-theme 'Flatabulous'
 gsettings set org.gnome.desktop.interface icon-theme 'Paper'
 gsettings set com.canonical.indicator.datetime show-date true
@@ -235,21 +236,26 @@ gsettings set com.canonical.indicator.power show-percentage true
 gsettings set com.canonical.indicator.power show-time true
 gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 gsettings set org.gtk.Settings.FileChooser show-hidden true
+gsettings set com.canonical.Unity always-show-menus false
+gsettings set com.canonical.Unity integrated-menus false
 
-#echo "[Adding Gnome shell extensions]"
-#echo "[Configuring Gnome shell]"
-# TODO: new tab instead of window
-# TODO: bell
-#echo "[Configuring Gnome]"
+#TODO Icon sizes for unity bar
+
+#echo "[Adding GNOME shell extensions]"
+#echo "[Configuring GNOME]"
 #echo "[ ...Showing minimize-maximize icons]"
 #echo "[ ...]"
-#TODO
 
 echo "[Hiding Unity dock (will not disable it)]"
 #http://askubuntu.com/questions/643028/shell-script-to-remove-unity-launcherif-present-in-ubuntu-14-04-and-or-the-xf
 dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1   #0 to enable back
 dconf write /org/compiz/profiles/unity/plugins/unityshell/edge-responsiveness 0  #2 to enable back
 gsettings set com.canonical.Unity.Launcher favorites [] #gsettings reset com.canonical.Unity.Launcher favorites
+
+echo "[Installing classic Application top menu]"
+sudo apt-add-repository -y ppa:diesch/testing  &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q classicmenu-indicator > /dev/null
 
 echo "[Changing wallpaper]"
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Vi%C3%B1uela.jpg
@@ -267,14 +273,30 @@ sudo apt-get -y -q autoclean &> /dev/null
 echo "[ DONE! Log out from this session and login again to see all the changes. Hope it works! ]"
 
 # TODO
-# Pomodoro utility
 # Cleanup utility
 # Malware utility?
-# Antivirus utility?
-# Skype?
-# Dropbox?
-# More utilities (PDF viewer+editor, GIMP, photo editor, audio editor, comic viewer, screencast recorder
-#                 compressor utilities, ebook reader, e-mail client, ...)
+# Comic viewer x 2
+# Calibre
+# Mail client (Geary (Thunderbird alternative))
+# PDF Viewer
+# PDF Editor (Inkspace)
+# Steam
+# Skype
+# DropBox
+# Screencast recorder
+# Pomodoro
+# Compressor commands + GUI (peazip)
+# Audio Editor (audacity)
+# Video Editor (pitivi, openshot)
+# Photo Editor (digikam, shotwell, photoqt)
+# GIMP
+# KeePass
+# Gufws
+# Install the latest proprietary Linux graphics drivers available for your hardware
+# Shutter
+# Bleach bit
+# Kodi
+
 
 # LINKS:
 # http://askubuntu.com/questions/22313/what-is-dconf-what-is-its-function-and-how-do-i-use-it
