@@ -2,10 +2,11 @@
 # Author:  Javier Carretero Casado
 # License:
 
-# TODO??: Check we are using linux ubuntu Unity, otherwise exit
-
 desktopEnv=$(echo $XDG_CURRENT_DESKTOP)
-#TODO: Unity - GNOME - not defined
+if ! [ "$desktopEnv" == "Unity" ] ; then
+    echo "This script works for Linux Ubuntu with Unity. You will need to tweak this file to work for other "
+    echo "Linux distributions or windows managers"
+fi
 
 echo "[Updating list of available packages]"
 sudo apt update -y -q &> /dev/null
@@ -69,11 +70,27 @@ sudo apt-get install -y -q virtualbox-qt > /dev/null
 echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
 sudo apt-get install -y -q vlc &> /dev/null
 
-#echo "[Installing Atom editor]"
+echo "[Installing Atom editor]"
 sudo add-apt-repository -y ppa:webupd8team/atom &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q atom > /dev/null
-#TODO: same as nano (tabs to spaces, 4 spaces, max column)
+cat <<EOF > $HOME/.atom/config.cson
+"*":
+  core:
+    telemetryConsent: "no"
+    themes: [
+      "atom-dark-ui"
+      "atom-dark-syntax"
+    ]
+  editor:
+    atomicSoftTabs: false
+    lineHeight: 1.3
+    preferredLineLength: 110
+    showIndentGuide: true
+    tabLength: 4
+    tabType: "soft"
+EOF
+# TODO: install + configure packages (linters, debuggers, autocompletion, tools ) [python, bash, C, C++...]
 
 echo "[Installing Darktable photo editor]"
 sudo add-apt-repository -y ppa:pmjdebruijn/darktable-release &> /dev/null
@@ -115,7 +132,7 @@ gconftool-2 --type Boolean --set /apps/guake/general/use_visible_bell  True
 gconftool-2 --type Boolean --set /apps/guake/general/window_losefocus False
 gconftool-2 --type Boolean --set /apps/guake/general/window_ontop False
 gconftool-2 --type string  --set /apps/guake/style/font/palette_name 'Dracula'
-gconftool-2 --type string  --set /apps/guake/style/font/style 'Monospace 11'
+gconftool-2 --type string  --set /apps/guake/style/font/style 'Monospace 13'
 gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
 #Add guake to startup applications
 sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
@@ -138,7 +155,6 @@ echo "[Installing Gedit]"
 # http://askubuntu.com/questions/571877/how-to-change-gedit-preferences-from-terminal
 killall gedit &> /dev/null
 sudo apt-get install -y -q gedit > /dev/null
-#echo "[Configuring Gedit]"
 gsettings set org.gnome.gedit.preferences.editor wrap-mode 'none'
 gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
 gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
@@ -150,6 +166,8 @@ gsettings set org.gnome.gedit.preferences.editor right-margin-position 110
 gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
 gsettings set org.gnome.gedit.preferences.editor use-default-font true
 gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 9'
+gsettings set org.gnome.gedit.preferences.editor display-overview-map true
+
   # Trim trailing whitespaces when saving files
   git clone https://github.com/jonleighton/gedit-trailsave &> /dev/null
   pushd . &> /dev/null
@@ -159,6 +177,17 @@ gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 9'
   gsettings set org.gnome.gedit.plugins active-plugins "$plugins"
   popd &> /dev/null
   \rm -rf gedit-trailsave
+
+  #Change keybindings to move to new tab from Ctl+Alt+PgUp/Down to Ctrl+PgUp/Down
+  git clone https://github.com/jefferyto/gedit-control-your-tabs.git &> /dev/null
+  cp ./gedit-control-your-tabs/controlyourtabs.plugin ~/.local/share/gedit/plugins
+  cp ./gedit-control-your-tabs/controlyourtabs.py ~/.local/share/gedit/plugins
+  \rm -rf gedit-control-your-tabs
+  plugins=`gsettings get org.gnome.gedit.plugins active-plugins` ; plugins=${plugins::-1} ;
+  plugins="$plugins, 'controlyourtabs']"
+  gsettings set org.gnome.gedit.plugins active-plugins "$plugins"
+
+
 
 echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
@@ -204,7 +233,6 @@ sudo apt-get install -y -q fonts-powerline > /dev/null
 echo "[Configuring terminal aspect]"
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
-#TODO: install tmux? terminator? screen?
 # Ctrl+PageDown for Next Tab
 # Ctrl+PageUp for Previous Tab
 
@@ -238,8 +266,8 @@ gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 gsettings set org.gtk.Settings.FileChooser show-hidden true
 gsettings set com.canonical.Unity always-show-menus false
 gsettings set com.canonical.Unity integrated-menus false
-
-#TODO Icon sizes for unity bar
+#gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ unminimize-effects [\'animation:"Magic Lamp"\'] #"Glide 2" is the original
+#gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ minimize-effects [\'animation:"Magic Lamp"\'] #"Zoom" is the original
 
 #echo "[Adding GNOME shell extensions]"
 #echo "[Configuring GNOME]"
@@ -251,6 +279,7 @@ echo "[Hiding Unity dock (will not disable it)]"
 dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1   #0 to enable back
 dconf write /org/compiz/profiles/unity/plugins/unityshell/edge-responsiveness 0  #2 to enable back
 gsettings set com.canonical.Unity.Launcher favorites [] #gsettings reset com.canonical.Unity.Launcher favorites
+gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ icon-size 8
 
 echo "[Installing classic Application top menu]"
 sudo apt-add-repository -y ppa:diesch/testing  &> /dev/null
@@ -271,10 +300,13 @@ sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
 sudo apt-get -y -q autoclean &> /dev/null
 echo "[ DONE! Log out from this session and login again to see all the changes. Hope it works! ]"
+echo "[ Remember that installed applications can be accessed by clicking on the 'three stacked rectangles' icon (dock at the top left) ]"
+echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
+
+# TODO: change default apps for web browser, mail client, music player, video player and photo viewer
 
 # TODO
 # Cleanup utility
-# Malware utility?
 # Comic viewer x 2
 # Calibre
 # Mail client (Geary (Thunderbird alternative))

@@ -27,7 +27,7 @@ sudo apt-get install -y -q curl > /dev/null
 echo "[Installing Wget]"
 sudo apt-get install -y -q wget > /dev/null
 echo "[Installing Tmux]"
-sudo apt-get install -y -q tmux > /dev/null  #Ctrl+b+%:creates vertical split #Ctrl+b+":creates horizontal split #Ctrl+b+spacebar:changes layouts, #Ctrl+b+x:kills split
+sudo apt-get install -y -q tmux > /dev/null  #Ctrl+b+%:creates vertical split #Ctrl+b+":creates horizontal split #Ctrl+b+spacebar:changes layouts, #Ctrl+b+x:kills split, #Ctrl+b+up/dwn/left/right:move between splits
 echo "[Installing Screen]"
 sudo apt-get install -y -q screen > /dev/null
 echo "[Installing Nmap]"
@@ -118,4 +118,3 @@ sudo apt autoremove -y -q > /dev/null
 sudo apt clean -y -q > /dev/null
 sudo apt-get -y -q autoclean > /dev/null
 echo "[Done!]"
-
