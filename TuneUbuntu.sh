@@ -75,6 +75,7 @@ echo "[Installing Atom editor]"
 sudo add-apt-repository -y ppa:webupd8team/atom &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q atom > /dev/null
+mkdir -p $HOME/.atom
 cat <<EOF > $HOME/.atom/config.cson
 "*":
   core:
@@ -146,7 +147,7 @@ antigen bundle pip
 antigen bundle command-not-found
 antigen bundle pyenv
 antigen bundle python
-antigen bundle virtualenvwrapper
+#antigen bundle virtualenvwrapper
 antigen bundle web-search
 
 # Syntax highlighting bundle.
