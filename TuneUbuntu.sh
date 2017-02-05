@@ -269,7 +269,8 @@ cd fonts
 cd ..
 \rm -rf ./fonts
 sudo apt-get install -y -q fonts-powerline > /dev/null
-#TODO: refresh cache!
+fc-cache -vf &> /dev/null #refresh font cache! (make fonts available)
+
 
 echo "[Configuring terminal aspect]"
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
