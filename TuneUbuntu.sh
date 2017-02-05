@@ -114,11 +114,9 @@ sudo apt-get install -y -q git > /dev/null
 echo "[Installing GIT client]" #gitkraken? gitk?
 #TODO
 
-echo "[Installing zsh]"
+echo "[Installing zsh and switching to it]"
 sudo apt-get install -y -q zsh > /dev/null
-echo "[Switching to zsh]"
 chsh -s $(which zsh)
-#echo "[Installing Oh-my-zsh]"
 echo "[Installing Antigen (plugin manager for zsh)]"
 #https://github.com/zsh-users/antigen
 #https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config
