@@ -1,11 +1,11 @@
 #!/bin/bash
-# Author: Javier Carretero Casado
+# Author:  Javier Carretero Casado
+# License: Beerware
 
 # TODO: To add aliases to separate file
 PkgCleanup ()      { sudo apt-get -f install && sudo apt-get autoremove && sudo apt-get -y autoclean && sudo apt-get -y clean ; }
 PkgUpdate()        { sudo apt update -y -q ; }
 PkgUpdateUpgrade() { sudo apt-get upgrade && sudo apt-get dist-upgrade ; }
-
 
 # TODO: pycharm
 # TODO: tkdiff alternative
@@ -27,7 +27,16 @@ sudo apt-get install -y -q curl > /dev/null
 echo "[Installing Wget]"
 sudo apt-get install -y -q wget > /dev/null
 echo "[Installing Tmux]"
-sudo apt-get install -y -q tmux > /dev/null  #Ctrl+b+%:creates vertical split #Ctrl+b+":creates horizontal split #Ctrl+b+spacebar:changes layouts, #Ctrl+b+x:kills split, #Ctrl+b+up/dwn/left/right:move between splits
+sudo apt-get install -y -q tmux > /dev/null
+#Ctrl+b+%        : creates vertical split
+#Ctrl+b+"        : creates horizontal split
+#Ctrl+b+spacebar : changes layouts
+#Ctrl+b+x        : kills split
+#Ctrl+b+up/dwn/left/right: move between splits
+#Ctr+b+d         : dettach from current session
+#Ctrl+b+$        : rename current session
+#tmux attach -t session-name: joins session 'session-name'
+#http://askubuntu.com/questions/8653/how-to-keep-processes-running-after-ending-ssh-session
 echo "[Installing Screen]"
 sudo apt-get install -y -q screen > /dev/null
 echo "[Installing Nmap]"

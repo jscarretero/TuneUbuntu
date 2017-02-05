@@ -1,11 +1,12 @@
 #!/bin/bash
 # Author:  Javier Carretero Casado
-# License:
+# License: Beerware
 
-desktopEnv=$(echo $XDG_CURRENT_DESKTOP)
+desktopEnv=$XDG_CURRENT_DESKTOP
 if ! [ "$desktopEnv" == "Unity" ] ; then
     echo "This script works for Linux Ubuntu with Unity. You will need to tweak this file to work for other "
-    echo "Linux distributions or windows managers"
+    echo "Linux distributions or windows managers. Exiting."
+    exit 1
 fi
 
 echo "[Updating list of available packages]"
@@ -112,14 +113,54 @@ sudo apt-get install -y -q git > /dev/null
 echo "[Installing GIT client]" #gitkraken? gitk?
 #TODO
 
-
-#TODO: NO: use bash-it instead!!
+echo "[Installing zsh]"
+sudo apt-get install -y -q zsh > /dev/null
+echo "[Switching to zsh]"
+chsh -s $(which zsh)
 #echo "[Installing Oh-my-zsh]"
-#echo "[Configuring Oh-my-zsh]"
-#echo "[...Changing theme]" !!!
-#echo "[...Changing plugins]"
-#echo "[...Changing fonts]"
-#echo "[...Changing color schemes]"s
+echo "[Installing Antigen (plugin manager for zsh)]"
+#https://github.com/zsh-users/antigen
+#https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config
+
+pushd . &> /dev/null
+cd ~
+git clone https://github.com/zsh-users/antigen.git &> /dev/null
+mv antigen .antigen
+
+#Backup .zshrc if it exists
+if [ -f "~/.zshrc" ] ; then
+    echo "...backing up .zshrc file to $HOME/.antigen/.zshrc_bck"
+    cp ~/.zshrc $HOME/.antigen/.zshrc_bck
+fi
+
+rm -f ~/.zshrc
+cat <<EOF > $HOME/.zshrc
+source ~/.antigen/antigen.zsh
+
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load the theme.
+antigen theme agnoster
+
+# Tell antigen that you're done.
+antigen apply
+EOF
+popd &> /dev/null
+
+
+#TODO: configure antigen, guake bash!
+#TODO: tmux not using zsh!
+# plugins, themes, and theme !
 
 echo "[Installing Guake (Ctr+F12)]"
 sudo apt-get install -y -q guake > /dev/null
@@ -167,6 +208,7 @@ gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
 gsettings set org.gnome.gedit.preferences.editor use-default-font true
 gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 9'
 gsettings set org.gnome.gedit.preferences.editor display-overview-map true
+gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 
   # Trim trailing whitespaces when saving files
   git clone https://github.com/jonleighton/gedit-trailsave &> /dev/null
@@ -186,8 +228,6 @@ gsettings set org.gnome.gedit.preferences.editor display-overview-map true
   plugins=`gsettings get org.gnome.gedit.plugins active-plugins` ; plugins=${plugins::-1} ;
   plugins="$plugins, 'controlyourtabs']"
   gsettings set org.gnome.gedit.plugins active-plugins "$plugins"
-
-
 
 echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
@@ -229,6 +269,7 @@ cd fonts
 cd ..
 \rm -rf ./fonts
 sudo apt-get install -y -q fonts-powerline > /dev/null
+#TODO: refresh cache!
 
 echo "[Configuring terminal aspect]"
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
@@ -238,7 +279,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
 
 echo "[Configuring keyboard delays - rates]"
 gsettings set org.gnome.desktop.peripherals.keyboard delay 140
-gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 22
+gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
 echo "[Installing 'Paper' GTK theme, icons and cursors]"
@@ -304,6 +345,8 @@ echo "[ Remember that installed applications can be accessed by clicking on the 
 echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 
 # TODO: change default apps for web browser, mail client, music player, video player and photo viewer
+# TODO: Windowskey + M to minimize all windows
+# TODO: Windowskey + Enter to show windows thumbnails
 
 # TODO
 # Cleanup utility
@@ -327,8 +370,9 @@ echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 # Install the latest proprietary Linux graphics drivers available for your hardware
 # Shutter
 # Bleach bit
-# Kodi
+# Kodi ?
 
 
 # LINKS:
 # http://askubuntu.com/questions/22313/what-is-dconf-what-is-its-function-and-how-do-i-use-it
+
