@@ -343,8 +343,8 @@ sudo apt-add-repository -y ppa:diesch/testing  &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q classicmenu-indicator > /dev/null
 
-echo "[Changing wallpaper]"
-gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Vi%C3%B1uela.jpg
+#echo "[Changing wallpaper]"
+#gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Vi%C3%B1uela.jpg
 
 echo "[Changing timezone to Europe/Madrid]"
 sudo timedatectl set-timezone Europe/Madrid
