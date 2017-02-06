@@ -289,6 +289,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
 # Install Dracula theme
 git clone https://github.com/GalaticStryder/gnome-terminal-colors-dracula &> /dev/null
 cd gnome-terminal-colors-dracula
+sleep 1
 echo "1 \n 1 \n YES " | ./install.sh &> /dev/null
 cd ..
 rm -rf ./gnome-terminal-colors-dracula
