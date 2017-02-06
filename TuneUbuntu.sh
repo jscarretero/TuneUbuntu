@@ -357,6 +357,8 @@ echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 # TODO: change default apps for web browser, mail client, music player, video player and photo viewer
 # TODO: Windowskey + M to minimize all windows
 # TODO: Windowskey + Enter to show windows thumbnails
+# TODO: useful aliases like notify-send--> alert, look for others
+# TODO: pygmentize ?
 
 
 echo "[Installing Mcomix (comic viewer)]"
@@ -401,3 +403,5 @@ sudo apt-get install -y -q shutter &> /dev/null
 # TODO: Gufws
 
 # TODO: Install the latest proprietary Linux graphics drivers available for your hardware
+
+notify-send "DONE!    :)"
