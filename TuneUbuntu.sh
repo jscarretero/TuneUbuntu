@@ -2,6 +2,8 @@
 # Author:  Javier Carretero Casado
 # License: Beerware
 
+set -e # stop on error
+
 desktopEnv=$XDG_CURRENT_DESKTOP
 if ! [ "$desktopEnv" == "Unity" ] ; then
     echo "This script works for Linux Ubuntu with Unity. You will need to tweak this file to work for other "
@@ -29,8 +31,8 @@ sudo apt-get install -y -q unity-tweak-tool > /dev/null
 echo "[Installing Synaptic package manager]"
 sudo apt-get install -y -q synaptic > /dev/null
 
-echo "[Installing Slack]"
-sudo apt-get install -y -q slack > /dev/null
+#echo "[Installing Slack]"
+#sudo apt-get install -y -q slack > /dev/null  #TODO: Does not work
 
 echo "[Installing Spotify]"
 # Commands from https://www.spotify.com/es/download/linux/
@@ -65,8 +67,6 @@ sudo apt-get install -y -q virtualbox-qt > /dev/null
 #sudo apt-get install -y -q libdvdcss2 libdvdnav4 libdvdread4  > /dev/null
 #sudo apt-get install -y -q libdvd-pkg > /dev/null
 #sudo dpkg-reconfigure libdvd-pkg > /dev/null
-#echo "[Installing Flash Player (flash will soon be unsupported)]"
-#sudo apt-get install flashplugin-installer #Not needed for Chrome #already installed by restricted-extras
 
 echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
 sudo apt-get install -y -q vlc &> /dev/null
@@ -119,7 +119,7 @@ sudo apt-get install -y -q zsh > /dev/null
 chsh -s $(which zsh)
 echo "[Installing Antigen (plugin manager for zsh)]"
 #https://github.com/zsh-users/antigen
-#https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config
+#https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config # nice, but do I need it?
 
 pushd . &> /dev/null
 cd ~
@@ -158,7 +158,6 @@ antigen theme agnoster
 antigen apply
 EOF
 popd &> /dev/null
-
 
 echo "[Installing Guake (Ctr+F12)]"
 sudo apt-get install -y -q guake > /dev/null
@@ -268,7 +267,6 @@ gconftool-2 --type Boolean --set /apps/docky-2/Docky/Items/DockyItem/ShowDockyIt
 gconftool-2 --type list --list-type string --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Location ['Barcelona\, spain']
 gconftool-2 --type Boolean --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Metric True
 gconftool-2 --type Integer --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Timeout 60
-
 nohup docky &> /dev/null &
 
 echo "[Installing new Fonts (Powerline)]"
@@ -279,7 +277,6 @@ cd ..
 \rm -rf ./fonts
 sudo apt-get install -y -q fonts-powerline > /dev/null
 fc-cache -vf &> /dev/null #refresh font cache! (make fonts available)
-
 
 echo "[Configuring terminal aspect]"
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
@@ -329,11 +326,6 @@ gsettings set com.canonical.Unity integrated-menus false
 #gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ unminimize-effects [\'animation:"Magic Lamp"\'] #"Glide 2" is the original
 #gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ minimize-effects [\'animation:"Magic Lamp"\'] #"Zoom" is the original
 
-#echo "[Adding GNOME shell extensions]"
-#echo "[Configuring GNOME]"
-#echo "[ ...Showing minimize-maximize icons]"
-#echo "[ ...]"
-
 echo "[Hiding Unity dock (will not disable it)]"
 #http://askubuntu.com/questions/643028/shell-script-to-remove-unity-launcherif-present-in-ubuntu-14-04-and-or-the-xf
 dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1   #0 to enable back
@@ -364,6 +356,8 @@ echo "[ Remember that installed applications can be accessed by clicking on the 
 echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 
 # TODO: change default apps for web browser, mail client, music player, video player and photo viewer
+
+
 # TODO: Windowskey + M to minimize all windows
 # TODO: Windowskey + Enter to show windows thumbnails
 
@@ -390,8 +384,3 @@ echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 # Shutter
 # Bleach bit
 # Kodi ?
-
-
-# LINKS:
-# http://askubuntu.com/questions/22313/what-is-dconf-what-is-its-function-and-how-do-i-use-it
-
