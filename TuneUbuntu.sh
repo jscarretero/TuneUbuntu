@@ -233,7 +233,6 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
   sed -i '/selection" value/c\    \<color name="selection" value="#000000"/\>' $HOME/.local/share/gedit/styles/dracula.xml
   gsettings set org.gnome.gedit.preferences.editor scheme 'dracula'
 
-
 echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
 # Auto-Start
@@ -356,31 +355,49 @@ echo "[ Remember that installed applications can be accessed by clicking on the 
 echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 
 # TODO: change default apps for web browser, mail client, music player, video player and photo viewer
-
-
 # TODO: Windowskey + M to minimize all windows
 # TODO: Windowskey + Enter to show windows thumbnails
 
-# TODO
-# Cleanup utility
-# Comic viewer x 2
-# Calibre
-# Mail client (Geary (Thunderbird alternative))
+
+echo "[Installing Mcomix (comic viewer)]"
+sudo apt-get install -y -q mcomix &> /dev/null
+echo "[Installing Qcomicbook (another comic viewer)]"
+sudo apt-get install -y -q qcomicbook &> /dev/null
+
+echo "[Installing Calibre (ebook reader)]"
+sudo apt-get install -y -q calibre &> /dev/null
+
+echo "[Installing Geary (e-mail client, alternative to Thunderbird)]"
+sudo apt-get install -y -q geary &> /dev/null
+
+echo "[Installing GIMP (Photoshop alternative)]"
+sudo apt-get install -y -q gimp &> /dev/null
+
+echo "[Installing Bleachbit (cleaner)]"
+sudo apt-get install -y -q bleachbit > /dev/null
+
+echo "[Installing Shutter (advanced screenshot capture)]"
+sudo apt-get install -y -q shutter &> /dev/null
+
 # PDF Viewer
 # PDF Editor (Inkspace)
-# Steam
-# Skype
-# DropBox
 # Screencast recorder
 # Pomodoro
 # Compressor commands + GUI (peazip)
-# Audio Editor (audacity)
-# Video Editor (pitivi, openshot)
-# Photo Editor (digikam, shotwell, photoqt)
-# GIMP
 # KeePass
-# Gufws
-# Install the latest proprietary Linux graphics drivers available for your hardware
-# Shutter
-# Bleach bit
-# Kodi ?
+
+#echo "[Installing Skype]"
+#sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+#sudo dpkg --add-architecture i386
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q skype &> /dev/null
+
+# TODO: audio editors
+# TODO: video editors
+# TODO: photo editors
+# TODO: STEAM
+# TODO: KODI
+# TODO: DropBox
+# TODO: Gufws
+
+# TODO: Install the latest proprietary Linux graphics drivers available for your hardware
