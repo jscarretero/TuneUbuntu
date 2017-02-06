@@ -288,9 +288,11 @@ gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
 # Ctrl+PageUp for Previous Tab
 # Install Dracula theme
 git clone https://github.com/GalaticStryder/gnome-terminal-colors-dracula &> /dev/null
+sleep 1
 cd gnome-terminal-colors-dracula
 sleep 1
-echo "1 \n 1 \n YES " | ./install.sh &> /dev/null
+echo "1 \n 1 \n YES \n 2 \n" | ./install.sh &> /dev/null
+sleep 1
 cd ..
 rm -rf ./gnome-terminal-colors-dracula
 
