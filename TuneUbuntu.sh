@@ -279,6 +279,12 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
 # Ctrl+PageDown for Next Tab
 # Ctrl+PageUp for Previous Tab
+# Install Dracula theme
+git clone https://github.com/GalaticStryder/gnome-terminal-colors-dracula &> /dev/null
+cd gnome-terminal-colors-dracula
+echo "1 \n 1 \n YES " | ./install.sh &> /dev/null
+cd ..
+rm -rf ./gnome-terminal-colors-dracula
 
 echo "[Configuring keyboard delays - rates]"
 gsettings set org.gnome.desktop.peripherals.keyboard delay 140
