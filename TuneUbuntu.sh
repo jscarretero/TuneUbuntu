@@ -160,10 +160,6 @@ EOF
 popd &> /dev/null
 
 
-#TODO: configure antigen, guake bash!
-#TODO: tmux not using zsh!
-# plugins, themes, and theme !
-
 echo "[Installing Guake (Ctr+F12)]"
 sudo apt-get install -y -q guake > /dev/null
 gconftool-2 --type Integer --set /apps/guake/general/window_height  100
