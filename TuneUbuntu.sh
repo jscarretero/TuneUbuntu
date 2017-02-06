@@ -212,7 +212,7 @@ gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 9'
 gsettings set org.gnome.gedit.preferences.editor display-overview-map true
 gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 
-  # Trim trailing whitespaces when saving files
+  # Trim trailing whitespaces when saving files (plugin)
   git clone https://github.com/jonleighton/gedit-trailsave &> /dev/null
   pushd . &> /dev/null
   cd gedit-trailsave  && ./install.sh &> /dev/null
@@ -222,7 +222,7 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
   popd &> /dev/null
   \rm -rf gedit-trailsave
 
-  #Change keybindings to move to new tab from Ctl+Alt+PgUp/Down to Ctrl+PgUp/Down
+  #Change keybindings to move to new tab from Ctl+Alt+PgUp/Down to Ctrl+PgUp/Down (plugin)
   git clone https://github.com/jefferyto/gedit-control-your-tabs.git &> /dev/null
   cp ./gedit-control-your-tabs/controlyourtabs.plugin ~/.local/share/gedit/plugins
   cp ./gedit-control-your-tabs/controlyourtabs.py ~/.local/share/gedit/plugins
@@ -230,6 +230,14 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
   plugins=`gsettings get org.gnome.gedit.plugins active-plugins` ; plugins=${plugins::-1} ;
   plugins="$plugins, 'controlyourtabs']"
   gsettings set org.gnome.gedit.plugins active-plugins "$plugins"
+
+  #Add Dracula color theme and enable it (theme)
+  mkdir -p $HOME/.local/share/gedit/styles/
+  wget --quiet -O $HOME/.local/share/gedit/styles/dracula.xml https://raw.githubusercontent.com/dracula/gedit/master/dracula.xml
+  #Patch the 'selection' color to not clash with 'current-line' color (black color) ... fuck that
+
+  gsettings set org.gnome.gedit.preferences.editor scheme 'dracula'
+
 
 echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
@@ -263,6 +271,8 @@ gconftool-2 --type Boolean --set /apps/docky-2/Docky/Items/DockyItem/ShowDockyIt
 gconftool-2 --type list --list-type string --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Location ['Barcelona\, spain']
 gconftool-2 --type Boolean --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Metric True
 gconftool-2 --type Integer --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Timeout 60
+
+nohup docky &> /dev/null &
 
 echo "[Installing new Fonts (Powerline)]"
 git clone https://github.com/powerline/fonts.git  &> /dev/null
