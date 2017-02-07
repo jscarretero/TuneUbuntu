@@ -291,7 +291,8 @@ git clone https://github.com/GalaticStryder/gnome-terminal-colors-dracula &> /de
 sleep 1
 cd gnome-terminal-colors-dracula
 sleep 1
-echo "1 \n 1 \n YES \n 2 \n" | ./install.sh &> /dev/null
+profId=$(gsettings get org.gnome.Terminal.ProfilesList default | sed "s/^\([\"']\)\(.*\)\1\$/\2/g")
+./install.sh --scheme=Dracula -p :$profId --skip-dircolors
 sleep 1
 cd ..
 rm -rf ./gnome-terminal-colors-dracula
