@@ -172,6 +172,7 @@ gconftool-2 --type Boolean --set /apps/guake/general/window_ontop False
 gconftool-2 --type string  --set /apps/guake/style/font/palette_name 'Dracula'
 gconftool-2 --type string  --set /apps/guake/style/font/style 'Monospace 13'
 gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
+timeout 2.5 guake-prefs &> /dev/null
 #Add guake to startup applications
 sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
