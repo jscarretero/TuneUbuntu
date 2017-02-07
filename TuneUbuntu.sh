@@ -2,8 +2,6 @@
 # Author:  Javier Carretero Casado
 # License: Beerware
 
-set -e # stop on error
-
 desktopEnv=$XDG_CURRENT_DESKTOP
 if ! [ "$desktopEnv" == "Unity" ] ; then
     echo "This script works for Linux Ubuntu with Unity. You will need to tweak this file to work for other "
@@ -124,7 +122,7 @@ echo "[Installing Antigen (plugin manager for zsh)]"
 pushd . &> /dev/null
 cd ~
 git clone https://github.com/zsh-users/antigen.git &> /dev/null
-mv antigen .antigen
+mv antigen .antigen &> /dev/null
 
 #Backup .zshrc if it exists
 if [ -f "~/.zshrc" ] ; then
@@ -347,26 +345,13 @@ echo "[Changing timezone to Europe/Madrid]"
 sudo timedatectl set-timezone Europe/Madrid
 # sudo dpkg-reconfigure tzdata   # This will bring up a new window where the user can select it
 
-echo "[Changing keyboard layout to 'es']"
-sudo setxkbmap -layout es  #DOES NOT WORK
-
-sudo apt autoremove -y -q &> /dev/null
-sudo apt clean -y -q &> /dev/null
-sudo apt-get -y -q autoclean &> /dev/null
-echo "[ DONE! Log out from this session and login again to see all the changes. Hope it works! ]"
-echo "[ Remember that installed applications can be accessed by clicking on the 'three stacked rectangles' icon (dock at the top left) ]"
-echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
-
-# TODO: change default apps for web browser, mail client, music player, video player and photo viewer
-# TODO: Windowskey + M to minimize all windows
-# TODO: Windowskey + Enter to show windows thumbnails
-# TODO: useful aliases like notify-send--> alert, look for others
-# TODO: pygmentize ?
+#echo "[Changing keyboard layout to 'es']"   # and winkeys?
+#sudo setxkbmap -layout es  #TODO: Does not work
 
 
-echo "[Installing Mcomix (comic viewer)]"
-sudo apt-get install -y -q mcomix &> /dev/null
-echo "[Installing Qcomicbook (another comic viewer)]"
+#echo "[Installing Mcomix (comic viewer)]"
+#sudo apt-get install -y -q mcomix &> /dev/null
+echo "[Installing Qcomicbook (comic viewer)]"
 sudo apt-get install -y -q qcomicbook &> /dev/null
 
 echo "[Installing Calibre (ebook reader)]"
@@ -384,11 +369,28 @@ sudo apt-get install -y -q bleachbit > /dev/null
 echo "[Installing Shutter (advanced screenshot capture)]"
 sudo apt-get install -y -q shutter &> /dev/null
 
-# PDF Viewer
-# PDF Editor (Inkspace)
+echo "[Installing Evince (PDF viewer and annotator)]"
+ssudo apt-get install -y -q evince &> /dev/null
+#echo "[Installing Okular (PDF viewer and annotator)]"
+#sudo apt-get install -y -q okular &> /dev/null
+echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
+sudo apt-get install -y -q inkscape &> /dev/null
+echo "[Installing Pdftk (PDF manipulation)]"
+sudo apt-get install -y -q pdftk &> /dev/null
+echo "[Installing PDFChain (Pdftk GUI)]"
+#sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q pdfchain &> /dev/null
+
 # Screencast recorder
-# Pomodoro
+
 # Compressor commands + GUI (peazip)
+echo "[Installing compression utilities]"
+sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa arj sharutils mpack lzma lzop cabextract &> /dev/null
+
+echo "[Installing Kodi Media Center <3]"
+sudo apt-get install -y -q kodi &> /dev/null
+
 # KeePass
 
 #echo "[Installing Skype]"
@@ -397,14 +399,27 @@ sudo apt-get install -y -q shutter &> /dev/null
 #sudo apt-get update -y -q &> /dev/null
 #sudo apt-get install -y -q skype &> /dev/null
 
-# TODO: audio editors
-# TODO: video editors
-# TODO: photo editors
-# TODO: STEAM
-# TODO: KODI
-# TODO: DropBox
-# TODO: Gufws
+# TODO?: audio editors
+# TODO?: video editors
+# TODO?: photo editors
+# TODO?: STEAM
+# TODO?: DropBox
+# TODO?: Gufws
+# TODO?: Pomodoro - Tomate
+
+# TODO: change default apps for web browser, mail client, music player, video player and photo viewer
+# TODO: Windowskey + M to minimize all windows
+# TODO: Windowskey + Enter to show windows thumbnails
+# TODO: useful aliases like notify-send--> alert, look for others
+# TODO: pygmentize ?
 
 # TODO: Install the latest proprietary Linux graphics drivers available for your hardware
+
+sudo apt autoremove -y -q &> /dev/null
+sudo apt clean -y -q &> /dev/null
+sudo apt-get -y -q autoclean &> /dev/null
+echo "[ DONE! Log out from this session and login again to see all the changes. Hope it works! ]"
+echo "[ Remember that installed applications can be accessed by clicking on the 'three stacked rectangles' icon (dock at the top left) ]"
+echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 
 notify-send "DONE!    :)"
