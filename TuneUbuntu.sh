@@ -366,8 +366,8 @@ sudo apt-get install -y -q gimp &> /dev/null
 echo "[Installing Bleachbit (cleaner)]"
 sudo apt-get install -y -q bleachbit > /dev/null
 
-echo "[Installing Shutter (advanced screenshot capture)]"
-sudo apt-get install -y -q shutter &> /dev/null
+#echo "[Installing Shutter (advanced screenshot capture)]"
+#sudo apt-get install -y -q shutter &> /dev/null
 
 echo "[Installing Evince (PDF viewer and annotator)]"
 ssudo apt-get install -y -q evince &> /dev/null
@@ -377,7 +377,7 @@ echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw
 sudo apt-get install -y -q inkscape &> /dev/null
 echo "[Installing Pdftk (PDF manipulation)]"
 sudo apt-get install -y -q pdftk &> /dev/null
-echo "[Installing PDFChain (Pdftk GUI)]"
+#echo "[Installing PDFChain (Pdftk GUI)]"  # FIXME: pdfchain does not run bc of segmentation fault
 #sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
 #sudo apt-get update -y -q &> /dev/null
 #sudo apt-get install -y -q pdfchain &> /dev/null

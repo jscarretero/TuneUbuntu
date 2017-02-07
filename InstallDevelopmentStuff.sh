@@ -6,10 +6,13 @@
 PkgCleanup ()      { sudo apt-get -f install && sudo apt-get autoremove && sudo apt-get -y autoclean && sudo apt-get -y clean ; }
 PkgUpdate()        { sudo apt update -y -q ; }
 PkgUpdateUpgrade() { sudo apt-get upgrade && sudo apt-get dist-upgrade ; }
+alias pkg_update="sudo apt-get --only-upgrade install $1"
 
-# TODO: pycharm
+
+# TODO?: PyCharm?
 # TODO: tkdiff alternative
-# TODO: qt for python
+# TODO: qt for python ?
+# TODO: git confllict resolution tool
 
 echo "[Updating list of available packages]"
 sudo apt update -y -q
@@ -41,8 +44,6 @@ echo "[Installing Screen]"
 sudo apt-get install -y -q screen > /dev/null
 echo "[Installing Nmap]"
 sudo apt-get install -y -q nmap > /dev/null
-echo "[Installing Bash]"
-sudo apt-get install -y -q wget > /dev/null
 echo "[Installing Ctags]"
 sudo apt-get install -y -q ctags > /dev/null
 echo "[Installing OpenSSL]"
@@ -101,6 +102,7 @@ sudo apt-get install build-essential autoconf automake libtool ¿cmake?
 # Dstat
     sudo apt-get install dstat
     '''
+    echo "[Installing Dstat (system-level performance monitor)]"
     tmpDir=`mktemp -d`
     pushd .
     cd "$tmpDir"
