@@ -2,7 +2,7 @@
 # Author:  Javier Carretero Casado
 # License: Beerware
 
-# TODO: To add aliases to separate file
+# TODO:To add aliases to separate file
 PkgCleanup ()      { sudo apt-get -f install && sudo apt-get autoremove && sudo apt-get -y autoclean && sudo apt-get -y clean ; }
 PkgUpdate()        { sudo apt update -y -q ; }
 PkgUpdateUpgrade() { sudo apt-get upgrade && sudo apt-get dist-upgrade ; }

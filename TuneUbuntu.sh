@@ -2,6 +2,8 @@
 # Author:  Javier Carretero Casado
 # License: Beerware
 
+set -e # stop on error
+
 desktopEnv=$XDG_CURRENT_DESKTOP
 if ! [ "$desktopEnv" == "Unity" ] ; then
     echo "This script works for Linux Ubuntu with Unity. You will need to tweak this file to work for other "
@@ -29,8 +31,8 @@ sudo apt-get install -y -q unity-tweak-tool > /dev/null
 echo "[Installing Synaptic package manager]"
 sudo apt-get install -y -q synaptic > /dev/null
 
-echo "[Installing Slack]"
-sudo apt-get install -y -q slack > /dev/null
+#echo "[Installing Slack]"
+#sudo apt-get install -y -q slack > /dev/null  #TODO: Does not work
 
 echo "[Installing Spotify]"
 # Commands from https://www.spotify.com/es/download/linux/
@@ -65,8 +67,6 @@ sudo apt-get install -y -q virtualbox-qt > /dev/null
 #sudo apt-get install -y -q libdvdcss2 libdvdnav4 libdvdread4  > /dev/null
 #sudo apt-get install -y -q libdvd-pkg > /dev/null
 #sudo dpkg-reconfigure libdvd-pkg > /dev/null
-#echo "[Installing Flash Player (flash will soon be unsupported)]"
-#sudo apt-get install flashplugin-installer #Not needed for Chrome #already installed by restricted-extras
 
 echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
 sudo apt-get install -y -q vlc &> /dev/null
@@ -119,7 +119,7 @@ sudo apt-get install -y -q zsh > /dev/null
 chsh -s $(which zsh)
 echo "[Installing Antigen (plugin manager for zsh)]"
 #https://github.com/zsh-users/antigen
-#https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config
+#https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config # nice, but do I need it?
 
 pushd . &> /dev/null
 cd ~
@@ -158,7 +158,6 @@ antigen theme agnoster
 antigen apply
 EOF
 popd &> /dev/null
-
 
 echo "[Installing Guake (Ctr+F12)]"
 sudo apt-get install -y -q guake > /dev/null
@@ -234,7 +233,6 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
   sed -i '/selection" value/c\    \<color name="selection" value="#000000"/\>' $HOME/.local/share/gedit/styles/dracula.xml
   gsettings set org.gnome.gedit.preferences.editor scheme 'dracula'
 
-
 echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
 # Auto-Start
@@ -268,7 +266,6 @@ gconftool-2 --type Boolean --set /apps/docky-2/Docky/Items/DockyItem/ShowDockyIt
 gconftool-2 --type list --list-type string --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Location ['Barcelona\, spain']
 gconftool-2 --type Boolean --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Metric True
 gconftool-2 --type Integer --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Timeout 60
-
 nohup docky &> /dev/null &
 
 echo "[Installing new Fonts (Powerline)]"
@@ -279,7 +276,6 @@ cd ..
 \rm -rf ./fonts
 sudo apt-get install -y -q fonts-powerline > /dev/null
 fc-cache -vf &> /dev/null #refresh font cache! (make fonts available)
-
 
 echo "[Configuring terminal aspect]"
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
@@ -329,11 +325,7 @@ gsettings set com.canonical.Unity always-show-menus false
 gsettings set com.canonical.Unity integrated-menus false
 #gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ unminimize-effects [\'animation:"Magic Lamp"\'] #"Glide 2" is the original
 #gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ minimize-effects [\'animation:"Magic Lamp"\'] #"Zoom" is the original
-
-#echo "[Adding GNOME shell extensions]"
-#echo "[Configuring GNOME]"
-#echo "[ ...Showing minimize-maximize icons]"
-#echo "[ ...]"
+sudo sh -c "echo 'LC_TIME=\"en_GB.UTF-8\"' >> /etc/default/locale"
 
 echo "[Hiding Unity dock (will not disable it)]"
 #http://askubuntu.com/questions/643028/shell-script-to-remove-unity-launcherif-present-in-ubuntu-14-04-and-or-the-xf
@@ -367,32 +359,51 @@ echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 # TODO: change default apps for web browser, mail client, music player, video player and photo viewer
 # TODO: Windowskey + M to minimize all windows
 # TODO: Windowskey + Enter to show windows thumbnails
+# TODO: useful aliases like notify-send--> alert, look for others
+# TODO: pygmentize ?
 
-# TODO
-# Cleanup utility
-# Comic viewer x 2
-# Calibre
-# Mail client (Geary (Thunderbird alternative))
+
+echo "[Installing Mcomix (comic viewer)]"
+sudo apt-get install -y -q mcomix &> /dev/null
+echo "[Installing Qcomicbook (another comic viewer)]"
+sudo apt-get install -y -q qcomicbook &> /dev/null
+
+echo "[Installing Calibre (ebook reader)]"
+sudo apt-get install -y -q calibre &> /dev/null
+
+echo "[Installing Geary (e-mail client, alternative to Thunderbird)]"
+sudo apt-get install -y -q geary &> /dev/null
+
+echo "[Installing GIMP (Photoshop alternative)]"
+sudo apt-get install -y -q gimp &> /dev/null
+
+echo "[Installing Bleachbit (cleaner)]"
+sudo apt-get install -y -q bleachbit > /dev/null
+
+echo "[Installing Shutter (advanced screenshot capture)]"
+sudo apt-get install -y -q shutter &> /dev/null
+
 # PDF Viewer
 # PDF Editor (Inkspace)
-# Steam
-# Skype
-# DropBox
 # Screencast recorder
 # Pomodoro
 # Compressor commands + GUI (peazip)
-# Audio Editor (audacity)
-# Video Editor (pitivi, openshot)
-# Photo Editor (digikam, shotwell, photoqt)
-# GIMP
 # KeePass
-# Gufws
-# Install the latest proprietary Linux graphics drivers available for your hardware
-# Shutter
-# Bleach bit
-# Kodi ?
 
+#echo "[Installing Skype]"
+#sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+#sudo dpkg --add-architecture i386
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q skype &> /dev/null
 
-# LINKS:
-# http://askubuntu.com/questions/22313/what-is-dconf-what-is-its-function-and-how-do-i-use-it
+# TODO: audio editors
+# TODO: video editors
+# TODO: photo editors
+# TODO: STEAM
+# TODO: KODI
+# TODO: DropBox
+# TODO: Gufws
 
+# TODO: Install the latest proprietary Linux graphics drivers available for your hardware
+
+notify-send "DONE!    :)"
