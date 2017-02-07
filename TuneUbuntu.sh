@@ -2,6 +2,9 @@
 # Author:  Javier Carretero Casado
 # License: Beerware
 
+# Before running this sript on a fresh Ubuntu installation, I recommend you to try it on a virtual machine
+# where you may have installed that Ubuntu image.
+
 desktopEnv=$XDG_CURRENT_DESKTOP
 if ! [ "$desktopEnv" == "Unity" ] ; then
     echo "This script works for Linux Ubuntu with Unity. You will need to tweak this file to work for other "
@@ -55,6 +58,11 @@ sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q qbittorrent > /dev/null
 
+echo "[Installing Geary (e-mail client, alternative to Thunderbird)]"
+sudo apt-get install -y -q geary &> /dev/null
+
+#TODO? Drop geary and use evolution instead?
+
 echo "[Installing Oracle's VirtualBox]"
 sudo apt-get install -y -q virtualbox-qt > /dev/null
 
@@ -100,17 +108,47 @@ sudo apt-get install -y -q darktable > /dev/null
 echo "[Installing Pinta (better Paint)]"
 sudo apt-get install -y -q pinta > /dev/null
 
+echo "[Installing GIMP (Photoshop alternative)]"
+sudo apt-get install -y -q gimp &> /dev/null
+
+#echo "[Installing Shutter (advanced screenshot capture)]"
+#sudo apt-get install -y -q shutter &> /dev/null
+
+echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
+sudo apt-get install -y -q inkscape &> /dev/null
+echo "[Installing Evince (PDF viewer and annotator)]"
+ssudo apt-get install -y -q evince &> /dev/null
+#echo "[Installing Okular (PDF viewer and annotator)]"
+#sudo apt-get install -y -q okular &> /dev/null
+echo "[Installing Pdftk (PDF manipulation)]"
+sudo apt-get install -y -q pdftk &> /dev/null
+#echo "[Installing PDFChain (Pdftk GUI)]"  # FIXME: pdfchain does not run bc of segmentation fault
+#sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q pdfchain &> /dev/null
+
 echo "[Installing Remarkable (Markdown editor)]"
 wget --quiet https://remarkableapp.github.io/files/remarkable_1.87_all.deb  #FIXME with latest file name
 sudo apt-get install -y -q gdebi > /dev/null
 sudo gdebi -q -n remarkable_1.87_all.deb > /dev/null                        #FIXME with latest file name
 \rm remarkable_1.87_all.deb
 
+#echo "[Installing Mcomix (comic viewer)]"
+#sudo apt-get install -y -q mcomix &> /dev/null
+echo "[Installing Qcomicbook (comic viewer)]"
+sudo apt-get install -y -q qcomicbook &> /dev/null
+
+echo "[Installing Calibre (ebook reader)]"
+sudo apt-get install -y -q calibre &> /dev/null
+
 echo "[Installing Git]"
 sudo apt-get install -y -q git > /dev/null
 
 echo "[Installing GIT client]" #gitkraken? gitk?
 #TODO
+
+echo "[Installing Bleachbit (cleaner)]"
+sudo apt-get install -y -q bleachbit > /dev/null
 
 echo "[Installing zsh and switching to it]"
 sudo apt-get install -y -q zsh > /dev/null
@@ -349,39 +387,6 @@ sudo timedatectl set-timezone Europe/Madrid
 #sudo setxkbmap -layout es  #TODO: Does not work
 
 
-#echo "[Installing Mcomix (comic viewer)]"
-#sudo apt-get install -y -q mcomix &> /dev/null
-echo "[Installing Qcomicbook (comic viewer)]"
-sudo apt-get install -y -q qcomicbook &> /dev/null
-
-echo "[Installing Calibre (ebook reader)]"
-sudo apt-get install -y -q calibre &> /dev/null
-
-echo "[Installing Geary (e-mail client, alternative to Thunderbird)]"
-sudo apt-get install -y -q geary &> /dev/null
-
-echo "[Installing GIMP (Photoshop alternative)]"
-sudo apt-get install -y -q gimp &> /dev/null
-
-echo "[Installing Bleachbit (cleaner)]"
-sudo apt-get install -y -q bleachbit > /dev/null
-
-#echo "[Installing Shutter (advanced screenshot capture)]"
-#sudo apt-get install -y -q shutter &> /dev/null
-
-echo "[Installing Evince (PDF viewer and annotator)]"
-ssudo apt-get install -y -q evince &> /dev/null
-#echo "[Installing Okular (PDF viewer and annotator)]"
-#sudo apt-get install -y -q okular &> /dev/null
-echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
-sudo apt-get install -y -q inkscape &> /dev/null
-echo "[Installing Pdftk (PDF manipulation)]"
-sudo apt-get install -y -q pdftk &> /dev/null
-#echo "[Installing PDFChain (Pdftk GUI)]"  # FIXME: pdfchain does not run bc of segmentation fault
-#sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
-#sudo apt-get update -y -q &> /dev/null
-#sudo apt-get install -y -q pdfchain &> /dev/null
-
 # Screencast recorder
 
 # Compressor commands + GUI (peazip)
@@ -410,6 +415,7 @@ sudo apt-get install -y -q kodi &> /dev/null
 # TODO: change default apps for web browser, mail client, music player, video player and photo viewer
 # TODO: Windowskey + M to minimize all windows
 # TODO: Windowskey + Enter to show windows thumbnails
+
 # TODO: useful aliases like notify-send--> alert, look for others
 # TODO: pygmentize ?
 
