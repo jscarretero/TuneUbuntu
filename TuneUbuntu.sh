@@ -267,9 +267,11 @@ antigen bundle command-not-found
 antigen bundle web-search
 antigen bundle colorize
 
-# Syntax highlighting bundle.
+# Bundles from zsh-users.
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
+ #antigen bundle zsh-users/zsh-completions
+ # TODO: zsh-users/zsh-history-substring-search
 
 # Load the theme.
 antigen theme agnoster
@@ -278,9 +280,9 @@ antigen theme agnoster
 antigen apply
 
 # Setup zsh-autosuggestions
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh #FIXME: needed?
 
-# Bind keys to jump words
+# Bind keys.
 bindkey "[D" backward-word
 bindkey "[C" forward-word
 bindkey -e
@@ -292,11 +294,10 @@ bindkey "^[[F"    end-of-line
 bindkey "^[[1;5F" end-of-line
 #To set new bindkeys in a terminal type Ctrl+V, nothing will be shown, then type the key combination :)
 
-
-#TODO: Start - end keys
-
+# Exports.
 export EDITOR='nano'
 
+# Other.
 source ~/.alias
 
 EOF
@@ -431,8 +432,7 @@ sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa
 
 # TODO: change default apps for web browser, mail client, music player, video player and photo viewer
 # TODO: useful aliases like notify-send--> alert, look for others
-# TODO: pygmentize ?
-
+# TODO: install banshee, and install all plugins for banshee and rhythmbox
 
 sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
