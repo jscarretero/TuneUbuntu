@@ -232,12 +232,6 @@ timeout 2.5 guake-prefs &> /dev/null  || true
 #Add guake to startup applications
 sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
-#TODO: zsh-autosuggestions and use it in antigen
-#TODO: zsh-history-substring-search
-#TODO: clean history upon reading .zshrc and limit history size and #entries
-#TODO: guake colors clash for dracula and autosuggestions
-#TODO:
-
 #https://github.com/zsh-users/
 #https://github.com/zsh-users/antigen
 echo "[Installing Antigen (plugin manager for zsh)]"
@@ -261,7 +255,7 @@ source ~/.antigen/antigen.zsh
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
+# Bundles from the default repo (robbyrussell's oh-my-zsh). Check them :)
 antigen bundle command-not-found
  #antigen bundle git
  #antigen bundle pip
@@ -274,7 +268,7 @@ antigen bundle colorize
 # Bundles from zsh-users.
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh  #FIXME: ./zsh... is needed?
+antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh  #TODO FIXME: ./zsh... is needed?
  #antigen bundle zsh-users/zsh-completions
  # TODO: zsh-users/zsh-history-substring-search
 
@@ -285,7 +279,7 @@ antigen theme agnoster
 antigen apply
 
 # Setup zsh-autosuggestions
-#source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh #FIXME: needed?
+#source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh #TODO FIXME: needed?
 
 # Bind keys.
 bindkey "[D" backward-word
@@ -305,6 +299,13 @@ export EDITOR='nano'
 # Other.
 source ~/.alias
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=black,bold' #fixes guake color clash for zsh-users autosuggestions
+
+export HISTSIZE=25               #History size
+export SAVEHIST=0                #Saved history size after logout
+#export HISTFILE=~/.zsh_history  #History file (default value)
+setopt INC_APPEND_HISTORY        #Append into history file
+setopt HIST_IGNORE_DUPS          #Save only one command if 2 common are same and consistent
+setopt EXTENDED_HISTORY          #Add timestamp for each entry
 
 EOF
 popd &> /dev/null
