@@ -19,17 +19,14 @@ sudo apt update -y -q &> /dev/null
 #sudo apt -y -q upgrade &> /dev/null
 
 echo
-echo "[Installing Dconf tools]"
+echo "[Installing configuration and basic tools (dconf, gconf-editor, unity-tweak-tool, git, synaptic, zsh)]"
+sudo apt-get install -y -q zsh > /dev/null
+chsh -s $(which zsh)
 sudo apt-get install -y -q dconf-cli > /dev/null
 sudo apt-get install -y -q dconf-editor > /dev/null
-
-echo "[Installing Gconf-editor]"
 sudo apt-get install -y -q gconf-editor > /dev/null
-
-echo "[Installing Unity tweak tool]"
 sudo apt-get install -y -q unity-tweak-tool > /dev/null
-
-echo "[Installing Synaptic package manager]"
+sudo apt-get install -y -q git > /dev/null
 sudo apt-get install -y -q synaptic > /dev/null
 
 #echo "[Installing Slack]"
@@ -49,6 +46,13 @@ sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q google-chrome-stable > /dev/null
 sudo rm /etc/apt/sources.list.d/google.list
 
+echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
+sudo apt-get install -y -q vlc &> /dev/null
+
+echo "[Installing Kodi Media Center <3]"
+sudo apt-get install -y -q kodi &> /dev/null
+#TODO: find prepackaged configuration files
+
 echo "[Installing Transmission for bittorrents]"
 sudo apt-get install -y -q transmission > /dev/null
 sudo apt-get install -y -q transmission-qt > /dev/null
@@ -60,22 +64,47 @@ sudo apt-get install -y -q qbittorrent > /dev/null
 
 echo "[Installing Geary (e-mail client, alternative to Thunderbird)]"
 sudo apt-get install -y -q geary &> /dev/null
-
 #TODO? Drop geary and use evolution instead?
+
+echo "[Installing Darktable photo editor]"
+sudo add-apt-repository -y ppa:pmjdebruijn/darktable-release &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q darktable > /dev/null
+
+echo "[Installing Pinta (better Paint)]"
+sudo apt-get install -y -q pinta > /dev/null
+
+echo "[Installing GIMP (Photoshop alternative)]"
+sudo apt-get install -y -q gimp &> /dev/null
+
+echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
+sudo apt-get install -y -q inkscape &> /dev/null
+echo "[Installing Evince (PDF viewer and annotator)]"
+ssudo apt-get install -y -q evince &> /dev/null
+#echo "[Installing Okular (PDF viewer and annotator)]"
+#sudo apt-get install -y -q okular &> /dev/null
+echo "[Installing Pdftk (PDF manipulation)]"
+sudo apt-get install -y -q pdftk &> /dev/null
+#echo "[Installing PDFChain (Pdftk GUI)]"  # FIXME: pdfchain does not run bc of segmentation fault
+#sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q pdfchain &> /dev/null
+
+#echo "[Installing Mcomix (comic viewer)]"
+#sudo apt-get install -y -q mcomix &> /dev/null
+echo "[Installing Qcomicbook (comic viewer)]"
+sudo apt-get install -y -q qcomicbook &> /dev/null
+
+echo "[Installing Calibre (ebook reader)]"
+sudo apt-get install -y -q calibre &> /dev/null
+
+echo "[Installing Bleachbit (cleaner)]"
+sudo apt-get install -y -q bleachbit > /dev/null
 
 echo "[Installing Oracle's VirtualBox]"
 sudo apt-get install -y -q virtualbox-qt > /dev/null
 
-#echo "[Installing Restricted extras and addons (including codecs)]"
-#TODO: check what they are installing
-#sudo apt-get install -y -q ubuntu-restricted-extras                  #interactive!!
-#sudo apt-get install -y -q ubuntu-restricted-addons > /dev/null
-#sudo apt-get install -y -q libdvdcss2 libdvdnav4 libdvdread4  > /dev/null
-#sudo apt-get install -y -q libdvd-pkg > /dev/null
-#sudo dpkg-reconfigure libdvd-pkg > /dev/null
-
-echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
-sudo apt-get install -y -q vlc &> /dev/null
+# ---- editing - programming stuff
 
 echo "[Installing Atom editor]"
 sudo add-apt-repository -y ppa:webupd8team/atom &> /dev/null
@@ -100,119 +129,13 @@ cat <<EOF > $HOME/.atom/config.cson
 EOF
 # TODO: install + configure packages (linters, debuggers, autocompletion, tools ) [python, bash, C, C++...]
 
-echo "[Installing Darktable photo editor]"
-sudo add-apt-repository -y ppa:pmjdebruijn/darktable-release &> /dev/null
-sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q darktable > /dev/null
-
-echo "[Installing Pinta (better Paint)]"
-sudo apt-get install -y -q pinta > /dev/null
-
-echo "[Installing GIMP (Photoshop alternative)]"
-sudo apt-get install -y -q gimp &> /dev/null
-
-#echo "[Installing Shutter (advanced screenshot capture)]"
-#sudo apt-get install -y -q shutter &> /dev/null
-
-echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
-sudo apt-get install -y -q inkscape &> /dev/null
-echo "[Installing Evince (PDF viewer and annotator)]"
-ssudo apt-get install -y -q evince &> /dev/null
-#echo "[Installing Okular (PDF viewer and annotator)]"
-#sudo apt-get install -y -q okular &> /dev/null
-echo "[Installing Pdftk (PDF manipulation)]"
-sudo apt-get install -y -q pdftk &> /dev/null
-#echo "[Installing PDFChain (Pdftk GUI)]"  # FIXME: pdfchain does not run bc of segmentation fault
-#sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
-#sudo apt-get update -y -q &> /dev/null
-#sudo apt-get install -y -q pdfchain &> /dev/null
-
 echo "[Installing Remarkable (Markdown editor)]"
 wget --quiet https://remarkableapp.github.io/files/remarkable_1.87_all.deb  #FIXME with latest file name
 sudo apt-get install -y -q gdebi > /dev/null
 sudo gdebi -q -n remarkable_1.87_all.deb > /dev/null                        #FIXME with latest file name
 \rm remarkable_1.87_all.deb
 
-#echo "[Installing Mcomix (comic viewer)]"
-#sudo apt-get install -y -q mcomix &> /dev/null
-echo "[Installing Qcomicbook (comic viewer)]"
-sudo apt-get install -y -q qcomicbook &> /dev/null
-
-echo "[Installing Calibre (ebook reader)]"
-sudo apt-get install -y -q calibre &> /dev/null
-
-echo "[Installing Git]"
-sudo apt-get install -y -q git > /dev/null
-
-echo "[Installing GIT client]" #gitkraken? gitk?
-#TODO
-
-echo "[Installing Bleachbit (cleaner)]"
-sudo apt-get install -y -q bleachbit > /dev/null
-
-echo "[Installing zsh and switching to it]"
-sudo apt-get install -y -q zsh > /dev/null
-chsh -s $(which zsh)
-echo "[Installing Antigen (plugin manager for zsh)]"
-#https://github.com/zsh-users/antigen
-#https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config # nice, but do I need it?
-
-pushd . &> /dev/null
-cd ~
-git clone https://github.com/zsh-users/antigen.git &> /dev/null
-mv antigen .antigen &> /dev/null
-
-#Backup .zshrc if it exists
-if [ -f "~/.zshrc" ] ; then
-    echo "...backing up .zshrc file to $HOME/.antigen/.zshrc_bck"
-    cp ~/.zshrc $HOME/.antigen/.zshrc_bck
-fi
-
-rm -f ~/.zshrc
-cat <<EOF > $HOME/.zshrc
-source ~/.antigen/antigen.zsh
-
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
-
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle pip
-antigen bundle command-not-found
-antigen bundle pyenv
-antigen bundle python
-#antigen bundle virtualenvwrapper
-antigen bundle web-search
-
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-# Load the theme.
-antigen theme agnoster
-
-# Tell antigen that you're done.
-antigen apply
-EOF
-popd &> /dev/null
-
-echo "[Installing Guake (Ctr+F12)]"
-sudo apt-get install -y -q guake > /dev/null
-gconftool-2 --type Integer --set /apps/guake/general/window_height  100
-gconftool-2 --type Float   --set /apps/guake/general/window_height_f 100
-gconftool-2 --type Integer --set /apps/guake/general/window_width 100
-gconftool-2 --type Float   --set /apps/guake/general/window_width_f 100
-gconftool-2 --type Integer --set /apps/guake/style/background/transparency 0
-gconftool-2 --type Boolean --set /apps/guake/general/use_visible_bell  True
-gconftool-2 --type Boolean --set /apps/guake/general/window_losefocus False
-gconftool-2 --type Boolean --set /apps/guake/general/window_ontop False
-gconftool-2 --type string  --set /apps/guake/style/font/palette_name 'Dracula'
-gconftool-2 --type string  --set /apps/guake/style/font/style 'Monospace 13'
-gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
-timeout 2.5 guake-prefs &> /dev/null
-#Add guake to startup applications
-sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
-
-echo "[Installing Nano]"
+echo "[Installing Nano and configuring it]"
 sudo apt-get install -y -q nano > /dev/null
 #echo "[Configuring Nano]"
  echo "include \"/usr/share/nano/*.nanorc\"" >> ~/.nanorc
@@ -226,7 +149,7 @@ sudo apt-get install -y -q nano > /dev/null
  echo "unset nonewlines" >> ~/.nanorc
  echo "set tabstospaces" >> ~/.nanorc
 
-echo "[Installing Gedit]"
+echo "[Installing Gedit and configuring it]"
 # http://askubuntu.com/questions/571877/how-to-change-gedit-preferences-from-terminal
 killall gedit &> /dev/null
 sudo apt-get install -y -q gedit > /dev/null
@@ -240,7 +163,7 @@ gsettings set org.gnome.gedit.preferences.editor display-right-margin true
 gsettings set org.gnome.gedit.preferences.editor right-margin-position 110
 gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
 gsettings set org.gnome.gedit.preferences.editor use-default-font true
-gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 9'
+gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 11'
 gsettings set org.gnome.gedit.preferences.editor display-overview-map true
 gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 
@@ -269,6 +192,115 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
   #Patch the 'selection' color to not clash with 'current-line' color (black color) ... fuck that
   sed -i '/selection" value/c\    \<color name="selection" value="#000000"/\>' $HOME/.local/share/gedit/styles/dracula.xml
   gsettings set org.gnome.gedit.preferences.editor scheme 'dracula'
+
+
+echo "[Installing GIT client]" #gitkraken? gitk?
+#TODO
+#TODO: meld, tkdiff, and other conflict resolution tools. Look for them
+
+
+echo "[Configuring Terminal aspect]"
+gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
+gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
+# Ctrl+PageDown for Next Tab
+# Ctrl+PageUp for Previous Tab
+# Install Dracula theme
+git clone https://github.com/GalaticStryder/gnome-terminal-colors-dracula &> /dev/null
+sleep 1
+cd gnome-terminal-colors-dracula
+sleep 1
+profId=$(gsettings get org.gnome.Terminal.ProfilesList default | sed "s/^\([\"']\)\(.*\)\1\$/\2/g")
+./install.sh --scheme=Dracula -p :$profId --skip-dircolors
+sleep 1
+cd ..
+rm -rf ./gnome-terminal-colors-dracula
+
+echo "[Installing Guake (Ctr+F12 Terminal)]"
+sudo apt-get install -y -q guake > /dev/null
+gconftool-2 --type Integer --set /apps/guake/general/window_height  100
+gconftool-2 --type Float   --set /apps/guake/general/window_height_f 100
+gconftool-2 --type Integer --set /apps/guake/general/window_width 100
+gconftool-2 --type Float   --set /apps/guake/general/window_width_f 100
+gconftool-2 --type Integer --set /apps/guake/style/background/transparency 0
+gconftool-2 --type Boolean --set /apps/guake/general/use_visible_bell  True
+gconftool-2 --type Boolean --set /apps/guake/general/window_losefocus False
+gconftool-2 --type Boolean --set /apps/guake/general/window_ontop False
+gconftool-2 --type string  --set /apps/guake/style/font/palette_name 'Dracula'
+gconftool-2 --type string  --set /apps/guake/style/font/style 'Monospace 13'
+gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
+timeout 2.5 guake-prefs &> /dev/null  || true
+#Add guake to startup applications
+sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
+
+#TODO: zsh-autosuggestions and use it in antigen
+
+#https://github.com/zsh-users/antigen
+#https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config # nice, but do I need it?
+echo "[Installing Antigen (plugin manager for zsh)]"
+pushd . &> /dev/null
+cd ~
+git clone https://github.com/zsh-users/antigen.git &> /dev/null
+mv antigen .antigen &> /dev/null
+
+git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions &> /dev/null
+
+#Backup .zshrc if it exists
+if [ -f "~/.zshrc" ] ; then
+    echo "...backing up .zshrc file to $HOME/.antigen/.zshrc_bck"
+    cp ~/.zshrc $HOME/.antigen/.zshrc_bck
+fi
+
+rm -f ~/.zshrc
+cat <<EOF > $HOME/.zshrc
+source ~/.antigen/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+ #antigen bundle git
+ #antigen bundle pip
+antigen bundle command-not-found
+ #antigen bundle pyenv
+ #antigen bundle python
+ #antigen bundle virtualenvwrapper
+antigen bundle web-search
+antigen bundle colorize
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+
+# Load the theme.
+antigen theme agnoster
+
+# Tell antigen that you're done.
+antigen apply
+
+# Setup zsh-autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Bind keys to jump words
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey -e
+bindkey '^[[1;9C' forward-word
+bindkey '^[[1;9D' backward-word
+bindkey "^[[H"    beginning-of-line
+bindkey "^[[1;5H" beginning-of-line
+bindkey "^[[F"    end-of-line
+bindkey "^[[1;5F" end-of-line
+#To set new bindkeys in a terminal type Ctrl+V, nothing will be shown, then type the key combination :)
+
+
+#TODO: Start - end keys
+
+export EDITOR='nano'
+
+source ~/.alias
+
+EOF
+popd &> /dev/null
 
 echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
@@ -305,6 +337,18 @@ gconftool-2 --type Boolean --set /apps/docky-2/WeatherDocklet/WeatherPreferences
 gconftool-2 --type Integer --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Timeout 60
 nohup docky &> /dev/null &
 
+echo "[Hiding Unity dock (will not disable it)]"
+#http://askubuntu.com/questions/643028/shell-script-to-remove-unity-launcherif-present-in-ubuntu-14-04-and-or-the-xf
+dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1   #0 to enable back
+dconf write /org/compiz/profiles/unity/plugins/unityshell/edge-responsiveness 0  #2 to enable back
+gsettings set com.canonical.Unity.Launcher favorites [] #gsettings reset com.canonical.Unity.Launcher favorites
+gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ icon-size 8
+
+echo "[Installing classic Application top menu]"
+sudo apt-add-repository -y ppa:diesch/testing  &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q classicmenu-indicator > /dev/null
+
 echo "[Installing new Fonts (Powerline)]"
 git clone https://github.com/powerline/fonts.git  &> /dev/null
 cd fonts
@@ -313,27 +357,6 @@ cd ..
 \rm -rf ./fonts
 sudo apt-get install -y -q fonts-powerline > /dev/null
 fc-cache -vf &> /dev/null #refresh font cache! (make fonts available)
-
-echo "[Configuring terminal aspect]"
-gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
-gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
-# Ctrl+PageDown for Next Tab
-# Ctrl+PageUp for Previous Tab
-# Install Dracula theme
-git clone https://github.com/GalaticStryder/gnome-terminal-colors-dracula &> /dev/null
-sleep 1
-cd gnome-terminal-colors-dracula
-sleep 1
-profId=$(gsettings get org.gnome.Terminal.ProfilesList default | sed "s/^\([\"']\)\(.*\)\1\$/\2/g")
-./install.sh --scheme=Dracula -p :$profId --skip-dircolors
-sleep 1
-cd ..
-rm -rf ./gnome-terminal-colors-dracula
-
-echo "[Configuring keyboard delays - rates]"
-gsettings set org.gnome.desktop.peripherals.keyboard delay 140
-gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
-gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
 echo "[Installing 'Paper' GTK theme, icons and cursors]"
 sudo add-apt-repository -y ppa:snwh/pulp &> /dev/null
@@ -364,18 +387,6 @@ gsettings set com.canonical.Unity integrated-menus false
 #gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ minimize-effects [\'animation:"Magic Lamp"\'] #"Zoom" is the original
 sudo sh -c "echo 'LC_TIME=\"en_GB.UTF-8\"' >> /etc/default/locale"
 
-echo "[Hiding Unity dock (will not disable it)]"
-#http://askubuntu.com/questions/643028/shell-script-to-remove-unity-launcherif-present-in-ubuntu-14-04-and-or-the-xf
-dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1   #0 to enable back
-dconf write /org/compiz/profiles/unity/plugins/unityshell/edge-responsiveness 0  #2 to enable back
-gsettings set com.canonical.Unity.Launcher favorites [] #gsettings reset com.canonical.Unity.Launcher favorites
-gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ icon-size 8
-
-echo "[Installing classic Application top menu]"
-sudo apt-add-repository -y ppa:diesch/testing  &> /dev/null
-sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q classicmenu-indicator > /dev/null
-
 #echo "[Changing wallpaper]"
 #gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Vi%C3%B1uela.jpg
 
@@ -386,17 +397,19 @@ sudo timedatectl set-timezone Europe/Madrid
 #echo "[Changing keyboard layout to 'es']"   # and winkeys?
 #sudo setxkbmap -layout es  #TODO: Does not work
 
+echo "[Configuring keyboard delays - rates]"
+gsettings set org.gnome.desktop.peripherals.keyboard delay 140
+gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
+gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
-# Screencast recorder
+# Screencast recorders (2 normal, 2 for GIFs)
+
+#echo "[Installing Shutter (advanced screenshot capture)]"
+#sudo apt-get install -y -q shutter &> /dev/null
 
 # Compressor commands + GUI (peazip)
 echo "[Installing compression utilities]"
 sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa arj sharutils mpack lzma lzop cabextract &> /dev/null
-
-echo "[Installing Kodi Media Center <3]"
-sudo apt-get install -y -q kodi &> /dev/null
-
-# KeePass
 
 #echo "[Installing Skype]"
 #sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
@@ -411,15 +424,15 @@ sudo apt-get install -y -q kodi &> /dev/null
 # TODO?: DropBox
 # TODO?: Gufws
 # TODO?: Pomodoro - Tomate
+# TODO?: Password manager like KeepPass, but that synchronizes to cloud
 
-# TODO: change default apps for web browser, mail client, music player, video player and photo viewer
 # TODO: Windowskey + M to minimize all windows
 # TODO: Windowskey + Enter to show windows thumbnails
 
+# TODO: change default apps for web browser, mail client, music player, video player and photo viewer
 # TODO: useful aliases like notify-send--> alert, look for others
 # TODO: pygmentize ?
 
-# TODO: Install the latest proprietary Linux graphics drivers available for your hardware
 
 sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
@@ -427,5 +440,16 @@ sudo apt-get -y -q autoclean &> /dev/null
 echo "[ DONE! Log out from this session and login again to see all the changes. Hope it works! ]"
 echo "[ Remember that installed applications can be accessed by clicking on the 'three stacked rectangles' icon (dock at the top left) ]"
 echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
+
+# TODO: Install the latest proprietary Linux graphics drivers available for your hardware
+# TODO: Install special restricted extras?
+
+#echo "[Installing Restricted extras and addons (including codecs)]"
+#TODO: check what they are installing
+#sudo apt-get install -y -q ubuntu-restricted-extras                  #interactive!!
+#sudo apt-get install -y -q ubuntu-restricted-addons > /dev/null
+#sudo apt-get install -y -q libdvdcss2 libdvdnav4 libdvdread4  > /dev/null
+#sudo apt-get install -y -q libdvd-pkg > /dev/null
+#sudo dpkg-reconfigure libdvd-pkg > /dev/null
 
 notify-send "DONE!    :)"

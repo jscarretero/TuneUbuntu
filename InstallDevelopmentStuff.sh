@@ -62,35 +62,36 @@ echo "[Installing Python Virtualenv]"
 sudo pip install -q virtualenv > /dev/null
 #echo "[Installing Python Pycharm IDE]" # TODO
 
-  #pip install -q --upgrade pip > /dev/null
-  ## These should be installed under a python virtualenv (once created and activated)
+pip install -q --upgrade pip > /dev/null
 
-  #echo "[Installing Python Pandas & Numpy]"
-  #Also installs numpy, python-dateutil, six, pytz, requests
-  #pip install -y -q pandas > /dev/null
+## These should be installed under a python virtualenv (once created and activated)
+echo "[Installing Python Pandas & Numpy]"
+#Also installs numpy, python-dateutil, six, pytz, requests
+pip install -y -q pandas > /dev/null
 
-  #echo "[Installing Plotly]"
-  #pip install -y -q plotly > /dev/null
+echo "[Installing Plotly]"
+pip install -y -q plotly > /dev/null
 
-  #echo "[Installing Matplotlib]"
-  #Also installs numpy, python-dateutil, six, pytz, cycler, pyparsing
-  #pip install -y -q matplotlib > /dev/null
+echo "[Installing Matplotlib]"
+#Also installs numpy, python-dateutil, six, pytz, cycler, pyparsing
+pip install -y -q matplotlib > /dev/null
 
-  #echo "[Installing Colorlover package (for plots)]"
-  #pip install -y -q colorlover > /dev/null
+echo "[Installing Colorlover package (for plots)]"
+pip install -y -q colorlover > /dev/null
 
-  #echo "[Installing MongoDB library for Python (pymongo)]
-  #pip install -y -q pymongo > /dev/null
+echo "[Installing MongoDB library for Python (pymongo)]"
+pip install -y -q pymongo > /dev/null
 
-'''
+
 sudo apt-get install build-essential autoconf automake libtool ¿cmake?
 
 
 # OpenMPI
-  sudo apt-get install -y -q openmpi-bin openmpi-common libopenmpi-dev > /dev/null
+echo "[Installing OpenMPI bin-command and lib-dev]"
+sudo apt-get install -y -q openmpi-bin openmpi-common libopenmpi-dev &> /dev/null
 
-# GCC, C++, Gfortran
-  sudo apt-get install -y -q gcc g++ gfortran fort77 > /dev/null
+echo "[Installing GCC, C++, Gfortran, and Fort77]"
+sudo apt-get install -y -q gcc g++ gfortran fort77 &> /dev/null
 
 # Clang
 
@@ -125,9 +126,6 @@ sudo apt-get install build-essential autoconf automake libtool ¿cmake?
     popd
     '''
 
-# compressors-decompressors + GUI
-
-'''
 sudo apt autoremove -y -q > /dev/null
 sudo apt clean -y -q > /dev/null
 sudo apt-get -y -q autoclean > /dev/null
