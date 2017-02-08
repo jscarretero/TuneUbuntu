@@ -262,11 +262,11 @@ source ~/.antigen/antigen.zsh
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle command-not-found
  #antigen bundle git
  #antigen bundle pip
-antigen bundle command-not-found
  #antigen bundle pyenv
- #antigen bundle python
+ #antigen bundle python # what does it do?
  #antigen bundle virtualenvwrapper
 antigen bundle web-search
 antigen bundle colorize
@@ -304,6 +304,7 @@ export EDITOR='nano'
 
 # Other.
 source ~/.alias
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=black,bold' #fixes guake color clash for zsh-users autosuggestions
 
 EOF
 popd &> /dev/null
