@@ -233,9 +233,13 @@ timeout 2.5 guake-prefs &> /dev/null  || true
 sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
 #TODO: zsh-autosuggestions and use it in antigen
+#TODO: zsh-history-substring-search
+#TODO: clean history upon reading .zshrc and limit history size and #entries
+#TODO: guake colors clash for dracula and autosuggestions
+#TODO:
 
+#https://github.com/zsh-users/
 #https://github.com/zsh-users/antigen
-#https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config # nice, but do I need it?
 echo "[Installing Antigen (plugin manager for zsh)]"
 pushd . &> /dev/null
 cd ~
@@ -270,6 +274,7 @@ antigen bundle colorize
 # Bundles from zsh-users.
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh  #FIXME: ./zsh... is needed?
  #antigen bundle zsh-users/zsh-completions
  # TODO: zsh-users/zsh-history-substring-search
 
@@ -432,7 +437,7 @@ sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa
 
 # TODO: change default apps for web browser, mail client, music player, video player and photo viewer
 # TODO: useful aliases like notify-send--> alert, look for others
-# TODO: install banshee, and install all plugins for banshee and rhythmbox
+# TODO: install clementine, and install all plugins for clementine and rhythmbox
 
 sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
