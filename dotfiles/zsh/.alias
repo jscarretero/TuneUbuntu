@@ -1,6 +1,8 @@
 # Author:  Javier Carretero Casado
 # License: Beerware
 
+# WARNING: Specific alias for specific tools (npm, pip, docker, ...)should go to other .alias files
+
 
 # Opens current directory in a file explorer
 explore() { nautilus $1 &> /dev/null & disown }
@@ -17,23 +19,29 @@ go() { gnome-open $1 &> /dev/null & disown }
 # History search (use: hs sometext)
 alias hs='history | grep -i $1'
 
-# Clear alias
+# Clear terminal
 alias c='clear'
 
-# Cd into directory and list it. Not really an alias, but it can be useful
-cls () { cd $@ && ls -F; }
+# Clear all alias
+alias clearalias='unalias -a'
+
+# Cd into directory and list it.
+cls () { cd "$@" && ls -F; }
 
 # Make a dir and cd into it. It can override another command called mcd (useless)
-mcd() { mkdir -p "$1" && cd "$1"; }
+mcd() { mkdir -p "$1" && cd "$@"; }
 
 # Backup a file
-backup() { cp "$1"{,.bak}; }
+backup() { cp $@ $@.backup-`date +%y%m%d`; }
 
 # Updates repo cache and installs all kinds of updates
 alias update='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade'
+#TODO: add news, and some to clean the system
 
-# SSH to a machine called machine with user 'user'. It is also useful to setup a good .ssh/config and ssh keys to make hopping amongst machines even easier.
-alias machine="ssh user@machine"
+# SSH to a machine called machine with user 'user'.
+# It is also useful to setup a good .ssh/config and ssh keys to make hopping amongst machines even easier.
+# NO: READ: https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html (ssh section)
+# alias machine="ssh user@machine"
 
 # Use less if the output is bigger than the screen.
 alias less='less -FSRX'
@@ -41,24 +49,30 @@ alias less='less -FSRX'
 # LS with l=long : h=human readable sizes : a=all : r=reverse sort : t=time sort
 alias lt='ls -lhart'
 
-# Compare MD5 sum
-md5check() { md5sum "$1" | grep "$2";}
-
-# Free memory
+# Frees memory
 alias freemem='sync && echo 3 | sudo tee /proc/sys/vm/drop_caches'
 
+# TODO: Review and add new ones for space, directory, files, structure, ...
 # "Sort by size" to display in list the files in the current directory, sorted by their size on disk
-sbs() { du -b --max-depth 1 | sort -nr | perl -pe 's{([0-9]+)}{sprintf "%.1f%s", $1>=2**30? ($1/2**30, "G"): $1>=2**20? ($1/2**20, "M"): $1>=2**10? ($1/2**10, "K"): ($1, "")}e';}
-topfile() { BASEDIR=$1 ; TOP=$2 ; find $BASEDIR -xdev -type f -ls |sort -k 7 -r -n | head -$TOP |awk '{size=$7/1024/1024; printf("%dMb %s\n", size,$11);}';}
-topdir() { BASEDIR=$1; TOP=$2 ; du -alx $BASEDIR | sort -n -r | head -n $TOP | awk '{size=$1/1024/1024; printf("%dMb %s\n", size,$2);}';}
-ssd () {echo "Device         Total  Used  Free  Pct MntPoint" ; df -h | grep "^/dev/" ; df -h | grep "^/mnt/" ; return 0}
+sbs() { du -b --max-depth 1 | sort -nr | perl -pe 's{([0-9]+)}{sprintf "%.1f%s", $1>=2**30? ($1/2**30, "G"): $1>=2**20? ($1/2**20, "M"): $1>=2**10? ($1/2**10, "K"): ($1, "")}e'; }
+topfile() { BASEDIR=$1 ; TOP=$2 ; find $BASEDIR -xdev -type f -ls |sort -k 7 -r -n | head -$TOP |awk '{size=$7/1024/1024; printf("%dMb %s\n", size,$11);}'; }
+topdir() { BASEDIR=$1; TOP=$2 ; du -alx $BASEDIR | sort -n -r | head -n $TOP | awk '{size=$1/1024/1024; printf("%dMb %s\n", size,$2);}'; }
+ssd () {echo "Device         Total  Used  Free  Pct MntPoint" ; df -h | grep "^/dev/" ; df -h | grep "^/mnt/" ; return 0; }
 
+# Shows file and dir tree (if tree is not installed)
+if ! [  -f "$(which tree)" ] ; then
+    alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+fi
 
 # Find the PID of any process: ps? [name]
-alias psgrep= "ps aux | grep"
+psgrep () { ps aux | grep $@ ; }
+
+# Short names
+alias chrome='google-chrome >& /dev/null'
+alias usage='sudo baobab >& /dev/null'
 
 #For typos
-alias sl=ls
+alias sl='ls'
 alias cd..='cd ..'
 alias gerp='grep'
 alias mroe='more'
@@ -67,10 +81,26 @@ alias whcih='which'
 alias wich='which'
 alias mdir='mkdir'
 
+# NEEDED?
 # Create .tar.gz
-alias tarc="tar czvf"
+alias tarc='tar czvf'
 # Extract .tar.gz
-alias tarx="tar xzvf"
+alias tarx='tar xzvf'
 # List .tar.gz
-alias tart="tar tzvf"
+alias tart='tar tzvf'
+
+# Root shell
+alias root='sudo -i'
+
+# TODO: top memory-cpu consuming
+# TODO: apt aliases
+
+# if user is not root, pass all commands via sudo (not needed)
+if [ $UID -ne 0 ]; then
+    alias reboot='sudo reboot'
+    alias poweroff='sudo poweroff'
+    alias halt='sudo halt'
+    alias shutdown='sudo shutdown'
+fi
+alias lockscreen='gnome-screensaver-command -l'
 
