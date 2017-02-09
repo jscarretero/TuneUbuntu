@@ -184,7 +184,7 @@ gsettings set org.gnome.gedit.preferences.editor display-right-margin true
 gsettings set org.gnome.gedit.preferences.editor right-margin-position 110
 gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
 gsettings set org.gnome.gedit.preferences.editor use-default-font true
-c
+gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 11'
 gsettings set org.gnome.gedit.preferences.editor display-overview-map true
 gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 
