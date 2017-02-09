@@ -20,33 +20,33 @@ sudo apt update -y -q &> /dev/null
 
 echo
 echo "[Installing configuration and basic tools (dconf, gconf-editor, unity-tweak-tool, git, synaptic, zsh)]"
-sudo apt-get install -y -q zsh > /dev/null
+sudo apt-get install -y -q zsh &> /dev/null
 chsh -s $(which zsh)
-sudo apt-get install -y -q dconf-cli > /dev/null
-sudo apt-get install -y -q dconf-editor > /dev/null
-sudo apt-get install -y -q gconf-editor > /dev/null
-sudo apt-get install -y -q unity-tweak-tool > /dev/null
-sudo apt-get install -y -q git > /dev/null
-sudo apt-get install -y -q synaptic > /dev/null
+sudo apt-get install -y -q dconf-cli &> /dev/null
+sudo apt-get install -y -q dconf-editor &> /dev/null
+sudo apt-get install -y -q gconf-editor &> /dev/null
+sudo apt-get install -y -q unity-tweak-tool &> /dev/null
+sudo apt-get install -y -q git &> /dev/null
+sudo apt-get install -y -q synaptic &> /dev/null
 
 #echo "[Installing Slack]"
-#sudo apt-get install -y -q slack > /dev/null  #TODO: Does not work
+#sudo apt-get install -y -q slack &> /dev/null  #TODO: Does not work
 
 echo "[Installing Chrome]"
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &> /dev/null
 sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q google-chrome-stable > /dev/null
+sudo apt-get install -y -q google-chrome-stable &> /dev/null
 sudo rm /etc/apt/sources.list.d/google.list
 
 echo "[Installing Spotify]"
 # Commands from https://www.spotify.com/es/download/linux/
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 &> /dev/null
-echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list > /dev/null
+echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list &> /dev/null
 sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q spotify-client > /dev/null
+sudo apt-get install -y -q spotify-client &> /dev/null
 
-echo "[Install Rhythmbox and plugins (music player)]"
+echo "[Installing Rhythmbox and plugins (music player)]"
 sudo apt-get install -y -q rhythmbox &> /dev/null
 sudo add-apt-repository -y ppa:fossfreedom/rhythmbox-plugins &> /dev/null
 sudo apt-get update -y -q &> /dev/null
@@ -61,13 +61,13 @@ sudo apt-get install -y -q kodi &> /dev/null
 #TODO: find prepackaged configuration files
 
 echo "[Installing Transmission for bittorrents]"
-sudo apt-get install -y -q transmission > /dev/null
-sudo apt-get install -y -q transmission-qt > /dev/null
+sudo apt-get install -y -q transmission &> /dev/null
+sudo apt-get install -y -q transmission-qt &> /dev/null
 
 echo "[Installing QBitTorrent]"
 sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable &> /dev/null
 sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q qbittorrent > /dev/null
+sudo apt-get install -y -q qbittorrent &> /dev/null
 
 #echo "[Installing Thunderbird (e-mail client)]"
 #sudo apt-get install -y -q thunderbird &> /dev/null
@@ -82,12 +82,12 @@ sudo apt-get install -y -q evolution &> /dev/null
 echo "[Installing Darktable photo editor]"
 sudo add-apt-repository -y ppa:pmjdebruijn/darktable-release &> /dev/null
 sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q darktable > /dev/null
+sudo apt-get install -y -q darktable &> /dev/null
 
 #TODO: Install shotwell
 
 echo "[Installing Pinta (better Paint)]"
-sudo apt-get install -y -q pinta > /dev/null
+sudo apt-get install -y -q pinta &> /dev/null
 
 #echo "[Installing GIMP (Photoshop alternative)]"
 #sudo apt-get install -y -q gimp &> /dev/null
@@ -96,7 +96,7 @@ sudo apt-get install -y -q pinta > /dev/null
 #sudo apt-get install -y -q inkscape &> /dev/null
 
 echo "[Installing Evince (PDF viewer and annotator)]"
-ssudo apt-get install -y -q evince &> /dev/null
+sudo apt-get install -y -q evince &> /dev/null
 
 #echo "[Installing Okular (PDF viewer and annotator)]"
 #sudo apt-get install -y -q okular &> /dev/null
@@ -119,17 +119,17 @@ echo "[Installing Calibre (ebook reader)]"
 sudo apt-get install -y -q calibre &> /dev/null
 
 echo "[Installing Bleachbit (cleaner)]"
-sudo apt-get install -y -q bleachbit > /dev/null
+sudo apt-get install -y -q bleachbit &> /dev/null
 
 echo "[Installing Oracle's VirtualBox]"
-sudo apt-get install -y -q virtualbox-qt > /dev/null
+sudo apt-get install -y -q virtualbox-qt &> /dev/null
 
 # ---- editing - programming stuff
 
 echo "[Installing Atom editor]"
 sudo add-apt-repository -y ppa:webupd8team/atom &> /dev/null
 sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q atom > /dev/null
+sudo apt-get install -y -q atom &> /dev/null
 mkdir -p $HOME/.atom
 cat <<EOF > $HOME/.atom/config.cson
 "*":
@@ -152,12 +152,12 @@ EOF
 
 echo "[Installing Remarkable (Markdown editor)]"
 wget --quiet https://remarkableapp.github.io/files/remarkable_1.87_all.deb  #FIXME with latest file name
-sudo apt-get install -y -q gdebi > /dev/null
-sudo gdebi -q -n remarkable_1.87_all.deb > /dev/null                        #FIXME with latest file name
+sudo apt-get install -y -q gdebi &> /dev/null
+sudo gdebi -q -n remarkable_1.87_all.deb &> /dev/null                        #FIXME with latest file name
 \rm remarkable_1.87_all.deb
 
 echo "[Installing Nano and configuring it]"
-sudo apt-get install -y -q nano > /dev/null
+sudo apt-get install -y -q nano &> /dev/null
 #echo "[Configuring Nano]"
  echo "include \"/usr/share/nano/*.nanorc\"" >> ~/.nanorc
  echo "set autoindent" >> ~/.nanorc
@@ -173,7 +173,7 @@ sudo apt-get install -y -q nano > /dev/null
 echo "[Installing Gedit and configuring it]"
 # http://askubuntu.com/questions/571877/how-to-change-gedit-preferences-from-terminal
 killall gedit &> /dev/null
-sudo apt-get install -y -q gedit > /dev/null
+sudo apt-get install -y -q gedit &> /dev/null
 gsettings set org.gnome.gedit.preferences.editor wrap-mode 'none'
 gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
 gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
@@ -237,7 +237,7 @@ cd ..
 rm -rf ./gnome-terminal-colors-dracula
 
 echo "[Installing Guake (Ctr+F12 Terminal)]"
-sudo apt-get install -y -q guake > /dev/null
+sudo apt-get install -y -q guake &> /dev/null
 gconftool-2 --type Integer --set /apps/guake/general/window_height  100
 gconftool-2 --type Float   --set /apps/guake/general/window_height_f 100
 gconftool-2 --type Integer --set /apps/guake/general/window_width 100
@@ -383,7 +383,7 @@ gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshel
 echo "[Installing classic Application top menu]"
 sudo apt-add-repository -y ppa:diesch/testing  &> /dev/null
 sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q classicmenu-indicator > /dev/null
+sudo apt-get install -y -q classicmenu-indicator &> /dev/null
 
 echo "[Installing new Fonts (Powerline)]"
 git clone https://github.com/powerline/fonts.git  &> /dev/null
@@ -391,22 +391,22 @@ cd fonts
 ./install.sh &> /dev/null
 cd ..
 \rm -rf ./fonts
-sudo apt-get install -y -q fonts-powerline > /dev/null
+sudo apt-get install -y -q fonts-powerline &> /dev/null
 fc-cache -vf &> /dev/null #refresh font cache! (make fonts available)
 
 echo "[Installing 'Paper' GTK theme, icons and cursors]"
 sudo add-apt-repository -y ppa:snwh/pulp &> /dev/null
 sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q paper-icon-theme > /dev/null
-sudo apt-get install -y -q paper-gtk-theme > /dev/null
-sudo apt-get install -y -q paper-cursor-theme > /dev/null
+sudo apt-get install -y -q paper-icon-theme &> /dev/null
+sudo apt-get install -y -q paper-gtk-theme &> /dev/null
+sudo apt-get install -y -q paper-cursor-theme &> /dev/null
 echo "[Installing 'Flatabulous' GTK theme, icons and cursors]"
 sudo add-apt-repository -y ppa:noobslab/themes &> /dev/null
 sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q flatabulous-theme > /dev/null
+sudo apt-get install -y -q flatabulous-theme &> /dev/null
 sudo add-apt-repository -y ppa:noobslab/icons &> /dev/null
 sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q ultra-flat-icons > /dev/null
+sudo apt-get install -y -q ultra-flat-icons &> /dev/null
 
 echo "[Configuring general aspect]"
 gsettings set org.gnome.desktop.interface gtk-theme 'Flatabulous'
@@ -482,9 +482,9 @@ echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 #echo "[Installing Restricted extras and addons (including codecs)]"
 #TODO: check what they are installing
 #sudo apt-get install -y -q ubuntu-restricted-extras                  #interactive!!
-#sudo apt-get install -y -q ubuntu-restricted-addons > /dev/null
-#sudo apt-get install -y -q libdvdcss2 libdvdnav4 libdvdread4  > /dev/null
-#sudo apt-get install -y -q libdvd-pkg > /dev/null
-#sudo dpkg-reconfigure libdvd-pkg > /dev/null
+#sudo apt-get install -y -q ubuntu-restricted-addons &> /dev/null
+#sudo apt-get install -y -q libdvdcss2 libdvdnav4 libdvdread4  &> /dev/null
+#sudo apt-get install -y -q libdvd-pkg &> /dev/null
+#sudo dpkg-reconfigure libdvd-pkg &> /dev/null
 
 notify-send "DONE!    :)"
