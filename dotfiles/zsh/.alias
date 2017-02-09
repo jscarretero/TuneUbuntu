@@ -24,7 +24,7 @@ alias c='clear'
 cls () { cd $@ && ls -F; }
 
 # Make a dir and cd into it. It can override another command called mcd (useless)
-mcd() { mkdir -p "$1"; cd "$1"; }
+mcd() { mkdir -p "$1" && cd "$1"; }
 
 # Backup a file
 backup() { cp "$1"{,.bak}; }
@@ -51,7 +51,7 @@ alias freemem='sync && echo 3 | sudo tee /proc/sys/vm/drop_caches'
 sbs() { du -b --max-depth 1 | sort -nr | perl -pe 's{([0-9]+)}{sprintf "%.1f%s", $1>=2**30? ($1/2**30, "G"): $1>=2**20? ($1/2**20, "M"): $1>=2**10? ($1/2**10, "K"): ($1, "")}e';}
 topfile() { BASEDIR=$1 ; TOP=$2 ; find $BASEDIR -xdev -type f -ls |sort -k 7 -r -n | head -$TOP |awk '{size=$7/1024/1024; printf("%dMb %s\n", size,$11);}';}
 topdir() { BASEDIR=$1; TOP=$2 ; du -alx $BASEDIR | sort -n -r | head -n $TOP | awk '{size=$1/1024/1024; printf("%dMb %s\n", size,$2);}';}
-ssd () {echo "Device         Total  Used  Free  Pct MntPoint" ; df -h | grep "/dev/sd" ; df -h | grep "/mnt/" s}
+ssd () {echo "Device         Total  Used  Free  Pct MntPoint" ; df -h | grep "^/dev/" ; df -h | grep "^/mnt/" ; return 0}
 
 
 # Find the PID of any process: ps? [name]
