@@ -1,7 +1,76 @@
 # Author:  Javier Carretero Casado
 # License: Beerware
 
-#http://askubuntu.com/questions/21290/which-aliases-do-you-find-most-useful-or-helpful-to-your-ubuntu-experience
 
-stackoverflow='web_search duckduckgo \!so'
+# Opens current directory in a file explorer
+explore() { nautilus $1 &> /dev/null & disown }
+
+# Opens web browser window to stackoverflow site with search given as a parameter
+alias stackoverflow='web_search duckduckgo \!so'
+
+# Opens a file with whatever program would open by double clicking on it in a GUI file explorer
+go() { gnome-open $1 &> /dev/null & disown }
+
+# Add extra protection against mistakes
+# alias rm='rm -i'  # Commented, learn the hard way!
+
+# History search (use: hs sometext)
+alias hs='history | grep -i $1'
+
+# Clear alias
+alias c='clear'
+
+# Cd into directory and list it. Not really an alias, but it can be useful
+cls () { cd $@ && ls -F; }
+
+# Make a dir and cd into it. It can override another command called mcd (useless)
+mcd() { mkdir -p "$1"; cd "$1"; }
+
+# Backup a file
+backup() { cp "$1"{,.bak}; }
+
+# Updates repo cache and installs all kinds of updates
+alias update='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade'
+
+# SSH to a machine called machine with user 'user'. It is also useful to setup a good .ssh/config and ssh keys to make hopping amongst machines even easier.
+alias machine="ssh user@machine"
+
+# Use less if the output is bigger than the screen.
+alias less='less -FSRX'
+
+# LS with l=long : h=human readable sizes : a=all : r=reverse sort : t=time sort
+alias lt='ls -lhart'
+
+# Compare MD5 sum
+md5check() { md5sum "$1" | grep "$2";}
+
+# Free memory
+alias freemem='sync && echo 3 | sudo tee /proc/sys/vm/drop_caches'
+
+# "Sort by size" to display in list the files in the current directory, sorted by their size on disk
+sbs() { du -b --max-depth 1 | sort -nr | perl -pe 's{([0-9]+)}{sprintf "%.1f%s", $1>=2**30? ($1/2**30, "G"): $1>=2**20? ($1/2**20, "M"): $1>=2**10? ($1/2**10, "K"): ($1, "")}e';}
+topfile() { BASEDIR=$1 ; TOP=$2 ; find $BASEDIR -xdev -type f -ls |sort -k 7 -r -n | head -$TOP |awk '{size=$7/1024/1024; printf("%dMb %s\n", size,$11);}';}
+topdir() { BASEDIR=$1; TOP=$2 ; du -alx $BASEDIR | sort -n -r | head -n $TOP | awk '{size=$1/1024/1024; printf("%dMb %s\n", size,$2);}';}
+ssd () {echo "Device         Total  Used  Free  Pct MntPoint" ; df -h | grep "/dev/sd" ; df -h | grep "/mnt/" s}
+
+
+# Find the PID of any process: ps? [name]
+alias psgrep= "ps aux | grep"
+
+#For typos
+alias sl=ls
+alias cd..='cd ..'
+alias gerp='grep'
+alias mroe='more'
+alias wcho='echo'
+alias whcih='which'
+alias wich='which'
+alias mdir='mkdir'
+
+# Create .tar.gz
+alias tarc="tar czvf"
+# Extract .tar.gz
+alias tarx="tar xzvf"
+# List .tar.gz
+alias tart="tar tzvf"
 

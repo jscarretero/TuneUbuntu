@@ -5,8 +5,7 @@
 # Before running this sript on a fresh Ubuntu installation, I recommend you to try it on a virtual machine
 # where you may have installed that Ubuntu image.
 
-desktopEnv=$XDG_CURRENT_DESKTOP
-if ! [ "$desktopEnv" == "Unity" ] ; then
+if ! [ "$XDG_CURRENT_DESKTOP" == "Unity" ] ; then
     echo "This script works for Linux Ubuntu with Unity. You will need to tweak this file to work for other "
     echo "Linux distributions or windows managers. Exiting."
     exit 1
@@ -15,11 +14,11 @@ fi
 echo "[Updating list of available packages]"
 sudo apt update -y -q &> /dev/null
 
-#echo "[Upgrading system packages. This will take a while...]"
-#sudo apt -y -q upgrade &> /dev/null
+echo "[Upgrading system packages. This will take a while...]"
+sudo apt -y -q upgrade &> /dev/null
 
 echo
-echo "[Installing configuration and basic tools (dconf, gconf-editor, unity-tweak-tool, git, synaptic, zsh)]"
+echo "[Installing configuration and basic tools (dconf, gconf-editor, unity-tweak-tool, git, synaptic, gparted, zsh)]"
 sudo apt-get install -y -q zsh &> /dev/null
 chsh -s $(which zsh)
 sudo apt-get install -y -q dconf-cli &> /dev/null
@@ -28,6 +27,9 @@ sudo apt-get install -y -q gconf-editor &> /dev/null
 sudo apt-get install -y -q unity-tweak-tool &> /dev/null
 sudo apt-get install -y -q git &> /dev/null
 sudo apt-get install -y -q synaptic &> /dev/null
+sudo apt-get install -y -q gparted &> /dev/null
+sudo apt-get install -y -q libgnome2-bin &> /dev/null
+sudo apt-get install -y -q tree &> /dev/null
 
 #echo "[Installing Slack]"
 #sudo apt-get install -y -q slack &> /dev/null  #TODO: Does not work
@@ -51,7 +53,7 @@ sudo apt-get install -y -q rhythmbox &> /dev/null
 sudo add-apt-repository -y ppa:fossfreedom/rhythmbox-plugins &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q rhythmbox-plugin-complete &> /dev/null
-#TODO: enable plugins through settings
+#TODO: enable plugins through settings, make them work
 
 echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
 sudo apt-get install -y -q vlc &> /dev/null
@@ -60,9 +62,9 @@ echo "[Installing Kodi Media Center <3]"
 sudo apt-get install -y -q kodi &> /dev/null
 #TODO: find prepackaged configuration files
 
-echo "[Installing Transmission for bittorrents]"
-sudo apt-get install -y -q transmission &> /dev/null
-sudo apt-get install -y -q transmission-qt &> /dev/null
+#echo "[Installing Transmission for bittorrents]"
+#sudo apt-get install -y -q transmission &> /dev/null
+#sudo apt-get install -y -q transmission-qt &> /dev/null
 
 echo "[Installing QBitTorrent]"
 sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable &> /dev/null
@@ -85,6 +87,7 @@ sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q darktable &> /dev/null
 
 #TODO: Install shotwell
+#TODO: Install LibreOffice + theme plugins + enable one of them
 
 echo "[Installing Pinta (better Paint)]"
 sudo apt-get install -y -q pinta &> /dev/null
@@ -108,6 +111,7 @@ echo "[Installing PDFChain (Pdftk GUI)]"
 sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q pdfchain &> /dev/null
+#TODO: remove repository, seems to break things
 
 #echo "[Installing Mcomix (comic viewer)]"
 #sudo apt-get install -y -q mcomix &> /dev/null
@@ -269,7 +273,6 @@ if [ -f "~/.zshrc" ] ; then
     cp ~/.zshrc $HOME/.antigen/.zshrc_bck
 fi
 
-#TODO: history limit seems not to be working
 #TODO: install music player that allows navigating through artists, playlists, shows albums covers,
 #      allows getting cover arts in bulk, can synchronize with external devices and that (secondary):
 #      can integrate with spotify, get lyrics, information
@@ -278,63 +281,58 @@ fi
 
 rm -f ~/.zshrc
 cat <<EOF > $HOME/.zshrc
-source ~/.antigen/antigen.zsh
+      source ~/.antigen/antigen.zsh
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+      # Load the oh-my-zsh's library.
+      antigen use oh-my-zsh
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh). Check them :)
-antigen bundle command-not-found
- #antigen bundle git
- #antigen bundle pip
- #antigen bundle pyenv
- #antigen bundle python # what does it do?
- #antigen bundle virtualenvwrapper
-antigen bundle web-search
-antigen bundle colorize
+      # Bundles from the default repo (robbyrussell's oh-my-zsh). Check them :)
+      antigen bundle command-not-found
+      # antigen bundle git
+      # antigen bundle pip
+      # antigen bundle pyenv
+      # antigen bundle python # what does it do?
+      # antigen bundle virtualenvwrapper
+      antigen bundle web-search
+      antigen bundle colorize
 
-# Bundles from zsh-users.
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh  #TODO FIXME: ./zsh... is needed?
- #antigen bundle zsh-users/zsh-completions
+      # Bundles from zsh-users.
+      antigen bundle zsh-users/zsh-syntax-highlighting
+      antigen bundle zsh-users/zsh-autosuggestions
+      antigen bundle zsh-users/zsh-history-substring-search
+      #antigen bundle zsh-users/zsh-completions
 
-# Load the theme.
-antigen theme agnoster
+      # Load the theme.
+      antigen theme agnoster
 
-# Tell antigen that you're done.
-antigen apply
+      # Tell antigen that you're done.
+      antigen apply
 
-# Setup zsh-autosuggestions
-#source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh #TODO FIXME: needed?
-#TODO FIXME: need to source history-substring too?
+      # Bind keys.
+      bindkey "[D" backward-word
+      bindkey "[C" forward-word
+      bindkey -e
+      bindkey '^[[1;9C' forward-word
+      bindkey '^[[1;9D' backward-word
+      bindkey "^[[H"    beginning-of-line
+      bindkey "^[[1;5H" beginning-of-line
+      bindkey "^[[F"    end-of-line
+      bindkey "^[[1;5F" end-of-line
+      #To get bindkeys representation: in a terminal type Ctrl+V, nothing will be shown, then type the key combination
 
-# Bind keys.
-bindkey "[D" backward-word
-bindkey "[C" forward-word
-bindkey -e
-bindkey '^[[1;9C' forward-word
-bindkey '^[[1;9D' backward-word
-bindkey "^[[H"    beginning-of-line
-bindkey "^[[1;5H" beginning-of-line
-bindkey "^[[F"    end-of-line
-bindkey "^[[1;5F" end-of-line
-#To get bindkeys representation: in a terminal type Ctrl+V, nothing will be shown, then type the key combination
+      # Exports.
+      export EDITOR='nano'
 
-# Exports.
-export EDITOR='nano'
+      # Other.
+      source ~/.alias
+      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=black,bold' #fixes guake color clash for zsh-users autosuggestions
 
-# Other.
-source ~/.alias
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=black,bold' #fixes guake color clash for zsh-users autosuggestions
-
-export HISTSIZE=25               #History size
-export SAVEHIST=0                #Saved history size after logout
-#export HISTFILE=~/.zsh_history  #History file (default value)
-setopt INC_APPEND_HISTORY        #Append into history file
-setopt HIST_IGNORE_DUPS          #Save only one command if 2 common are same and consistent
-setopt EXTENDED_HISTORY          #Add timestamp for each entry
-
+      export HISTSIZE=300              #History size
+      export SAVEHIST=300              #Saved history size after logout
+      #export HISTFILE=~/.zsh_history  #History file (default value)
+      setopt INC_APPEND_HISTORY        #Append into history file
+      setopt HIST_IGNORE_DUPS          #Save only one command if 2 common are same and consistent
+      setopt EXTENDED_HISTORY          #Add timestamp for each entry
 EOF
 popd &> /dev/null
 
