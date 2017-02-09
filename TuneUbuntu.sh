@@ -32,6 +32,13 @@ sudo apt-get install -y -q synaptic > /dev/null
 #echo "[Installing Slack]"
 #sudo apt-get install -y -q slack > /dev/null  #TODO: Does not work
 
+echo "[Installing Chrome]"
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &> /dev/null
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q google-chrome-stable > /dev/null
+sudo rm /etc/apt/sources.list.d/google.list
+
 echo "[Installing Spotify]"
 # Commands from https://www.spotify.com/es/download/linux/
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 &> /dev/null
@@ -39,12 +46,12 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q spotify-client > /dev/null
 
-echo "[Installing Chrome]"
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &> /dev/null
-sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+echo "[Install Rhythmbox and plugins (music player)]"
+sudo apt-get install -y -q rhythmbox &> /dev/null
+sudo add-apt-repository -y ppa:fossfreedom/rhythmbox-plugins &> /dev/null
 sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q google-chrome-stable > /dev/null
-sudo rm /etc/apt/sources.list.d/google.list
+sudo apt-get install -y -q rhythmbox-plugin-complete &> /dev/null
+#TODO: enable plugins through settings
 
 echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
 sudo apt-get install -y -q vlc &> /dev/null
@@ -62,36 +69,49 @@ sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q qbittorrent > /dev/null
 
+#echo "[Installing Thunderbird (e-mail client)]"
+#sudo apt-get install -y -q thunderbird &> /dev/null
+
 echo "[Installing Geary (e-mail client, alternative to Thunderbird)]"
 sudo apt-get install -y -q geary &> /dev/null
 #TODO? Drop geary and use evolution instead?
+
+echo "[Installing Evolution (e-mail client, alternative to Thunderbird) ]"
+sudo apt-get install -y -q evolution &> /dev/null
 
 echo "[Installing Darktable photo editor]"
 sudo add-apt-repository -y ppa:pmjdebruijn/darktable-release &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q darktable > /dev/null
 
+#TODO: Install shotwell
+
 echo "[Installing Pinta (better Paint)]"
 sudo apt-get install -y -q pinta > /dev/null
 
-echo "[Installing GIMP (Photoshop alternative)]"
-sudo apt-get install -y -q gimp &> /dev/null
+#echo "[Installing GIMP (Photoshop alternative)]"
+#sudo apt-get install -y -q gimp &> /dev/null
 
-echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
-sudo apt-get install -y -q inkscape &> /dev/null
+#echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
+#sudo apt-get install -y -q inkscape &> /dev/null
+
 echo "[Installing Evince (PDF viewer and annotator)]"
 ssudo apt-get install -y -q evince &> /dev/null
+
 #echo "[Installing Okular (PDF viewer and annotator)]"
 #sudo apt-get install -y -q okular &> /dev/null
+
 echo "[Installing Pdftk (PDF manipulation)]"
 sudo apt-get install -y -q pdftk &> /dev/null
-#echo "[Installing PDFChain (Pdftk GUI)]"  # FIXME: pdfchain does not run bc of segmentation fault
-#sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
-#sudo apt-get update -y -q &> /dev/null
-#sudo apt-get install -y -q pdfchain &> /dev/null
+
+echo "[Installing PDFChain (Pdftk GUI)]"
+sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q pdfchain &> /dev/null
 
 #echo "[Installing Mcomix (comic viewer)]"
 #sudo apt-get install -y -q mcomix &> /dev/null
+
 echo "[Installing Qcomicbook (comic viewer)]"
 sudo apt-get install -y -q qcomicbook &> /dev/null
 
@@ -128,6 +148,7 @@ cat <<EOF > $HOME/.atom/config.cson
     tabType: "soft"
 EOF
 # TODO: install + configure packages (linters, debuggers, autocompletion, tools ) [python, bash, C, C++...]
+#       And add those files to the repo!
 
 echo "[Installing Remarkable (Markdown editor)]"
 wget --quiet https://remarkableapp.github.io/files/remarkable_1.87_all.deb  #FIXME with latest file name
@@ -163,7 +184,7 @@ gsettings set org.gnome.gedit.preferences.editor display-right-margin true
 gsettings set org.gnome.gedit.preferences.editor right-margin-position 110
 gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
 gsettings set org.gnome.gedit.preferences.editor use-default-font true
-gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 11'
+c
 gsettings set org.gnome.gedit.preferences.editor display-overview-map true
 gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 
@@ -248,6 +269,13 @@ if [ -f "~/.zshrc" ] ; then
     cp ~/.zshrc $HOME/.antigen/.zshrc_bck
 fi
 
+#TODO: history limit seems not to be working
+#TODO: install music player that allows navigating through artists, playlists, shows albums covers,
+#      allows getting cover arts in bulk, can synchronize with external devices and that (secondary):
+#      can integrate with spotify, get lyrics, information
+#TODO: another image manipulation program (effects) and image navigator
+#TODO: change font to Monospace 13 for Gedit, Terminal and Guake. For Gedit, unmark use system font
+
 rm -f ~/.zshrc
 cat <<EOF > $HOME/.zshrc
 source ~/.antigen/antigen.zsh
@@ -270,7 +298,6 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh  #TODO FIXME: ./zsh... is needed?
  #antigen bundle zsh-users/zsh-completions
- # TODO: zsh-users/zsh-history-substring-search
 
 # Load the theme.
 antigen theme agnoster
@@ -280,6 +307,7 @@ antigen apply
 
 # Setup zsh-autosuggestions
 #source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh #TODO FIXME: needed?
+#TODO FIXME: need to source history-substring too?
 
 # Bind keys.
 bindkey "[D" backward-word
@@ -291,7 +319,7 @@ bindkey "^[[H"    beginning-of-line
 bindkey "^[[1;5H" beginning-of-line
 bindkey "^[[F"    end-of-line
 bindkey "^[[1;5F" end-of-line
-#To set new bindkeys in a terminal type Ctrl+V, nothing will be shown, then type the key combination :)
+#To get bindkeys representation: in a terminal type Ctrl+V, nothing will be shown, then type the key combination
 
 # Exports.
 export EDITOR='nano'
@@ -410,11 +438,6 @@ gsettings set org.gnome.desktop.peripherals.keyboard delay 140
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
-# Screencast recorders (2 normal, 2 for GIFs)
-
-#echo "[Installing Shutter (advanced screenshot capture)]"
-#sudo apt-get install -y -q shutter &> /dev/null
-
 # Compressor commands + GUI (peazip)
 echo "[Installing compression utilities]"
 sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa arj sharutils mpack lzma lzop cabextract &> /dev/null
@@ -425,9 +448,13 @@ sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa
 #sudo apt-get update -y -q &> /dev/null
 #sudo apt-get install -y -q skype &> /dev/null
 
+#echo "[Installing Shutter (advanced screenshot capture)]"
+#sudo apt-get install -y -q shutter &> /dev/null
+
+# TODO?: screencast recorders (normal and for GIFs)
+# TODO?: photo editors
 # TODO?: audio editors
 # TODO?: video editors
-# TODO?: photo editors
 # TODO?: STEAM
 # TODO?: DropBox
 # TODO?: Gufws
@@ -437,7 +464,6 @@ sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa
 # TODO: Windowskey + M to minimize all windows
 # TODO: Windowskey + Enter to show windows thumbnails
 
-# TODO: change default apps for web browser, mail client, music player, video player and photo viewer
 # TODO: useful aliases like notify-send--> alert, look for others
 # TODO: install clementine, and install all plugins for clementine and rhythmbox
 
@@ -448,8 +474,10 @@ echo "[ DONE! Log out from this session and login again to see all the changes. 
 echo "[ Remember that installed applications can be accessed by clicking on the 'three stacked rectangles' icon (dock at the top left) ]"
 echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 
+# TODO: Change default apps for web browser, mail client, music player, video player and photo viewer (don't know how to do that through CLI)
 # TODO: Install the latest proprietary Linux graphics drivers available for your hardware
 # TODO: Install special restricted extras?
+
 
 #echo "[Installing Restricted extras and addons (including codecs)]"
 #TODO: check what they are installing
