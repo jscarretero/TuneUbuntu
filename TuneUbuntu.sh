@@ -462,7 +462,6 @@ sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa
 # TODO: Windowskey + M to minimize all windows
 # TODO: Windowskey + Enter to show windows thumbnails
 
-# TODO: useful aliases like notify-send--> alert, look for others
 # TODO: install clementine, and install all plugins for clementine and rhythmbox
 
 sudo apt autoremove -y -q &> /dev/null
