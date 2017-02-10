@@ -288,7 +288,9 @@ cat <<EOF > $HOME/.zshrc
 
       # Bundles from the default repo (robbyrussell's oh-my-zsh). Check them :)
       antigen bundle command-not-found
-      # antigen bundle git
+      antigen bundle git
+      antigen bundle git-extras
+      antigen bundle git-flow
       # antigen bundle pip
       # antigen bundle pyenv
       # antigen bundle python # what does it do?
