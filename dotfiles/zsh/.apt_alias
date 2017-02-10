@@ -3,14 +3,18 @@
 
 # WARNING: Specific alias for specific tools (npm, pip, docker, ...)should go to other .alias files
 
-# Updates repo cache and installs all kinds of updates #FIXME
-alias update='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade'
-#TODO: add news, and some to clean the system
-# TODO: apt aliases
+# Cleanup
+apt_cleanup () { sudo apt-get -f install && sudo apt-get autoremove && sudo apt-get autoclean && sudo apt-get clean ; }
 
-# TODO:To add aliases to separate file
-PkgCleanup ()      { sudo apt-get -f install && sudo apt-get autoremove && sudo apt-get -y autoclean && sudo apt-get -y clean ; }
-PkgUpdate()        { sudo apt update -y -q ; }
-PkgUpdateUpgrade() { sudo apt-get upgrade && sudo apt-get dist-upgrade ; }
-alias pkg_update="sudo apt-get --only-upgrade install $1"
+# Upgrades all packages
+apt_allupgrade () { sudo apt-get update && sudo apt-get upgrade && apt_cleanup ; }
+
+# Upgrades a package
+apt_upgrade () { sudo apt-get update && sudo apt-get --only-upgrade install $@ && apt_cleanup ; }
+
+# Installs a package
+apt_install() { sudo apt-get update && sudo apt-get install $@ && apt_cleanup ; }
+
+# Upgrades packages and distribution
+apt_totalupgrade () { sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && apt_cleanup ; }
 
