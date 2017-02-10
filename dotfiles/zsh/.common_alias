@@ -34,10 +34,6 @@ mcd() { mkdir -p "$1" && cd "$@"; }
 # Backup a file
 backup() { cp $@ $@.backup-`date +%y%m%d`; }
 
-# Updates repo cache and installs all kinds of updates
-alias update='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade'
-#TODO: add news, and some to clean the system
-
 # SSH to a machine called machine with user 'user'.
 # It is also useful to setup a good .ssh/config and ssh keys to make hopping amongst machines even easier.
 # NO: READ: https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html (ssh section)
@@ -53,10 +49,15 @@ alias lt='ls -lhart'
 alias freemem='sync && echo 3 | sudo tee /proc/sys/vm/drop_caches'
 
 # TODO: Review and add new ones for space, directory, files, structure, ...
+
 # "Sort by size" to display in list the files in the current directory, sorted by their size on disk
 sbs() { du -b --max-depth 1 | sort -nr | perl -pe 's{([0-9]+)}{sprintf "%.1f%s", $1>=2**30? ($1/2**30, "G"): $1>=2**20? ($1/2**20, "M"): $1>=2**10? ($1/2**10, "K"): ($1, "")}e'; }
+
 topfile() { BASEDIR=$1 ; TOP=$2 ; find $BASEDIR -xdev -type f -ls |sort -k 7 -r -n | head -$TOP |awk '{size=$7/1024/1024; printf("%dMb %s\n", size,$11);}'; }
+
 topdir() { BASEDIR=$1; TOP=$2 ; du -alx $BASEDIR | sort -n -r | head -n $TOP | awk '{size=$1/1024/1024; printf("%dMb %s\n", size,$2);}'; }
+
+# Show space in devices
 ssd () {echo "Device         Total  Used  Free  Pct MntPoint" ; df -h | grep "^/dev/" ; df -h | grep "^/mnt/" ; return 0; }
 
 # Shows file and dir tree (if tree is not installed)
@@ -64,8 +65,14 @@ if ! [  -f "$(which tree)" ] ; then
     alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 fi
 
+# Find top CPU consuming processes
+topcpu() { ps -eo pid,ppid,user,cmd,%cpu,%mem --sort=-%cpu | head ; }
+
+#  Find top Mem consuming processes
+topmem() { ps -eo pid,ppid,user,cmd,%mem,%cpu --sort=-%mem | head ; }
+
 # Find the PID of any process: ps? [name]
-psgrep () { ps aux | grep $@ ; }
+psgrep () { ps aux | head -n 1 ; ps aux | grep $@ ; }
 
 # Short names
 alias chrome='google-chrome >& /dev/null'
@@ -81,19 +88,15 @@ alias whcih='which'
 alias wich='which'
 alias mdir='mkdir'
 
-# NEEDED?
 # Create .tar.gz
-alias tarc='tar czvf'
+# alias tarc='tar czvf'
 # Extract .tar.gz
-alias tarx='tar xzvf'
+# alias tarx='tar xzvf'
 # List .tar.gz
-alias tart='tar tzvf'
+# alias tart='tar tzvf'
 
 # Root shell
 alias root='sudo -i'
-
-# TODO: top memory-cpu consuming
-# TODO: apt aliases
 
 # if user is not root, pass all commands via sudo (not needed)
 if [ $UID -ne 0 ]; then

@@ -5,13 +5,6 @@
 # Before running this sript on a fresh Ubuntu installation, I recommend you to try it on a virtual machine
 # where you may have installed that Ubuntu image.
 
-# TODO:To add aliases to separate file
-PkgCleanup ()      { sudo apt-get -f install && sudo apt-get autoremove && sudo apt-get -y autoclean && sudo apt-get -y clean ; }
-PkgUpdate()        { sudo apt update -y -q ; }
-PkgUpdateUpgrade() { sudo apt-get upgrade && sudo apt-get dist-upgrade ; }
-alias pkg_update="sudo apt-get --only-upgrade install $1"
-
-
 # TODO?: PyCharm?
 # TODO: tkdiff alternative
 # TODO: qt for python ?
