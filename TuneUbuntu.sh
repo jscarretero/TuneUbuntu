@@ -187,8 +187,8 @@ gsettings set org.gnome.gedit.preferences.editor auto-indent true
 gsettings set org.gnome.gedit.preferences.editor display-right-margin true
 gsettings set org.gnome.gedit.preferences.editor right-margin-position 110
 gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
-gsettings set org.gnome.gedit.preferences.editor use-default-font true
-gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace 11'
+gsettings set org.gnome.gedit.preferences.editor use-default-font false #true
+gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace Regular 12'
 gsettings set org.gnome.gedit.preferences.editor display-overview-map true
 gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 
@@ -225,16 +225,19 @@ echo "[Installing GIT client]" #gitkraken? gitk?
 
 
 echo "[Configuring Terminal aspect]"
+profId=$(gsettings get org.gnome.Terminal.ProfilesList default | sed "s/^\([\"']\)\(.*\)\1\$/\2/g")
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
+dconf write /org/gnome/terminal/legacy/profiles:/:$profId/use-system-font false
+dconf write /org/gnome/terminal/legacy/profiles:/:$profId/font "'Monospace Regular 12'"  #two quotes!!
 # Ctrl+PageDown for Next Tab
 # Ctrl+PageUp for Previous Tab
+
 # Install Dracula theme
 git clone https://github.com/GalaticStryder/gnome-terminal-colors-dracula &> /dev/null
 sleep 1
 cd gnome-terminal-colors-dracula
 sleep 1
-profId=$(gsettings get org.gnome.Terminal.ProfilesList default | sed "s/^\([\"']\)\(.*\)\1\$/\2/g")
 ./install.sh --scheme=Dracula -p :$profId --skip-dircolors
 sleep 1
 cd ..
@@ -251,7 +254,8 @@ gconftool-2 --type Boolean --set /apps/guake/general/use_visible_bell  True
 gconftool-2 --type Boolean --set /apps/guake/general/window_losefocus False
 gconftool-2 --type Boolean --set /apps/guake/general/window_ontop False
 gconftool-2 --type string  --set /apps/guake/style/font/palette_name 'Dracula'
-gconftool-2 --type string  --set /apps/guake/style/font/style 'Monospace 13'
+gconftool-2 --type Boolean --set /apps/guake/general/use_default_font False
+gconftool-2 --type string  --set /apps/guake/style/font/style 'Monospace Regular 12'
 gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
 timeout 2.5 guake-prefs &> /dev/null  || true
 #Add guake to startup applications
@@ -277,7 +281,6 @@ fi
 #      allows getting cover arts in bulk, can synchronize with external devices and that (secondary):
 #      can integrate with spotify, get lyrics, information
 #TODO: another image manipulation program (effects) and image navigator
-#TODO: change font to Monospace 13 for Gedit, Terminal and Guake. For Gedit, unmark use system font
 
 rm -f ~/.zshrc
 cat <<EOF > $HOME/.zshrc
