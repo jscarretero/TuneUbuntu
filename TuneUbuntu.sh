@@ -111,7 +111,7 @@ echo "[Installing PDFChain (Pdftk GUI)]"
 sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q pdfchain &> /dev/null
-#TODO: remove repository, seems to break things
+sudo add-apt-repository -y  -r ppa:pdfchain-team/ppa &> /dev/null # Removes repo, seems to break things !
 
 #echo "[Installing Mcomix (comic viewer)]"
 #sudo apt-get install -y -q mcomix &> /dev/null
