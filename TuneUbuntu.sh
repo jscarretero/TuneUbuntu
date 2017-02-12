@@ -18,7 +18,7 @@ echo "[Upgrading system packages. This will take a while...]"
 sudo apt -y -q upgrade &> /dev/null
 
 echo
-echo "[Installing configuration and basic tools (dconf, gconf-editor, unity-tweak-tool, git, synaptic, gparted, zsh)]"
+echo "[Installing configuration and basic tools (dconf, gconf-editor, unity-tweak-tool, git, synaptic, gparted, compression utilities, zsh)]"
 sudo apt-get install -y -q zsh &> /dev/null
 chsh -s $(which zsh)
 sudo apt-get install -y -q dconf-cli &> /dev/null
@@ -30,6 +30,7 @@ sudo apt-get install -y -q synaptic &> /dev/null
 sudo apt-get install -y -q gparted &> /dev/null
 sudo apt-get install -y -q libgnome2-bin &> /dev/null
 sudo apt-get install -y -q tree &> /dev/null
+sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa arj sharutils mpack lzma lzop cabextract &> /dev/null
 
 #echo "[Installing Slack]"
 #sudo apt-get install -y -q slack &> /dev/null  #TODO: Does not work
@@ -188,7 +189,7 @@ gsettings set org.gnome.gedit.preferences.editor display-right-margin true
 gsettings set org.gnome.gedit.preferences.editor right-margin-position 110
 gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
 gsettings set org.gnome.gedit.preferences.editor use-default-font false #true
-gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace Regular 12'
+gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace Regular 11'
 gsettings set org.gnome.gedit.preferences.editor display-overview-map true
 gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 
@@ -219,17 +220,20 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
   gsettings set org.gnome.gedit.preferences.editor scheme 'dracula'
 
 
-echo "[Installing GIT client]" #gitkraken? gitk?
-#TODO
-#TODO: meld, tkdiff, and other conflict resolution tools. Look for them
+echo "[Installing GitKraken (GIT client)]" #gitkraken? gitk?
+wget -q https://release.gitkraken.com/linux/gitkraken-amd64.deb
+sudo dpkg -i gitkraken-amd64.deb &> /dev/null
+\rm gitkraken-amd64.deb
+#TODO: another
 
 
-echo "[Configuring Terminal aspect]"
+echo "[Installing and configuring Gnome-Terminal]"
+sudo apt-get install -y -q gnome-terminal &> /dev/null
 profId=$(gsettings get org.gnome.Terminal.ProfilesList default | sed "s/^\([\"']\)\(.*\)\1\$/\2/g")
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
 dconf write /org/gnome/terminal/legacy/profiles:/:$profId/use-system-font false
-dconf write /org/gnome/terminal/legacy/profiles:/:$profId/font "'Monospace Regular 12'"  #two quotes!!
+dconf write /org/gnome/terminal/legacy/profiles:/:$profId/font "'Monospace Regular 11'"  #two quotes!!
 # Ctrl+PageDown for Next Tab
 # Ctrl+PageUp for Previous Tab
 
@@ -255,7 +259,7 @@ gconftool-2 --type Boolean --set /apps/guake/general/window_losefocus False
 gconftool-2 --type Boolean --set /apps/guake/general/window_ontop False
 gconftool-2 --type string  --set /apps/guake/style/font/palette_name 'Dracula'
 gconftool-2 --type Boolean --set /apps/guake/general/use_default_font False
-gconftool-2 --type string  --set /apps/guake/style/font/style 'Monospace Regular 12'
+gconftool-2 --type string  --set /apps/guake/style/font/style 'Monospace Regular 11'
 gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
 timeout 2.5 guake-prefs &> /dev/null  || true
 #Add guake to startup applications
@@ -277,69 +281,22 @@ if [ -f "~/.zshrc" ] ; then
     cp ~/.zshrc $HOME/.antigen/.zshrc_bck
 fi
 
+rm -f ~/.zshrc
+
+# Create alias soft links
+ln -s ~/TuneUbuntu/dotfiles/zsh/.zshrc ~/.zshrc  &> /dev/null
+declare -a arr=(".common_alias" ".apt_alias")
+for i in "${arr[@]}"
+do
+    ln -s ~/TuneUbuntu/dotfiles/zsh/$i ~/$i  &> /dev/null
+done
+popd &> /dev/null
+
+
 #TODO: install music player that allows navigating through artists, playlists, shows albums covers,
 #      allows getting cover arts in bulk, can synchronize with external devices and that (secondary):
 #      can integrate with spotify, get lyrics, information
 #TODO: another image manipulation program (effects) and image navigator
-
-rm -f ~/.zshrc
-cat <<EOF > $HOME/.zshrc
-      source ~/.antigen/antigen.zsh
-
-      # Load the oh-my-zsh's library.
-      antigen use oh-my-zsh
-
-      # Bundles from the default repo (robbyrussell's oh-my-zsh). Check them :)
-      antigen bundle command-not-found
-      antigen bundle git
-      antigen bundle git-extras
-      antigen bundle git-flow
-      # antigen bundle pip
-      # antigen bundle pyenv
-      # antigen bundle python # what does it do?
-      # antigen bundle virtualenvwrapper
-      antigen bundle web-search
-      antigen bundle colorize
-
-      # Bundles from zsh-users.
-      antigen bundle zsh-users/zsh-syntax-highlighting
-      antigen bundle zsh-users/zsh-autosuggestions
-      antigen bundle zsh-users/zsh-history-substring-search
-      #antigen bundle zsh-users/zsh-completions
-
-      # Load the theme.
-      antigen theme agnoster
-
-      # Tell antigen that you're done.
-      antigen apply
-
-      # Bind keys.
-      bindkey "[D" backward-word
-      bindkey "[C" forward-word
-      bindkey -e
-      bindkey '^[[1;9C' forward-word
-      bindkey '^[[1;9D' backward-word
-      bindkey "^[[H"    beginning-of-line
-      bindkey "^[[1;5H" beginning-of-line
-      bindkey "^[[F"    end-of-line
-      bindkey "^[[1;5F" end-of-line
-      #To get bindkeys representation: in a terminal type Ctrl+V, nothing will be shown, then type the key combination
-
-      # Exports.
-      export EDITOR='nano'
-
-      # Other.
-      source ~/.alias
-      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=black,bold' #fixes guake color clash for zsh-users autosuggestions
-
-      export HISTSIZE=300              #History size
-      export SAVEHIST=300              #Saved history size after logout
-      #export HISTFILE=~/.zsh_history  #History file (default value)
-      setopt INC_APPEND_HISTORY        #Append into history file
-      setopt HIST_IGNORE_DUPS          #Save only one command if 2 common are same and consistent
-      setopt EXTENDED_HISTORY          #Add timestamp for each entry
-EOF
-popd &> /dev/null
 
 echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
@@ -376,7 +333,8 @@ gconftool-2 --type Boolean --set /apps/docky-2/WeatherDocklet/WeatherPreferences
 gconftool-2 --type Integer --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Timeout 60
 nohup docky &> /dev/null &
 
-echo "[Hiding Unity dock (will not disable it)]"
+# Hide Unity dock
+#echo "[Hiding Unity dock (will not disable it)]"
 #http://askubuntu.com/questions/643028/shell-script-to-remove-unity-launcherif-present-in-ubuntu-14-04-and-or-the-xf
 dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1   #0 to enable back
 dconf write /org/compiz/profiles/unity/plugins/unityshell/edge-responsiveness 0  #2 to enable back
@@ -425,6 +383,7 @@ gsettings set com.canonical.Unity integrated-menus false
 #gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ unminimize-effects [\'animation:"Magic Lamp"\'] #"Glide 2" is the original
 #gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ minimize-effects [\'animation:"Magic Lamp"\'] #"Zoom" is the original
 sudo sh -c "echo 'LC_TIME=\"en_GB.UTF-8\"' >> /etc/default/locale"
+#TODO: change aspect ratio
 
 #echo "[Changing wallpaper]"
 #gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Vi%C3%B1uela.jpg
@@ -441,9 +400,6 @@ gsettings set org.gnome.desktop.peripherals.keyboard delay 140
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
-# Compressor commands + GUI (peazip)
-echo "[Installing compression utilities]"
-sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa arj sharutils mpack lzma lzop cabextract &> /dev/null
 
 #echo "[Installing Skype]"
 #sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
@@ -461,6 +417,7 @@ sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa
 # TODO?: STEAM
 # TODO?: DropBox
 # TODO?: Gufws
+# TODO?: Peazip GUI
 # TODO?: Pomodoro - Tomate
 # TODO?: Password manager like KeepPass, but that synchronizes to cloud
 

@@ -4,11 +4,10 @@
 
 # Before running this sript on a fresh Ubuntu installation, I recommend you to try it on a virtual machine
 # where you may have installed that Ubuntu image.
-
+s
 # TODO?: PyCharm?
-# TODO: tkdiff alternative
 # TODO: qt for python ?
-# TODO: git confllict resolution tool
+# TODO: git confllict resolution tool: meld, tkdiff, kdiff3 and diffuse. Tell git which to use!s
 
 echo "[Updating list of available packages]"
 sudo apt update -y -q
@@ -97,11 +96,12 @@ sudo apt-get install -y -q gcc g++ gfortran fort77 &> /dev/null
 # Singularity from scratch
 
 # Dstat
-    sudo apt-get install dstat
+echo "[Installing Dstat (system-level performance monitor)]"
+sudo apt-get install -y -q dstat &> /dev/null
     '''
     echo "[Installing Dstat (system-level performance monitor)]"
     tmpDir=`mktemp -d`
-    pushd .
+    pushd . &> /dev/null
     cd "$tmpDir"
     git clone --quiet https://github.com/dagwieers/dstat.git
     cd dstat
@@ -109,14 +109,13 @@ sudo apt-get install -y -q gcc g++ gfortran fort77 &> /dev/null
     sed -i "/prefix = \/usr/c $our_prefix" ./Makefile
     ##make
     sudo make install >& /dev/null
-    cd /tmp
+    popd &> /dev/null
     rm -rf "$tmpDir"
     sudo ln -s /opt/dstat/share/dstat/  /opt/dstat/bin/plugins
     #FALTA MODIFICAR $PATH
     export PATH="$PATH:/opt/dstat/bin"
     echo "" >> ~/.bashsrc
     echo 'export PATH="$PATH:/opt/dstat/bin"' >> ~/.bashrc
-    popd
     '''
 
 sudo apt autoremove -y -q &> /dev/null
