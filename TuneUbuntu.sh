@@ -370,6 +370,10 @@ sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q ultra-flat-icons &> /dev/null
 
 echo "[Configuring general aspect]"
+#Changes displays scale factor
+  scales=$(dconf read /com/ubuntu/user-interface/scale-factor)
+  newscales=$(python -c "exec(\"import sys; import ast;\\nd = ast.literal_eval(str(sys.argv[1]))\\nfor k in d.keys():\\n    d[k]=7;\\nprint d\")" "$scales")
+  dconf write /com/ubuntu/user-interface/scale-factor "$newscales"
 gsettings set org.gnome.desktop.interface gtk-theme 'Flatabulous'
 gsettings set org.gnome.desktop.interface icon-theme 'Paper'
 gsettings set com.canonical.indicator.datetime show-date true
@@ -383,10 +387,9 @@ gsettings set com.canonical.Unity integrated-menus false
 #gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ unminimize-effects [\'animation:"Magic Lamp"\'] #"Glide 2" is the original
 #gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ minimize-effects [\'animation:"Magic Lamp"\'] #"Zoom" is the original
 sudo sh -c "echo 'LC_TIME=\"en_GB.UTF-8\"' >> /etc/default/locale"
-#TODO: change aspect ratio
 
-#echo "[Changing wallpaper]"
-#gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Cielo_estrellado_by_Eduardo_Diez_Vi%C3%B1uela.jpg
+echo "[Changing wallpaper]"
+gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/TCP118v1_by_Tiziano_Consonni.jpg'
 
 echo "[Changing timezone to Europe/Madrid]"
 sudo timedatectl set-timezone Europe/Madrid
@@ -399,7 +402,6 @@ echo "[Configuring keyboard delays - rates]"
 gsettings set org.gnome.desktop.peripherals.keyboard delay 140
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 gsettings set org.gnome.desktop.peripherals.keyboard repeat true
-
 
 #echo "[Installing Skype]"
 #sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
@@ -421,11 +423,6 @@ gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 # TODO?: Pomodoro - Tomate
 # TODO?: Password manager like KeepPass, but that synchronizes to cloud
 
-# TODO: Windowskey + M to minimize all windows
-# TODO: Windowskey + Enter to show windows thumbnails
-
-# TODO: install clementine, and install all plugins for clementine and rhythmbox
-
 sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
 sudo apt-get -y -q autoclean &> /dev/null
@@ -434,6 +431,8 @@ echo "[ Remember that installed applications can be accessed by clicking on the 
 echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 
 # TODO: Change default apps for web browser, mail client, music player, video player and photo viewer (don't know how to do that through CLI)
+# TODO: Windowskey + M to minimize all windows (possible?)
+# TODO: Windowskey + Enter to show windows thumbnails
 # TODO: Install the latest proprietary Linux graphics drivers available for your hardware
 # TODO: Install special restricted extras?
 
