@@ -227,7 +227,7 @@ sudo dpkg -i gitkraken-amd64.deb &> /dev/null
 #TODO: another
 
 
-echo "[Installing and configuring Gnome-Terminal]"
+echo "[Installing Gnome-Terminal and configuring it]"
 sudo apt-get install -y -q gnome-terminal &> /dev/null
 profId=$(gsettings get org.gnome.Terminal.ProfilesList default | sed "s/^\([\"']\)\(.*\)\1\$/\2/g")
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
@@ -285,7 +285,7 @@ rm -f ~/.zshrc
 
 # Create alias soft links
 ln -s ~/TuneUbuntu/dotfiles/zsh/.zshrc ~/.zshrc  &> /dev/null
-declare -a arr=(".common_alias" ".apt_alias", ".environment")
+declare -a arr=(".common_alias" ".apt_alias" ".environment")
 for i in "${arr[@]}"
 do
     ln -s ~/TuneUbuntu/dotfiles/zsh/$i ~/$i  &> /dev/null
