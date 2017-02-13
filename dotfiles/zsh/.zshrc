@@ -46,6 +46,7 @@
       source ~/.apt_alias
       source ~/.common_alias
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=black,bold' #fixes guake color clash for zsh-users autosuggestions
+      source ~/.environment
 
       export HISTSIZE=300              #History size
       export SAVEHIST=300              #Saved history size after logout

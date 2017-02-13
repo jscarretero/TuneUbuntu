@@ -285,7 +285,7 @@ rm -f ~/.zshrc
 
 # Create alias soft links
 ln -s ~/TuneUbuntu/dotfiles/zsh/.zshrc ~/.zshrc  &> /dev/null
-declare -a arr=(".common_alias" ".apt_alias")
+declare -a arr=(".common_alias" ".apt_alias", ".environment")
 for i in "${arr[@]}"
 do
     ln -s ~/TuneUbuntu/dotfiles/zsh/$i ~/$i  &> /dev/null
