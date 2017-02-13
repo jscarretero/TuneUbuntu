@@ -371,9 +371,19 @@ sudo apt-get install -y -q ultra-flat-icons &> /dev/null
 
 echo "[Configuring general aspect]"
 #Changes displays scale factor
-  scales=$(dconf read /com/ubuntu/user-interface/scale-factor)
-  newscales=$(python -c "exec(\"import sys; import ast;\\nd = ast.literal_eval(str(sys.argv[1]))\\nfor k in d.keys():\\n    d[k]=7;\\nprint d\")" "$scales")
-  dconf write /com/ubuntu/user-interface/scale-factor "$newscales"
+scales=$(dconf read /com/ubuntu/user-interface/scale-factor)
+export scales
+newscales=$(python <<EOF
+import ast
+import os
+d = ast.literal_eval(str(os.getenv('scales')))
+d={k:7 for k,v in d.items()}
+print d
+EOF
+)
+echo $newscales
+dconf write /com/ubuntu/user-interface/scale-factor "$newscales"
+
 gsettings set org.gnome.desktop.interface gtk-theme 'Flatabulous'
 gsettings set org.gnome.desktop.interface icon-theme 'Paper'
 gsettings set com.canonical.indicator.datetime show-date true
