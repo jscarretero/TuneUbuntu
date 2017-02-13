@@ -13,7 +13,7 @@ apt_allupgrade () { sudo apt-get update && sudo apt-get upgrade && apt_cleanup ;
 apt_upgrade () { sudo apt-get update && sudo apt-get --only-upgrade install $@ && apt_cleanup ; }
 
 # Installs a package
-apt_install() { sudo apt-get update && sudo apt-get install $@ && apt_cleanup ; }
+apt_install () { sudo apt-get update && sudo apt-get install $@ && apt_cleanup ; }
 
 # Upgrades packages and distribution
 apt_totalupgrade () { sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && apt_cleanup ; }

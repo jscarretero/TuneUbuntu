@@ -5,13 +5,13 @@
 
 
 # Opens current directory in a file explorer
-explore() { nautilus $1 &> /dev/null & disown }
+explore () { nautilus $1 &> /dev/null & disown }
 
 # Opens web browser window to stackoverflow site with search given as a parameter
 alias stackoverflow='web_search duckduckgo \!so'
 
 # Opens a file with whatever program would open by double clicking on it in a GUI file explorer
-go() { gnome-open $1 &> /dev/null & disown }
+go () { gnome-open $1 &> /dev/null & disown }
 
 # Add extra protection against mistakes
 # alias rm='rm -i'  # Commented, learn the hard way!
@@ -29,10 +29,10 @@ alias clearalias='unalias -a'
 cls () { cd "$@" && ls -F; }
 
 # Make a dir and cd into it. It can override another command called mcd (useless)
-mcd() { mkdir -p "$1" && cd "$@"; }
+mcd () { mkdir -p "$1" && cd "$@"; }
 
 # Backup a file
-backup() { cp $@ $@.backup-`date +%y%m%d`; }
+backup () { cp $@ $@.backup-`date +%y%m%d`; }
 
 # SSH to a machine called machine with user 'user'.
 # It is also useful to setup a good .ssh/config and ssh keys to make hopping amongst machines even easier.
@@ -53,7 +53,7 @@ sizes () { if [ $# -eq 0 ] ; then du -ahd1 ./* | sort -n; else du -ahd1 $1/* | s
 alias sbs='sizes'
 
 # Show space in devices
-ssd () {echo "Device         Total  Used  Free  Pct MntPoint" ; df -h | grep "^/dev/" ; df -h | grep "^/mnt/" ; return 0; }
+ssd () { echo "Device         Total  Used  Free  Pct MntPoint" ; df -h | grep "^/dev/" ; df -h | grep "^/mnt/" ; return 0; }
 
 # Shows file and dir tree (if tree is not installed)
 if ! [  -f "$(which tree)" ] ; then
@@ -61,10 +61,10 @@ if ! [  -f "$(which tree)" ] ; then
 fi
 
 # Find top CPU consuming processes
-topcpu() { ps -eo pid,ppid,user,cmd,%cpu,%mem --sort=-%cpu | head ; }
+topcpu () { ps -eo pid,ppid,user,cmd,%cpu,%mem --sort=-%cpu | head ; }
 
 #  Find top Mem consuming processes
-topmem() { ps -eo pid,ppid,user,cmd,%mem,%cpu --sort=-%mem | head ; }
+topmem () { ps -eo pid,ppid,user,cmd,%mem,%cpu --sort=-%mem | head ; }
 
 # Find the PID of any process: ps? [name]
 psgrep () { ps aux | head -n 1 ; ps aux | grep $@ ; }
