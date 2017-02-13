@@ -5,13 +5,13 @@
 
 
 # Opens current directory in a file explorer
-explore () { nautilus $1 &> /dev/null & disown }
+explore () { nautilus $1 &> /dev/null & disown; }
 
 # Opens web browser window to stackoverflow site with search given as a parameter
 alias stackoverflow='web_search duckduckgo \!so'
 
 # Opens a file with whatever program would open by double clicking on it in a GUI file explorer
-go () { gnome-open $1 &> /dev/null & disown }
+go () { gnome-open $1 &> /dev/null & disown; }
 
 # Add extra protection against mistakes
 # alias rm='rm -i'  # Commented, learn the hard way!
@@ -94,7 +94,7 @@ alias mdir='mkdir'
 alias root='sudo -i'
 
 # if user is not root, pass all commands via sudo (not needed)
-if [ $UID -ne 0 ]; then
+if [ $UID -ne 0 ] ; then
     alias reboot='sudo reboot'
     alias poweroff='sudo poweroff'
     alias halt='sudo halt'
