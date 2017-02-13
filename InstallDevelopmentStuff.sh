@@ -93,30 +93,25 @@ sudo apt-get install -y -q gcc g++ gfortran fort77 &> /dev/null
 # Java
   sudo apt-get install default-jdk
 
-# Singularity from scratch
-
 # Dstat
 echo "[Installing Dstat (system-level performance monitor)]"
 sudo apt-get install -y -q dstat &> /dev/null
-    '''
-    echo "[Installing Dstat (system-level performance monitor)]"
-    tmpDir=`mktemp -d`
-    pushd . &> /dev/null
-    cd "$tmpDir"
-    git clone --quiet https://github.com/dagwieers/dstat.git
-    cd dstat
-    our_prefix="prefix = /opt/dstat/"
-    sed -i "/prefix = \/usr/c $our_prefix" ./Makefile
-    ##make
-    sudo make install >& /dev/null
-    popd &> /dev/null
-    rm -rf "$tmpDir"
-    sudo ln -s /opt/dstat/share/dstat/  /opt/dstat/bin/plugins
-    #FALTA MODIFICAR $PATH
-    export PATH="$PATH:/opt/dstat/bin"
-    echo "" >> ~/.bashsrc
-    echo 'export PATH="$PATH:/opt/dstat/bin"' >> ~/.bashrc
-    '''
+#    echo "[Installing Dstat (system-level performance monitor)]"
+#    tmpDir=`mktemp -d`
+#    pushd . &> /dev/null
+#    cd "$tmpDir"
+#    git clone --quiet https://github.com/dagwieers/dstat.git
+#    cd dstat
+#    our_prefix="prefix = /opt/dstat/"
+#    sed -i "/prefix = \/usr/c $our_prefix" ./Makefile
+#    ##make
+#    sudo make install >& /dev/null
+#    popd &> /dev/null
+#    rm -rf "$tmpDir"
+#    sudo ln -s /opt/dstat/share/dstat/  /opt/dstat/bin/plugins
+#    export PATH="$PATH:/opt/dstat/bin"
+#    echo "" >> ~/.bashsrc
+#    echo 'export PATH="$PATH:/opt/dstat/bin"' >> ~/.bashrc
 
 sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
