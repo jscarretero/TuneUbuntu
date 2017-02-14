@@ -18,3 +18,8 @@ apt_install () { sudo apt-get update && sudo apt-get install $@ && apt_cleanup ;
 # Upgrades packages and distribution
 apt_totalupgrade () { sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && apt_cleanup ; }
 
+# Removes a package
+apt_remove () { sudo apt-get remove $@ && apt_cleanup ; }
+
+# Purges a package (deletes data and configuration files)
+apt_purge () { sudo apt-get purge $@ && apt_cleanup ; }
