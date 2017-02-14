@@ -5,17 +5,15 @@
 # Before running this sript on a fresh Ubuntu installation, I recommend you to try it on a virtual machine
 # where you may have installed that Ubuntu image.
 
-# TODO?: PyCharm?
-# TODO: qt for python ?
-# TODO: git confllict resolution tool: meld, tkdiff, kdiff3 and diffuse. Tell git which to use!s
+# TODO: git confllict resolution tool: meld, tkdiff, kdiff3 and diffuse. Tell git which to use!
 
 echo "[Updating list of available packages]"
-sudo apt update -y -q
+sudo apt update -y -q &> /dev/null
 
 echo
 echo "[Upgrading system packages. This will take a while...]"
-sudo apt upgrade
-sudo apt-get dist-upgrade
+sudo apt -y -q upgrade &> /dev/null
+sudo apt-get -y -q dist-upgrade &> /dev/null
 
 echo
 echo "[Installing Git]"
@@ -58,11 +56,45 @@ echo "[Installing Python 2.7.*]"
 sudo apt-get install -y -q python &> /dev/null
 #sudo apt-get install -y -q python-dev &> /dev/null
 
-#echo "[Installing Python Pycharm IDE]" # TODO
-#wget --quiet https://download.jetbrains.com/python/pycharm-community-2016.3.2.tar.gz
-#tar -xvzf pycharm-community-2016.3.2.tar.gz -C /opt/
-#\rm pycharm-community-2016.3.2.tar.gz
-#TODO: Add pycharm.desktop to docky bar
+echo "[Installing Python Pycharm IDE]"
+mkdir -p ~/PyCharm
+wget --quiet https://download.jetbrains.com/python/pycharm-community-2016.3.2.tar.gz #FIXME: use latest version
+tar -xzf pycharm-community-2016.3.2.tar.gz -C ~/PyCharm
+\rm pycharm-community-2016.3.2.tar.gzs
+
+pycharmBin=\"$(readlink -e ~/PyCharm/*/bin/pycharm.sh)\"
+pycharmPath=$(dirname $(readlink -e ~/PyCharm/*/bin/pycharm.sh))
+pycharmIcon=$(readlink -e ~/PyCharm/*/bin/pycharm.png)
+cat <<EOF > $HOME/.local/share/applications/pycharm.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PyCharm Community Edition
+Icon=$pycharmIcon
+Exec=$pycharmBin %f
+Comment=The Drive to Develop
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-pycharm-ce
+EOF
+
+grep -q "PyCharm" ~/.environment || echo "export PATH=\$PATH:$pycharmPath" >> ~/.environment
+
+# Add pycharm.desktop to docky bar (if docky exists)
+if which docky &> /dev/null ;
+then
+    launchers=$(gconftool-2 --get /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers)
+    sortlist=$(gconftool-2 --get /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList)
+    launchers=${launchers::-1}
+    launcher="file://$HOME/.local/share/applications/pycharm.desktop"
+    launchers="$launchers,$launcher"]
+    sortlist=${sortlist::-1}
+    newsorted="$HOME/.local/share/applications/pycharm.desktop"
+    sortlist="$sortlist,$newsorted"]
+    gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers $launchers
+    gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList $sortlist
+fi
+
 
 echo "[Installing Python PyPI (pip)]"
 sudo apt-get install -y -q python-pip  &> /dev/null
@@ -71,7 +103,7 @@ pip install -q --upgrade pip &> /dev/null
 echo "[Installing Python Virtualenv]"
 pip install --user -q virtualenv &> /dev/null
 
-## These should be installed under a python virtualenv (once created and activated)
+# Packages to be available under no virtualenv
 echo "[Installing Python Pandas & Numpy]" #Also installs numpy, python-dateutil, six, pytz, requests
 pip install --user -q pandas &> /dev/null
 echo "[Installing Plotly]"
@@ -82,6 +114,13 @@ echo "[Installing Colorlover package (for plots)]"
 pip install --userr -q colorlover &> /dev/null
 echo "[Installing MongoDB library for Python (pymongo)]"
 pip install --user -q pymongo &> /dev/null
+# TODO?: pythonqt lib and dependences
+
+# If we want some Python packages available under a virtualenv, these are the steps:
+#   - virtualenv myenv
+#   - cd myenv && source bin/activate
+#   - pip install -r requirements.txt (where requirements has per each line something like this paramiko == 2.0.0)
+#   - Or: pip install paramiko ....
 
 echo "[Installing buildtools]"
 sudo apt-get install -y -q build-essential autoconf automake libtool cmake make &> /dev/null
@@ -89,12 +128,14 @@ sudo apt-get install -y -q build-essential autoconf automake libtool cmake make 
 echo "[Installing GCC, C++, Gfortran, and Fort77]"
 sudo apt-get install -y -q gcc g++ gfortran fort77 &> /dev/null
 
+echo "[Installing Clang]"
+sudo apt-get install -y -q clang &> /dev/null
+
 echo "[Installing OpenMPI bin-common and libdev]"
 sudo apt-get install -y -q openmpi-bin openmpi-common libopenmpi-dev &> /dev/null
 
-# TODO: Clang
 # TODO: Java
-sudo apt-get install default-jdk
+#sudo apt-get install default-jdk
 
 # Dstat
 echo "[Installing Dstat (system-level performance monitor)]"
@@ -121,4 +162,4 @@ sudo apt clean -y -q &> /dev/null
 sudo apt-get -y -q autoclean &> /dev/null
 echo "[ DONE! ]"
 
-c
+notify-send " DONE!!     :)"

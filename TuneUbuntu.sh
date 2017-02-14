@@ -16,6 +16,7 @@ sudo apt update -y -q &> /dev/null
 
 echo "[Upgrading system packages. This will take a while...]"
 sudo apt -y -q upgrade &> /dev/null
+sudo apt-get -y -q dist-upgrade &> /dev/null
 
 echo
 echo "[Installing configuration and basic tools (dconf, gconf-editor, unity-tweak-tool, git, synaptic, gparted, compression utilities, zsh)]"
@@ -326,7 +327,7 @@ gconftool-2 --type string --set /apps/docky-2/Docky/Services/ThemeService/Theme 
 gconftool-2 --type Boolean --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/ThreeDimensional True
 gconftool-2 --type Integer --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/IconSize 75
 gconftool-2 --type Float --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/ZoomPercent 2.1
-gconftool-2 --type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Autohide 'Intellihide'
+gconftool-2 --type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Autohide 'UniversalIntellihide'
 gconftool-2 --type Boolean --set /apps/docky-2/Docky/Items/DockyItem/ShowDockyItem False
 gconftool-2 --type list --list-type string --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Location ['Barcelona\, spain']
 gconftool-2 --type Boolean --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Metric True
