@@ -5,8 +5,6 @@
 # Before running this sript on a fresh Ubuntu installation, I recommend you to try it on a virtual machine
 # where you may have installed that Ubuntu image.
 
-# TODO: git confllict resolution tool: meld, tkdiff, kdiff3 and diffuse. Tell git which to use!
-
 echo "[Updating list of available packages]"
 sudo apt update -y -q &> /dev/null
 
@@ -18,6 +16,9 @@ sudo apt-get -y -q dist-upgrade &> /dev/null
 echo
 echo "[Installing Git]"
 sudo apt-get install -y -q git &> /dev/null
+
+echo "[Installing meld, tkdiff and diffuse]" #Tell git which one to use! meld or diffuse
+sudo apt-get install -y -q meld tkdiff diffuse &> /dev/null  #Install kdiff3? needs kde runtime :S
 
 echo "[Installing Curl]"
 sudo apt-get install -y -q curl &> /dev/null
@@ -65,6 +66,7 @@ tar -xzf pycharm-community-2016.3.2.tar.gz -C ~/PyCharm
 pycharmBin=\"$(readlink -e ~/PyCharm/*/bin/pycharm.sh)\"
 pycharmPath=$(dirname $(readlink -e ~/PyCharm/*/bin/pycharm.sh))
 pycharmIcon=$(readlink -e ~/PyCharm/*/bin/pycharm.png)
+
 cat <<EOF > $HOME/.local/share/applications/pycharm.desktop
 [Desktop Entry]
 Version=1.0
