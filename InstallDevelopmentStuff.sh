@@ -61,7 +61,7 @@ echo "[Installing Python Pycharm IDE]"
 mkdir -p ~/PyCharm
 wget --quiet https://download.jetbrains.com/python/pycharm-community-2016.3.2.tar.gz #FIXME: use latest version
 tar -xzf pycharm-community-2016.3.2.tar.gz -C ~/PyCharm
-\rm pycharm-community-2016.3.2.tar.gzs
+\rm pycharm-community-2016.3.2.tar.gz
 
 pycharmBin=\"$(readlink -e ~/PyCharm/*/bin/pycharm.sh)\"
 pycharmPath=$(dirname $(readlink -e ~/PyCharm/*/bin/pycharm.sh))
