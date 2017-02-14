@@ -368,9 +368,8 @@ sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q ultra-flat-icons &> /dev/null
 
 echo "[Configuring general aspect]"
-#Changes displays scale factor
-scales=$(dconf read /com/ubuntu/user-interface/scale-factor)
-export scales
+#TODO: Changes displays scale factor
+export scales=$(dconf read /com/ubuntu/user-interface/scale-factor)
 newscales=$(python <<EOF
 import ast
 import os
