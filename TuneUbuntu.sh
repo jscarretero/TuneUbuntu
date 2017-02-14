@@ -220,13 +220,10 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
   sed -i '/selection" value/c\    \<color name="selection" value="#000000"/\>' $HOME/.local/share/gedit/styles/dracula.xml
   gsettings set org.gnome.gedit.preferences.editor scheme 'dracula'
 
-
-echo "[Installing GitKraken (GIT client)]" #gitkraken? gitk?
+echo "[Installing GitKraken (GIT client)]"
 wget -q https://release.gitkraken.com/linux/gitkraken-amd64.deb
 sudo dpkg -i gitkraken-amd64.deb &> /dev/null
 \rm gitkraken-amd64.deb
-#TODO: another
-
 
 echo "[Installing Gnome-Terminal and configuring it]"
 sudo apt-get install -y -q gnome-terminal &> /dev/null
