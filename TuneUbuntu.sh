@@ -19,7 +19,7 @@ sudo apt -y -q upgrade &> /dev/null
 sudo apt-get -y -q dist-upgrade &> /dev/null
 
 echo
-echo "[Installing configuration and basic tools (dconf, gconf-editor, unity-tweak-tool, git, synaptic, gparted, compression utilities, zsh)]"
+echo "[Installing basic tools (dconf, gconf-editor, unity-tweak-tool, git, synaptic, gparted, compression utilities, zsh)]"
 sudo apt-get install -y -q zsh &> /dev/null
 chsh -s $(which zsh)
 sudo apt-get install -y -q dconf-cli &> /dev/null
