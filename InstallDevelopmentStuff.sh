@@ -96,6 +96,7 @@ then
     sortlist="$sortlist,$newsorted"]
     gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers $launchers
     gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList $sortlist
+    nohup docky &> /dev/null &
 fi
 
 
