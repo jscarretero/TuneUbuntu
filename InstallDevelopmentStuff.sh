@@ -85,7 +85,7 @@ grep -q "PyCharm" ~/.environment || echo "export PATH=\$PATH:$pycharmPath" >> ~/
 # Add pycharm.desktop to docky bar (if docky exists)
 if which docky &> /dev/null ;
 then
-    echo "MODIFYING DOCKY REGISTRY"
+    killall docky &> /dev/null
     launchers=$(gconftool-2 --get /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers)
     sortlist=$(gconftool-2 --get /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList)
     launchers=${launchers::-1}

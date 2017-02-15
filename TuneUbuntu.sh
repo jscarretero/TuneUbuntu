@@ -405,7 +405,7 @@ sudo timedatectl set-timezone Europe/Madrid
 #echo "[Changing keyboard layout to 'es']"   # and winkeys?
 #sudo setxkbmap -layout es  #TODO: Does not work
 
-sgsettings set org.gnome.desktop.peripherals.keyboard delay 140
+gsettings set org.gnome.desktop.peripherals.keyboard delay 140
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
