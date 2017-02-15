@@ -5,6 +5,8 @@
 # Before running this sript on a fresh Ubuntu installation, I recommend you to try it on a virtual machine
 # where you may have installed that Ubuntu image.
 
+set -e
+
 if ! [ "$XDG_CURRENT_DESKTOP" == "Unity" ] ; then
     echo "This script works for Linux Ubuntu with Unity. You will need to tweak this file to work for other "
     echo "Linux distributions or windows managers. Exiting."
@@ -42,7 +44,7 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q google-chrome-stable &> /dev/null
-sudo rm /etc/apt/sources.list.d/google.list
+sudo rm -rf /etc/apt/sources.list.d/google.list
 
 echo "[Installing Spotify]"
 # Commands from https://www.spotify.com/es/download/linux/
@@ -130,7 +132,7 @@ sudo apt-get install -y -q pdftk &> /dev/null
 
 echo "[Installing PDFChain (Pdftk GUI)]"
 sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
-sudo apt-get update -y -q &> /dev/null
+sudo apt-get update -y -q &> /dev/null  || true
 sudo apt-get install -y -q pdfchain &> /dev/null
 sudo add-apt-repository -y  -r ppa:pdfchain-team/ppa &> /dev/null # Removes repo, seems to break things !
 
@@ -179,7 +181,7 @@ echo "[Installing Remarkable (Markdown editor)]"
 wget --quiet https://remarkableapp.github.io/files/remarkable_1.87_all.deb  #FIXME with latest file name
 sudo apt-get install -y -q gdebi &> /dev/null
 sudo gdebi -q -n remarkable_1.87_all.deb &> /dev/null                        #FIXME with latest file name
-\rm remarkable_1.87_all.deb
+\rm -rf remarkable_1.87_all.deb
 
 echo "[Installing Nano and configuring it]"
 sudo apt-get install -y -q nano &> /dev/null
@@ -197,7 +199,7 @@ sudo apt-get install -y -q nano &> /dev/null
 
 echo "[Installing Gedit and configuring it]"
 # http://askubuntu.com/questions/571877/how-to-change-gedit-preferences-from-terminal
-killall gedit &> /dev/null
+killall gedit &> /dev/null || true
 sudo apt-get install -y -q gedit &> /dev/null
 gsettings set org.gnome.gedit.preferences.editor wrap-mode 'none'
 gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
@@ -242,7 +244,7 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 echo "[Installing GitKraken (GIT client)]"
 wget -q https://release.gitkraken.com/linux/gitkraken-amd64.deb
 sudo dpkg -i gitkraken-amd64.deb &> /dev/null
-\rm gitkraken-amd64.deb
+\rm -rf gitkraken-amd64.deb
 
 echo "[Installing Gnome-Terminal and configuring it]"
 sudo apt-get install -y -q gnome-terminal &> /dev/null
@@ -298,7 +300,7 @@ if [ -f "~/.zshrc" ] ; then
     cp ~/.zshrc $HOME/.antigen/.zshrc_bck
 fi
 
-rm -f ~/.zshrc
+rm -rf ~/.zshrc
 
 # Create alias soft links
 ln -s ~/TuneUbuntu/dotfiles/zsh/.zshrc ~/.zshrc  &> /dev/null
@@ -441,8 +443,8 @@ sudo apt-get --no-install-recommends install ubuntu-restricted-extras &> /dev/nu
 # I have removed the Microsoft Fonts! The package list have been obtained through synaptic
 sudo apt-get install -y -q libavcodec-extra libavcodec-ffmpeg-extra56  &> /dev/null
 
-echo "1"
-sudo apt-get install -y -q libdvdcss2 &> /dev/null
+#echo "1"
+#sudo apt-get install -y -q libdvdcss2 &> /dev/null
 echo "2"
 sudo apt-get install -y -q libdvdnav4 &> /dev/null
 echo "3"

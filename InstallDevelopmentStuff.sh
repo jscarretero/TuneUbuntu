@@ -5,6 +5,8 @@
 # Before running this sript on a fresh Ubuntu installation, I recommend you to try it on a virtual machine
 # where you may have installed that Ubuntu image.
 
+set -e 
+
 echo "[Updating list of available packages]"
 sudo apt update -y -q &> /dev/null
 
@@ -85,7 +87,7 @@ grep -q "PyCharm" ~/.environment || echo "export PATH=\$PATH:$pycharmPath" >> ~/
 # Add pycharm.desktop to docky bar (if docky exists)
 if which docky &> /dev/null ;
 then
-    killall docky &> /dev/null
+    killall docky &> /dev/null || true
     launchers=$(gconftool-2 --get /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers)
     sortlist=$(gconftool-2 --get /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList)
     launchers=${launchers::-1}
