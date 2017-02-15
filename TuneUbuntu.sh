@@ -444,9 +444,9 @@ sudo apt-get --no-install-recommends install ubuntu-restricted-extras &> /dev/nu
 sudo apt-get install -y -q libavcodec-extra libavcodec-ffmpeg-extra56  &> /dev/null
 
 #sudo apt-get install -y -q libdvdcss2 &> /dev/null
-sudo apt-get install -y -q libdvdnav4 &> /dev/null
-sudo apt-get install -y -q libdvdread4  &> /dev/null
-sudo apt-get install -y -q libdvd-pkg &> /dev/null
+#sudo apt-get install -y -q libdvdnav4 &> /dev/null
+#sudo apt-get install -y -q libdvdread4  &> /dev/null
+#sudo apt-get install -y -q libdvd-pkg &> /dev/null
 #sudo dpkg-reconfigure libdvd-pkg &> /dev/null
 
 # Install the latest proprietary Linux graphics drivers available for your hardware
