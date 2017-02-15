@@ -10,8 +10,8 @@ sudo apt update -y -q &> /dev/null
 
 echo
 echo "[Upgrading system packages. This will take a while...]"
-sudo apt -y -q upgrade &> /dev/null
-sudo apt-get -y -q dist-upgrade &> /dev/null
+#sudo apt -y -q upgrade &> /dev/null
+#sudo apt-get -y -q dist-upgrade &> /dev/null
 
 echo
 echo "[Installing Git]"
@@ -85,7 +85,7 @@ grep -q "PyCharm" ~/.environment || echo "export PATH=\$PATH:$pycharmPath" >> ~/
 # Add pycharm.desktop to docky bar (if docky exists)
 if which docky &> /dev/null ;
 then
-    echo "MODIFYING DOCKY REGISTRY""
+    echo "MODIFYING DOCKY REGISTRY"
     launchers=$(gconftool-2 --get /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers)
     sortlist=$(gconftool-2 --get /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList)
     launchers=${launchers::-1}

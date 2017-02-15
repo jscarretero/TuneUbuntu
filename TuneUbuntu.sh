@@ -15,8 +15,8 @@ echo "[Updating list of available packages]"
 sudo apt update -y -q &> /dev/null
 
 echo "[Upgrading system packages. This will take a while...]"
-sudo apt -y -q upgrade &> /dev/null
-sudo apt-get -y -q dist-upgrade &> /dev/null
+#sudo apt -y -q upgrade &> /dev/null
+#sudo apt-get -y -q dist-upgrade &> /dev/null
 
 echo
 echo "[Installing basic tools (dconf, gconf-editor, unity-tweak-tool, git, synaptic, gparted, compression utilities, zsh)]"
