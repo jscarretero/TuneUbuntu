@@ -59,9 +59,13 @@ sudo add-apt-repository -y ppa:fossfreedom/rhythmbox-plugins &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q rhythmbox-plugin-complete &> /dev/null
 #TODO: enable plugins through settings, make them work (album cover art navigation specially)
-#TODO: install music player that allows navigating through artists, playlists, shows albums covers,
-#      allows getting cover arts in bulk, can synchronize with external devices and that (secondary):
-#      can integrate with spotify, get lyrics, information. And stores covers in the audio files
+
+echo "[Installing Tomahawk (Rhythmbox alternative)]"
+sudo apt-get install -y -q tomahawk &> /dev/null
+
+#TODO: Install music player that allows navigating through artists / albums covers.
+#      Allows getting cover arts in bulk, and stores them into audio files. Also that can synchronize
+#      with external devices and that can integrate with spotify, get lyrics, information.
 
 echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
 sudo apt-get install -y -q vlc &> /dev/null
