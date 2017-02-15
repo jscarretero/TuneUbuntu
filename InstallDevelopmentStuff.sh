@@ -106,16 +106,16 @@ echo "[Installing Python Virtualenv]"
 pip install --user -q virtualenv &> /dev/null
 
 # Packages to be available under no virtualenv
-echo "[Installing Python Pandas & Numpy]" #Also installs numpy, python-dateutil, six, pytz, requests
-pip install --user -q pandas &> /dev/null
-echo "[Installing Plotly]"
-pip install --user -q plotly &> /dev/null
-echo "[Installing Matplotlib]"
-pip install --user -q matplotlib &> /dev/null #Also installs numpy, python-dateutil, six, pytz, cycler, pyparsing
-echo "[Installing Colorlover package (for plots)]"
-pip install --userr -q colorlover &> /dev/null
-echo "[Installing MongoDB library for Python (pymongo)]"
-pip install --user -q pymongo &> /dev/null
+#echo "[Installing Python Pandas & Numpy]" #Also installs numpy, python-dateutil, six, pytz, requests
+#pip install --user -q pandas &> /dev/null
+#echo "[Installing Plotly]"
+#pip install --user -q plotly &> /dev/null
+#echo "[Installing Matplotlib]"
+#pip install --user -q matplotlib &> /dev/null #Also installs numpy, python-dateutil, six, pytz, cycler, pyparsing
+#echo "[Installing Colorlover package (for plots)]"
+#pip install --userr -q colorlover &> /dev/null
+#echo "[Installing MongoDB library for Python (pymongo)]"
+#pip install --user -q pymongo &> /dev/null
 # TODO?: pythonqt lib and dependences
 
 # If we want some Python packages available under a virtualenv, these are the steps:
@@ -133,13 +133,17 @@ sudo apt-get install -y -q gcc g++ gfortran fort77 &> /dev/null
 echo "[Installing Clang]"
 sudo apt-get install -y -q clang &> /dev/null
 
-echo "[Installing OpenMPI bin-common and libdev]"
-sudo apt-get install -y -q openmpi-bin openmpi-common libopenmpi-dev &> /dev/null
+#echo "[Installing OpenMPI bin-common and libdev]"
+#sudo apt-get install -y -q openmpi-bin openmpi-common libopenmpi-dev &> /dev/null
 
-# TODO: Java
-#sudo apt-get install default-jdk
+echo "[Installing Java Open JDK 8]"
+sudo apt-get install -y -k default-jdk &> /dev/null #Open JDK 8
+#sudo add-apt-repository -y ppa:webupd8team/java &> /dev/null
+#sudo apt update -y -q &> /dev/null
+#sudo apt-get install -y -q oracle-java9-installer # &> /dev/null
+#https://www.digitalocean.com/community/tutorials/como-instalar-java-con-apt-get-en-ubuntu-16-04-es
+# sudo update-alternatives --config java # To choose java version to use
 
-# Dstat
 echo "[Installing Dstat (system-level performance monitor)]"
 sudo apt-get install -y -q dstat &> /dev/null
 #    echo "[Installing Dstat (system-level performance monitor)]"

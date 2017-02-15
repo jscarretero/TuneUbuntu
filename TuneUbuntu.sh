@@ -80,8 +80,8 @@ echo "[Installing Geary (e-mail client, alternative to Thunderbird)]"
 sudo apt-get install -y -q geary &> /dev/null
 #TODO? Drop geary and use evolution instead?
 
-echo "[Installing Evolution (e-mail client, alternative to Thunderbird) ]"
-sudo apt-get install -y -q evolution &> /dev/null
+#echo "[Installing Evolution (e-mail client, alternative to Thunderbird) ]"
+#sudo apt-get install -y -q evolution &> /dev/null
 
 echo "[Installing Darktable photo editor]"
 sudo add-apt-repository -y ppa:pmjdebruijn/darktable-release &> /dev/null
@@ -367,7 +367,7 @@ sudo add-apt-repository -y ppa:noobslab/icons &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q ultra-flat-icons &> /dev/null
 
-echo "[Configuring general aspect]"
+echo "[Configuring viusal aspect]"
 #TODO: Changes displays scale factor (code below does not work)
 #export scales=$(dconf read /com/ubuntu/user-interface/scale-factor)
 #newscales=$(python <<EOF
@@ -395,18 +395,16 @@ gsettings set com.canonical.Unity integrated-menus false
 #gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ minimize-effects [\'animation:"Magic Lamp"\'] #"Zoom" is the original
 sudo sh -c "echo 'LC_TIME=\"en_GB.UTF-8\"' >> /etc/default/locale"
 
-echo "[Changing wallpaper]"
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/TCP118v1_by_Tiziano_Consonni.jpg'
 
-echo "[Changing timezone to Europe/Madrid]"
+echo "[Other configurations]"
 sudo timedatectl set-timezone Europe/Madrid
 # sudo dpkg-reconfigure tzdata   # This will bring up a new window where the user can select it
 
 #echo "[Changing keyboard layout to 'es']"   # and winkeys?
 #sudo setxkbmap -layout es  #TODO: Does not work
 
-echo "[Configuring keyboard delays - rates]"
-gsettings set org.gnome.desktop.peripherals.keyboard delay 140
+sgsettings set org.gnome.desktop.peripherals.keyboard delay 140
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
