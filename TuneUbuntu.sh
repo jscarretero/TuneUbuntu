@@ -15,7 +15,7 @@ echo "[Updating list of available packages]"
 sudo apt-get install -y -q zsh &> /dev/null
 sudo apt update -y -q &> /dev/null
 
-echo "[Upgrading system packages. This will take a while...]"
+#echo "[Upgrading system packages. This will take a while...]"
 #sudo apt -y -q upgrade &> /dev/null
 #sudo apt-get -y -q dist-upgrade &> /dev/null
 
@@ -441,15 +441,15 @@ sudo apt-get --no-install-recommends install ubuntu-restricted-extras &> /dev/nu
 # I have removed the Microsoft Fonts! The package list have been obtained through synaptic
 sudo apt-get install -y -q libavcodec-extra libavcodec-ffmpeg-extra56  &> /dev/null
 
-echo "1" > salida
+echo "1"
 sudo apt-get install -y -q libdvdcss2 &> /dev/null
-echo "2" >> salida
+echo "2"
 sudo apt-get install -y -q libdvdnav4 &> /dev/null
-echo "3" >> salida
+echo "3"
 sudo apt-get install -y -q libdvdread4  &> /dev/null
-echo "4" >> salida
+echo "4"
 sudo apt-get install -y -q libdvd-pkg &> /dev/null
-echo "5" >> salida
+echo "5"
 sudo dpkg-reconfigure libdvd-pkg &> /dev/null
 
 # Install the latest proprietary Linux graphics drivers available for your hardware
