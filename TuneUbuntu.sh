@@ -56,7 +56,10 @@ sudo apt-get install -y -q rhythmbox &> /dev/null
 sudo add-apt-repository -y ppa:fossfreedom/rhythmbox-plugins &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q rhythmbox-plugin-complete &> /dev/null
-#TODO: enable plugins through settings, make them work
+#TODO: enable plugins through settings, make them work (album cover art navigation specially)
+#TODO: install music player that allows navigating through artists, playlists, shows albums covers,
+#      allows getting cover arts in bulk, can synchronize with external devices and that (secondary):
+#      can integrate with spotify, get lyrics, information. And stores covers in the audio files
 
 echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
 sudo apt-get install -y -q vlc &> /dev/null
@@ -74,15 +77,28 @@ sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q qbittorrent &> /dev/null
 
-#echo "[Installing Thunderbird (e-mail client)]"
-#sudo apt-get install -y -q thunderbird &> /dev/null
+echo "[Installing Thunderbird (e-mail client)]"
+sudo apt-get install -y -q thunderbird &> /dev/null
 
 echo "[Installing Geary (e-mail client, alternative to Thunderbird)]"
 sudo apt-get install -y -q geary &> /dev/null
-#TODO? Drop geary and use evolution instead?
 
 #echo "[Installing Evolution (e-mail client, alternative to Thunderbird) ]"
 #sudo apt-get install -y -q evolution &> /dev/null
+
+#echo "[Installing Skype]" #TODO: too old!, dont use it
+#sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+#sudo dpkg --add-architecture i386
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q skype &> /dev/null
+
+#echo "[Installing Shutter (advanced screenshot capture)]"
+#sudo apt-get install -y -q shutter &> /dev/null
+
+#echo "[Installing SimpleScreenRecorder (screen recorder)]"
+#sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder &> /dev/null
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q simplescreenrecorder &> /dev/null
 
 echo "[Installing Darktable photo editor]"
 sudo add-apt-repository -y ppa:pmjdebruijn/darktable-release &> /dev/null
@@ -90,7 +106,6 @@ sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q darktable &> /dev/null
 
 #TODO: Install shotwell
-#TODO: Install LibreOffice + theme plugins + enable one of them
 
 echo "[Installing Pinta (better Paint)]"
 sudo apt-get install -y -q pinta &> /dev/null
@@ -100,6 +115,9 @@ sudo apt-get install -y -q pinta &> /dev/null
 
 #echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
 #sudo apt-get install -y -q inkscape &> /dev/null
+
+#echo "[Installing LibreOffice (FOSS alternative to MS Office)]"
+#sudo apt-get install -y -q libreoffice &> /dev/null
 
 echo "[Installing Evince (PDF viewer and annotator)]"
 sudo apt-get install -y -q evince &> /dev/null
@@ -292,9 +310,6 @@ done
 popd &> /dev/null
 
 
-#TODO: install music player that allows navigating through artists, playlists, shows albums covers,
-#      allows getting cover arts in bulk, can synchronize with external devices and that (secondary):
-#      can integrate with spotify, get lyrics, information
 #TODO: another image manipulation program (effects) and image navigator
 
 echo "[Installing Docky dock bar]"
@@ -409,16 +424,7 @@ gsettings set org.gnome.desktop.peripherals.keyboard delay 140
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
-#echo "[Installing Skype]"
-#sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
-#sudo dpkg --add-architecture i386
-#sudo apt-get update -y -q &> /dev/null
-#sudo apt-get install -y -q skype &> /dev/null
-
-#echo "[Installing Shutter (advanced screenshot capture)]"
-#sudo apt-get install -y -q shutter &> /dev/null
-
-# TODO?: screencast recorders (normal and for GIFs)
+# TODO?: screencast recorders (for GIFs)
 # TODO?: photo editors
 # TODO?: audio editors
 # TODO?: video editors
@@ -428,6 +434,29 @@ gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 # TODO?: Peazip GUI
 # TODO?: Pomodoro - Tomate
 # TODO?: Password manager like KeepPass, but that synchronizes to cloud
+
+echo "[Installing Restricted extras and addons]"
+sudo apt-get install -y -q ubuntu-restricted-addons &> /dev/null
+sudo apt-get --no-install-recommends install ubuntu-restricted-extras &> /dev/null
+# I have removed the Microsoft Fonts! The package list have been obtained through synaptic
+sudo apt-get install -y -q libavcodec-extra libavcodec-ffmpeg-extra56  &> /dev/null
+
+echo "1" > salida
+sudo apt-get install -y -q libdvdcss2 &> /dev/null
+echo "2" >> salida
+sudo apt-get install -y -q libdvdnav4 &> /dev/null
+echo "3" >> salida
+sudo apt-get install -y -q libdvdread4  &> /dev/null
+echo "4" >> salida
+sudo apt-get install -y -q libdvd-pkg &> /dev/null
+echo "5" >> salida
+sudo dpkg-reconfigure libdvd-pkg &> /dev/null
+
+# Install the latest proprietary Linux graphics drivers available for your hardware
+#       http://www.webupd8.org/2016/06/how-to-install-latest-nvidia-drivers-in.html
+#       https://ubuntu-mate.community/t/how-to-install-graphics-card-drivers-in-ubuntu/3228
+echo "[You may want to install specific GPU drivers. Opening a windows (close it to skip this step)]"
+nohup software-properties-gtk --open-tab=4 &> /dev/null &
 
 sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
@@ -439,16 +468,6 @@ echo "[ Or by clicking on the 'Ubuntu Software' icon (dock bar at the bottom) ]"
 # TODO: Change default apps for web browser, mail client, music player, video player and photo viewer (don't know how to do that through CLI)
 # TODO: Windowskey + M to minimize all windows (possible?)
 # TODO: Windowskey + Enter to show windows thumbnails
-# TODO: Install the latest proprietary Linux graphics drivers available for your hardware
-# TODO: Install special restricted extras?
 
-
-#echo "[Installing Restricted extras and addons (including codecs)]"
-#TODO: check what they are installing
-#sudo apt-get install -y -q ubuntu-restricted-extras                  #interactive!!
-#sudo apt-get install -y -q ubuntu-restricted-addons &> /dev/null
-#sudo apt-get install -y -q libdvdcss2 libdvdnav4 libdvdread4  &> /dev/null
-#sudo apt-get install -y -q libdvd-pkg &> /dev/null
-#sudo dpkg-reconfigure libdvd-pkg &> /dev/null
 
 notify-send "DONE!    :)"
