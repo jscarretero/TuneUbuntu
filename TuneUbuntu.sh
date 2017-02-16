@@ -453,10 +453,10 @@ gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 # TODO?: Password manager like KeepPass, but that synchronizes to cloud
 
 echo "[Installing Restricted extras and addons]"
-sudo apt-get install -y -q ubuntu-restricted-addons &> /dev/null
-sudo apt-get --no-install-recommends install ubuntu-restricted-extras &> /dev/null
+sudo apt-get install -y -q ubuntu-restricted-addons &> /dev/null  || true
+sudo apt-get --no-install-recommends install ubuntu-restricted-extras &> /dev/null  || true
 # I have removed the Microsoft Fonts! The package list have been obtained through synaptic
-sudo apt-get install -y -q libavcodec-extra libavcodec-ffmpeg-extra56  &> /dev/null
+sudo apt-get install -y -q libavcodec-extra libavcodec-ffmpeg-extra56  &> /dev/null || true
 
 ####sudo apt-get install -y -q libdvdcss2 &> /dev/null
 #sudo apt-get install -y -q libdvdnav4 &> /dev/null
