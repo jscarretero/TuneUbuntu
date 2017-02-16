@@ -60,8 +60,14 @@ sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q rhythmbox-plugin-complete &> /dev/null
 #TODO: enable plugins through settings, make them work (album cover art navigation specially)
 
-echo "[Installing Tomahawk (Rhythmbox alternative)]"
+echo "[Installing Tomahawk (music player)]"
 sudo apt-get install -y -q tomahawk &> /dev/null
+
+echo "[Installing Lollypop (music player]"
+sudo add-apt-repository -y ppa:gnumdk/lollypop &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q lollypop &> /dev/null
+
 
 #TODO: Install music player that allows navigating through artists / albums covers.
 #      Allows getting cover arts in bulk, and stores them into audio files. Also that can synchronize
