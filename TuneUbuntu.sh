@@ -429,7 +429,10 @@ gsettings set com.canonical.Unity integrated-menus false
 #gsettings set org.compiz.animation:/org/compiz/profiles/unity/plugins/animation/ minimize-effects [\'animation:"Magic Lamp"\'] #"Zoom" is the original
 sudo sh -c "echo 'LC_TIME=\"en_GB.UTF-8\"' >> /etc/default/locale"
 
-gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/TCP118v1_by_Tiziano_Consonni.jpg'
+wget --quiet http://wallpaper-gallery.net/images/desktop-wallpaper-mountains/desktop-wallpaper-mountains-17.jpg --output-document ~/Pictures/mountains.jpg
+imageFile=$(readlink -e ~/Pictures/mountains.jpg)
+imageFile="'file://$imageFile'"
+gsettings set org.gnome.desktop.background picture-uri $imageFile
 
 echo "[Other configurations]"
 sudo timedatectl set-timezone Europe/Madrid
