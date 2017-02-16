@@ -106,12 +106,21 @@ sudo apt-get install -y -q geary &> /dev/null
 #sudo apt-get update -y -q &> /dev/null
 #sudo apt-get install -y -q simplescreenrecorder &> /dev/null
 
-echo "[Installing Darktable photo editor]"
+echo "[Installing Darktable photo manager and editor]"
 sudo add-apt-repository -y ppa:pmjdebruijn/darktable-release &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q darktable &> /dev/null
 
-#TODO: Install shotwell
+#echo "[Installing Digikam photo editor]"
+#sudo apt-get install -y -q digikam &> /dev/null
+
+#echo "[Installing Shotwell photo editor]"
+#sudo apt-get install -y -q shotwell &> /dev/null
+
+#echo "[Installing RawTherapee photo editor]"
+#sudo add-apt-repository -y ppa:dhor/myway  &> /dev/null
+#sudo apt-get update -y -q  &> /dev/null
+#sudo apt-get install -y -q rawtherapee  &> /dev/null
 
 echo "[Installing Pinta (better Paint)]"
 sudo apt-get install -y -q pinta &> /dev/null
@@ -315,9 +324,6 @@ do
 done
 popd &> /dev/null
 
-
-#TODO: another image manipulation program (effects) and image navigator
-
 echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
 # Auto-Start
@@ -431,7 +437,6 @@ gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 
 # TODO?: screencast recorders (for GIFs)
-# TODO?: photo editors
 # TODO?: audio editors
 # TODO?: video editors
 # TODO?: STEAM
