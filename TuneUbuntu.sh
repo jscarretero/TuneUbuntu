@@ -76,7 +76,7 @@ sudo apt-get install -y -q lollypop &> /dev/null
 echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
 sudo apt-get install -y -q vlc &> /dev/null
 
-echo "[Installing Kodi Media Center <3]"
+echo "[Installing Kodi Media Center]"
 sudo apt-get install -y -q kodi &> /dev/null
 #TODO: find prepackaged configuration files
 
