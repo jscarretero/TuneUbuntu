@@ -151,8 +151,7 @@ sudo apt-get install -y -q pdftk &> /dev/null
 
 echo "[Installing PDFChain (Pdftk GUI)]"
 sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
-sudo apt-get update -y -q &> /dev/null  || true
-sudo apt-get install -y -q pdfchain &> /dev/null
+c
 sudo add-apt-repository -y  -r ppa:pdfchain-team/ppa &> /dev/null # Removes repo, seems to break things !
 
 #echo "[Installing Mcomix (comic viewer)]"
@@ -195,6 +194,13 @@ cat <<EOF > $HOME/.atom/config.cson
 EOF
 # TODO: install + configure packages (linters, debuggers, autocompletion, tools ) [python, bash, C, C++...]
 #       And add those files to the repo!
+
+echo "[Installing Sublime 3 Text Editor]"
+sudo add-apt-repository -y ppa:webupd8team/sublime-text-3 &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q sublime-text-installer &> /dev/null
+echo "export PATH=\$PATH:/opt/sublime" >> ~/.environment
+# Licenses: https://gist.github.com/rudzainy/0d5965e9b5862fe57c2d9ba5b69d24a6
 
 echo "[Installing Remarkable (Markdown editor)]"
 wget --quiet https://remarkableapp.github.io/files/remarkable_1.87_all.deb  #FIXME with latest file name
