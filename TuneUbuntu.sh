@@ -201,6 +201,8 @@ sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q sublime-text-installer &> /dev/null
 echo "export PATH=\$PATH:/opt/sublime" >> ~/.environment
 # Licenses: https://gist.github.com/rudzainy/0d5965e9b5862fe57c2d9ba5b69d24a6
+# TODO: install + configure packages (linters, debuggers, autocompletion, tools ) [python, bash, C, C++...]
+#       And add those files to the repo!
 
 echo "[Installing Remarkable (Markdown editor)]"
 wget --quiet https://remarkableapp.github.io/files/remarkable_1.87_all.deb  #FIXME with latest file name
