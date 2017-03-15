@@ -104,3 +104,4 @@ alias lockscreen='gnome-screensaver-command -l'
 
 alias notify='notify-send'
 alias alert='notify-send'
+alias colorize='pygmentize'
