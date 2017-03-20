@@ -1,5 +1,5 @@
-#README
-
+About this repo
+---------------
 
 This repository contains scripts and dotfiles to configure Ubuntu 16.04 Unity  to my personal preferences.  No other Ubuntu flavors or versions have been tested.
 
