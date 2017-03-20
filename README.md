@@ -5,7 +5,7 @@ This repository contains scripts and dotfiles to configure Ubuntu 16.04 Unity  t
 
 The scripts also install apps and tools that I consider essential.
 
-##How to run
+## How to run
 Once you have installed Ubuntu 16.04 Unity, clone this repository. 
 Then, execute the following commands:
 ```
