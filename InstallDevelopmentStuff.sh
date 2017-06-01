@@ -141,6 +141,7 @@ sudo apt-get install -y -q clang &> /dev/null
 #sudo apt-get install -y -q openmpi-bin openmpi-common libopenmpi-dev &> /dev/null
 
 echo "[Installing Java Open JDK 8]"
+#https://ubunlog.com/instalar-configurar-java-ubuntu-17-04/
 sudo apt-get install -y -q default-jdk &> /dev/null #Open JDK 8
 #sudo add-apt-repository -y ppa:webupd8team/java &> /dev/null
 #sudo apt update -y -q &> /dev/null
