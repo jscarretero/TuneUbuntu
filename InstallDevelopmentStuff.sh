@@ -61,7 +61,7 @@ sudo apt-get install -y -q python &> /dev/null
 
 echo "[Installing Python Pycharm IDE]"
 mkdir -p ~/PyCharm
-wget --quiet pycharm-community-2017.1.3.tar.gz #FIXME: use latest version
+wget --quiet https://download.jetbrains.com/python/pycharm-community-2017.1.3.tar.gz #FIXME: use latest version
 tar -xzf pycharm-community-2017.1.3.tar.gz -C ~/PyCharm
 \rm pycharm-community-2017.1.3.tar.gz
 
