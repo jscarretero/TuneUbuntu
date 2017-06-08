@@ -107,21 +107,21 @@ sudo apt-get install -y -q geary &> /dev/null
 #echo "[Installing Shutter (advanced screenshot capture)]"
 #sudo apt-get install -y -q shutter &> /dev/null
 
-#echo "[Installing SimpleScreenRecorder (screen recorder)]"
-#sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder &> /dev/null
-#sudo apt-get update -y -q &> /dev/null
-#sudo apt-get install -y -q simplescreenrecorder &> /dev/null
-
-echo "[Installing Darktable photo manager and editor]"
-sudo add-apt-repository -y ppa:pmjdebruijn/darktable-release &> /dev/null
+echo "[Installing SimpleScreenRecorder (screen recorder)]"
+sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder &> /dev/null
 sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q darktable &> /dev/null
+sudo apt-get install -y -q simplescreenrecorder &> /dev/null
 
-#echo "[Installing Digikam photo editor]"
-#sudo apt-get install -y -q digikam &> /dev/null
+#echo "[Installing Darktable photo manager and editor]"
+#sudo add-apt-repository -y ppa:pmjdebruijn/darktable-release &> /dev/null
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q darktable &> /dev/null
 
-#echo "[Installing Shotwell photo editor]"
-#sudo apt-get install -y -q shotwell &> /dev/null
+echo "[Installing Digikam photo editor]"
+sudo apt-get install -y -q digikam &> /dev/null
+
+echo "[Installing Shotwell photo editor]"
+sudo apt-get install -y -q shotwell &> /dev/null
 
 #echo "[Installing RawTherapee photo editor]"
 #sudo add-apt-repository -y ppa:dhor/myway  &> /dev/null
@@ -131,11 +131,11 @@ sudo apt-get install -y -q darktable &> /dev/null
 echo "[Installing Pinta (better Paint)]"
 sudo apt-get install -y -q pinta &> /dev/null
 
-#echo "[Installing GIMP (Photoshop alternative)]"
-#sudo apt-get install -y -q gimp &> /dev/null
+echo "[Installing GIMP (Photoshop alternative)]"
+sudo apt-get install -y -q gimp &> /dev/null
 
-#echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
-#sudo apt-get install -y -q inkscape &> /dev/null
+echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
+sudo apt-get install -y -q inkscape &> /dev/null
 
 #echo "[Installing LibreOffice (FOSS alternative to MS Office)]"
 #sudo apt-get install -y -q libreoffice &> /dev/null
@@ -151,7 +151,8 @@ sudo apt-get install -y -q pdftk &> /dev/null
 
 echo "[Installing PDFChain (Pdftk GUI)]"
 sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
-c
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q pdfchain &> /dev/null
 sudo add-apt-repository -y  -r ppa:pdfchain-team/ppa &> /dev/null # Removes repo, seems to break things !
 
 #echo "[Installing Mcomix (comic viewer)]"
