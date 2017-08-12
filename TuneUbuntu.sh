@@ -205,6 +205,11 @@ echo "export PATH=\$PATH:/opt/sublime" >> ~/.environment
 # TODO: install + configure packages (linters, debuggers, autocompletion, tools ) [python, bash, C, C++...]
 #       And add those files to the repo!
 
+#echo "[Installing Visual Studio Code]" #TODO
+# https://code.visualstudio.com/docs/editor/command-line
+# https://gist.github.com/brunolm/65a760f6130fd2e1d39c
+# https://askubuntu.com/a/616080
+
 echo "[Installing Remarkable (Markdown editor)]"
 wget --quiet https://remarkableapp.github.io/files/remarkable_1.87_all.deb  #FIXME with latest file name
 sudo apt-get install -y -q gdebi &> /dev/null
@@ -225,7 +230,7 @@ sudo apt-get install -y -q nano &> /dev/null
  echo "unset nonewlines" >> ~/.nanorc
  echo "set tabstospaces" >> ~/.nanorc
 
-echo "[Installing Gedit and configuring it]"
+echo "[Installing Gedit and configuring it]" # WARNING: gedit has no dev support anymore, hasn't it?
 # http://askubuntu.com/questions/571877/how-to-change-gedit-preferences-from-terminal
 killall gedit &> /dev/null || true
 sudo apt-get install -y -q gedit &> /dev/null
@@ -286,7 +291,7 @@ dconf write /org/gnome/terminal/legacy/profiles:/:$profId/font "'Monospace Regul
 # Ctrl+PageDown for Next Tab
 # Ctrl+PageUp for Previous Tab
 
-# Install Dracula theme
+# Install Dracula theme for Gnome-terminal
 git clone https://github.com/GalaticStryder/gnome-terminal-colors-dracula &> /dev/null
 sleep 1
 cd gnome-terminal-colors-dracula

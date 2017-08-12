@@ -59,6 +59,10 @@ echo "[Installing Python 2.7.*]"
 sudo apt-get install -y -q python &> /dev/null
 #sudo apt-get install -y -q python-dev &> /dev/null
 
+echo "[Installing Python 3.5.*]"
+sudo apt-get install -y -q python3.5 &> /dev/null
+#sudo apt-get install -y -q python3.5-dev &> /dev/null
+
 echo "[Installing Python Pycharm IDE]"
 mkdir -p ~/PyCharm
 wget --quiet https://download.jetbrains.com/python/pycharm-community-2017.1.3.tar.gz #FIXME: use latest version
