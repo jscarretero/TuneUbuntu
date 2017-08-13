@@ -22,7 +22,8 @@
       #antigen bundle zsh-users/zsh-completions
 
       # Load the theme.
-      antigen theme agnoster
+      #antigen theme agnoster
+      antigen theme eastwood
 
       # Tell antigen that you're done.
       antigen apply
