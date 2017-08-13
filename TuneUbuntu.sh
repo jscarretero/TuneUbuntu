@@ -53,31 +53,31 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q spotify-client &> /dev/null
 
-echo "[Installing Rhythmbox and plugins (music player)]"
-sudo apt-get install -y -q rhythmbox &> /dev/null
-sudo add-apt-repository -y ppa:fossfreedom/rhythmbox-plugins &> /dev/null
-sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q rhythmbox-plugin-complete &> /dev/null
+#echo "[Installing Rhythmbox and plugins (music player)]"
+#sudo apt-get install -y -q rhythmbox &> /dev/null
+#sudo add-apt-repository -y ppa:fossfreedom/rhythmbox-plugins &> /dev/null
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q rhythmbox-plugin-complete &> /dev/null
 #TODO: enable plugins through settings, make them work (album cover art navigation specially)
 
-echo "[Installing Tomahawk (music player)]"
-sudo apt-get install -y -q tomahawk &> /dev/null
+#echo "[Installing Tomahawk (music player)]"
+#sudo apt-get install -y -q tomahawk &> /dev/null
 
-echo "[Installing Lollypop (music player]"
-sudo add-apt-repository -y ppa:gnumdk/lollypop &> /dev/null
-sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q lollypop &> /dev/null
+#echo "[Installing Lollypop (music player]"
+#sudo add-apt-repository -y ppa:gnumdk/lollypop &> /dev/null
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q lollypop &> /dev/null
 
 
 #TODO: Install music player that allows navigating through artists / albums covers.
 #      Allows getting cover arts in bulk, and stores them into audio files. Also that can synchronize
 #      with external devices and that can integrate with spotify, get lyrics, information.
 
-echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
-sudo apt-get install -y -q vlc &> /dev/null
+#echo "[Installing VLC Media Player]"  #Alternative to Ubuntu GNOME's "Totem" app
+#sudo apt-get install -y -q vlc &> /dev/null
 
-echo "[Installing Kodi Media Center]"
-sudo apt-get install -y -q kodi &> /dev/null
+#echo "[Installing Kodi Media Center]"
+#sudo apt-get install -y -q kodi &> /dev/null
 #TODO: find prepackaged configuration files
 
 #echo "[Installing Transmission for bittorrents]"
@@ -89,11 +89,11 @@ sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q qbittorrent &> /dev/null
 
-echo "[Installing Thunderbird (e-mail client)]"
-sudo apt-get install -y -q thunderbird &> /dev/null
+#echo "[Installing Thunderbird (e-mail client)]"
+#sudo apt-get install -y -q thunderbird &> /dev/null
 
-echo "[Installing Geary (e-mail client, alternative to Thunderbird)]"
-sudo apt-get install -y -q geary &> /dev/null
+#echo "[Installing Geary (e-mail client, alternative to Thunderbird)]"
+#sudo apt-get install -y -q geary &> /dev/null
 
 #echo "[Installing Evolution (e-mail client, alternative to Thunderbird) ]"
 #sudo apt-get install -y -q evolution &> /dev/null
@@ -117,11 +117,11 @@ sudo apt-get install -y -q simplescreenrecorder &> /dev/null
 #sudo apt-get update -y -q &> /dev/null
 #sudo apt-get install -y -q darktable &> /dev/null
 
-echo "[Installing Digikam photo editor]"
-sudo apt-get install -y -q digikam &> /dev/null
+#echo "[Installing Digikam photo editor]"
+#sudo apt-get install -y -q digikam &> /dev/null
 
-echo "[Installing Shotwell photo editor]"
-sudo apt-get install -y -q shotwell &> /dev/null
+#echo "[Installing Shotwell photo editor]"
+#sudo apt-get install -y -q shotwell &> /dev/null
 
 #echo "[Installing RawTherapee photo editor]"
 #sudo add-apt-repository -y ppa:dhor/myway  &> /dev/null
@@ -134,35 +134,35 @@ sudo apt-get install -y -q pinta &> /dev/null
 echo "[Installing GIMP (Photoshop alternative)]"
 sudo apt-get install -y -q gimp &> /dev/null
 
-echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
-sudo apt-get install -y -q inkscape &> /dev/null
+#echo "[Installing Inkscape (vector drawing and PDF editor, like LibreOffice Draw - alternative to Adobe Illustrator)]"
+#sudo apt-get install -y -q inkscape &> /dev/null
 
 #echo "[Installing LibreOffice (FOSS alternative to MS Office)]"
 #sudo apt-get install -y -q libreoffice &> /dev/null
 
-echo "[Installing Evince (PDF viewer and annotator)]"
-sudo apt-get install -y -q evince &> /dev/null
+#echo "[Installing Evince (PDF viewer and annotator)]"
+#sudo apt-get install -y -q evince &> /dev/null
 
 #echo "[Installing Okular (PDF viewer and annotator)]"
 #sudo apt-get install -y -q okular &> /dev/null
 
-echo "[Installing Pdftk (PDF manipulation)]"
-sudo apt-get install -y -q pdftk &> /dev/null
+#echo "[Installing Pdftk (PDF manipulation)]"
+#sudo apt-get install -y -q pdftk &> /dev/null
 
-echo "[Installing PDFChain (Pdftk GUI)]"
-sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
-sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q pdfchain &> /dev/null
-sudo add-apt-repository -y  -r ppa:pdfchain-team/ppa &> /dev/null # Removes repo, seems to break things !
+#echo "[Installing PDFChain (Pdftk GUI)]"
+#sudo add-apt-repository -y ppa:pdfchain-team/ppa &> /dev/null
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q pdfchain &> /dev/null
+#sudo add-apt-repository -y  -r ppa:pdfchain-team/ppa &> /dev/null # Removes repo, seems to break things !
 
 #echo "[Installing Mcomix (comic viewer)]"
 #sudo apt-get install -y -q mcomix &> /dev/null
 
-echo "[Installing Qcomicbook (comic viewer)]"
-sudo apt-get install -y -q qcomicbook &> /dev/null
+#echo "[Installing Qcomicbook (comic viewer)]"
+#sudo apt-get install -y -q qcomicbook &> /dev/null
 
-echo "[Installing Calibre (ebook reader)]"
-sudo apt-get install -y -q calibre &> /dev/null
+#echo "[Installing Calibre (ebook reader)]"
+#sudo apt-get install -y -q calibre &> /dev/null
 
 echo "[Installing Bleachbit (cleaner)]"
 sudo apt-get install -y -q bleachbit &> /dev/null
@@ -196,11 +196,10 @@ EOF
 # TODO: install + configure packages (linters, debuggers, autocompletion, tools ) [python, bash, C, C++...]
 #       And add those files to the repo!
 
-echo "[Installing Sublime 3 Text Editor]"
-sudo add-apt-repository -y ppa:webupd8team/sublime-text-3 &> /dev/null
-sudo apt-get update -y -q &> /dev/null
-sudo apt-get install -y -q sublime-text-installer &> /dev/null
-echo "export PATH=\$PATH:/opt/sublime" >> ~/.environment
+#echo "[Installing Sublime 3 Text Editor]"
+#sudo add-apt-repository -y ppa:webupd8team/sublime-text-3 &> /dev/null
+#sudo apt-get update -y -q &> /dev/null
+#sudo apt-get install -y -q sublime-text-installer &> /dev/null
 # Licenses: https://gist.github.com/rudzainy/0d5965e9b5862fe57c2d9ba5b69d24a6
 # TODO: install + configure packages (linters, debuggers, autocompletion, tools ) [python, bash, C, C++...]
 #       And add those files to the repo!
@@ -244,7 +243,7 @@ gsettings set org.gnome.gedit.preferences.editor display-right-margin true
 gsettings set org.gnome.gedit.preferences.editor right-margin-position 110
 gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
 gsettings set org.gnome.gedit.preferences.editor use-default-font false #true
-gsettings set org.gnome.gedit.preferences.editor editor-font 'Monospace Regular 11'
+gsettings set org.gnome.gedit.preferences.editor editor-font 'Ubuntu Mono Regular 14'
 gsettings set org.gnome.gedit.preferences.editor display-overview-map true
 gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 
@@ -287,7 +286,7 @@ profId=$(gsettings get org.gnome.Terminal.ProfilesList default | sed "s/^\([\"']
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
 dconf write /org/gnome/terminal/legacy/profiles:/:$profId/use-system-font false
-dconf write /org/gnome/terminal/legacy/profiles:/:$profId/font "'Monospace Regular 11'"  #two quotes!!
+dconf write /org/gnome/terminal/legacy/profiles:/:$profId/font "'Ubuntu Mono Regular 14'"  #two quotes!!
 # Ctrl+PageDown for Next Tab
 # Ctrl+PageUp for Previous Tab
 
@@ -313,7 +312,7 @@ gconftool-2 --type Boolean --set /apps/guake/general/window_losefocus False
 gconftool-2 --type Boolean --set /apps/guake/general/window_ontop False
 gconftool-2 --type string  --set /apps/guake/style/font/palette_name 'Dracula'
 gconftool-2 --type Boolean --set /apps/guake/general/use_default_font False
-gconftool-2 --type string  --set /apps/guake/style/font/style 'Monospace Regular 11'
+gconftool-2 --type string  --set /apps/guake/style/font/style 'Ubuntu Mono Regular 14'
 gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
 timeout 2.5 guake-prefs &> /dev/null  || true
 #Add guake to startup applications
@@ -417,7 +416,7 @@ sudo add-apt-repository -y ppa:noobslab/icons &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q ultra-flat-icons &> /dev/null
 
-echo "[Configuring viusal aspect]"
+echo "[Configuring visual aspect]"
 #TODO: Changes displays scale factor (code below does not work)
 #export scales=$(dconf read /com/ubuntu/user-interface/scale-factor)
 #newscales=$(python <<EOF
@@ -486,7 +485,7 @@ sudo apt-get install -y -q libavcodec-extra libavcodec-ffmpeg-extra56  &> /dev/n
 # Install the latest proprietary Linux graphics drivers available for your hardware
 #       http://www.webupd8.org/2016/06/how-to-install-latest-nvidia-drivers-in.html
 #       https://ubuntu-mate.community/t/how-to-install-graphics-card-drivers-in-ubuntu/3228
-echo "[You may want to install specific GPU drivers. Opening a windows (close it to skip this step)]"
+echo "[You may want to install specific GPU drivers. Opening a window (close it to skip this step)]"
 nohup software-properties-gtk --open-tab=4 &> /dev/null &
 
 sudo apt autoremove -y -q &> /dev/null

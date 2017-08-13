@@ -17,7 +17,7 @@ sudo apt update -y -q &> /dev/null
 
 echo
 echo "[Installing Git]"
-sudo apt-get install -y -q git &> /dev/null
+sudo apt-get install -y -q git tig &> /dev/null
 
 echo "[Installing meld, tkdiff and diffuse]" #Tell git which one to use! meld or diffuse
 sudo apt-get install -y -q meld tkdiff diffuse &> /dev/null  #Install kdiff3? needs kde runtime :S
