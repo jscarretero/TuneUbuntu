@@ -243,7 +243,7 @@ gsettings set org.gnome.gedit.preferences.editor display-right-margin true
 gsettings set org.gnome.gedit.preferences.editor right-margin-position 110
 gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
 gsettings set org.gnome.gedit.preferences.editor use-default-font false #true
-gsettings set org.gnome.gedit.preferences.editor editor-font 'Ubuntu Mono Regular 14'
+gsettings set org.gnome.gedit.preferences.editor editor-font 'Ubuntu Mono Regular 15'
 gsettings set org.gnome.gedit.preferences.editor display-overview-map true
 gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 
@@ -286,7 +286,7 @@ profId=$(gsettings get org.gnome.Terminal.ProfilesList default | sed "s/^\([\"']
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 gsettings set org.gnome.Terminal.Legacy.Settings tab-position 'bottom'
 dconf write /org/gnome/terminal/legacy/profiles:/:$profId/use-system-font false
-dconf write /org/gnome/terminal/legacy/profiles:/:$profId/font "'Ubuntu Mono Regular 14'"  #two quotes!!
+dconf write /org/gnome/terminal/legacy/profiles:/:$profId/font "'Ubuntu Mono Regular 15'"  #two quotes!!
 # Ctrl+PageDown for Next Tab
 # Ctrl+PageUp for Previous Tab
 
@@ -312,7 +312,7 @@ gconftool-2 --type Boolean --set /apps/guake/general/window_losefocus False
 gconftool-2 --type Boolean --set /apps/guake/general/window_ontop False
 gconftool-2 --type string  --set /apps/guake/style/font/palette_name 'Dracula'
 gconftool-2 --type Boolean --set /apps/guake/general/use_default_font False
-gconftool-2 --type string  --set /apps/guake/style/font/style 'Ubuntu Mono Regular 14'
+gconftool-2 --type string  --set /apps/guake/style/font/style 'Ubuntu Mono Regular 15'
 gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
 timeout 2.5 guake-prefs &> /dev/null  || true
 #Add guake to startup applications
