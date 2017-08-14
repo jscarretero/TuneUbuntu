@@ -380,8 +380,7 @@ gconftool-2 --type Boolean --set /apps/docky-2/WeatherDocklet/WeatherPreferences
 gconftool-2 --type Integer --set /apps/docky-2/WeatherDocklet/WeatherPreferences/Timeout 60
 nohup docky &> /dev/null &
 
-# Hide Unity dock
-#echo "[Hiding Unity dock (will not disable it)]"
+# Hide Unity dock (will not disable it)
 #http://askubuntu.com/questions/643028/shell-script-to-remove-unity-launcherif-present-in-ubuntu-14-04-and-or-the-xf
 dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1   #0 to enable back
 dconf write /org/compiz/profiles/unity/plugins/unityshell/edge-responsiveness 0  #2 to enable back
