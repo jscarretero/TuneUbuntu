@@ -164,15 +164,15 @@ sudo apt-get install -y -q gimp &> /dev/null
 #echo "[Installing Calibre (ebook reader)]"
 #sudo apt-get install -y -q calibre &> /dev/null
 
-echo "[Installing Bleachbit (cleaner)]"
-sudo apt-get install -y -q bleachbit &> /dev/null
+#echo "[Installing Bleachbit (cleaner)]"
+#sudo apt-get install -y -q bleachbit &> /dev/null
 
 echo "[Installing Oracle's VirtualBox]"
 sudo apt-get install -y -q virtualbox-qt &> /dev/null
 
 # ---- editing - programming stuff
 
-echo "[Installing Atom editor]"
+echo "[Installing Atom editor]"  #TODO: remove in favour of Visual Studio Code (FOSS)
 sudo add-apt-repository -y ppa:webupd8team/atom &> /dev/null
 sudo apt-get update -y -q &> /dev/null
 sudo apt-get install -y -q atom &> /dev/null
@@ -209,7 +209,7 @@ EOF
 # https://gist.github.com/brunolm/65a760f6130fd2e1d39c
 # https://askubuntu.com/a/616080
 
-echo "[Installing Remarkable (Markdown editor)]"
+echo "[Installing Remarkable (Markdown editor)]"  #TODO: do I need it when Visual Studio Code has extensions?
 wget --quiet https://remarkableapp.github.io/files/remarkable_1.87_all.deb  #FIXME with latest file name
 sudo apt-get install -y -q gdebi &> /dev/null
 sudo gdebi -q -n remarkable_1.87_all.deb &> /dev/null                        #FIXME with latest file name
@@ -229,7 +229,7 @@ sudo apt-get install -y -q nano &> /dev/null
  echo "unset nonewlines" >> ~/.nanorc
  echo "set tabstospaces" >> ~/.nanorc
 
-echo "[Installing Gedit and configuring it]" # WARNING: gedit has no dev support anymore, hasn't it?
+echo "[Installing Gedit and configuring it]" # WARNING: gedit has no dev support anymore, does it?
 # http://askubuntu.com/questions/571877/how-to-change-gedit-preferences-from-terminal
 killall gedit &> /dev/null || true
 sudo apt-get install -y -q gedit &> /dev/null
@@ -467,7 +467,6 @@ gsettings set org.gnome.desktop.peripherals.keyboard repeat true
 # TODO?: DropBox
 # TODO?: Gufws
 # TODO?: Peazip GUI
-# TODO?: Pomodoro - Tomate
 # TODO?: Password manager like KeepPass, but that synchronizes to cloud
 
 echo "[Installing Restricted extras and addons]"

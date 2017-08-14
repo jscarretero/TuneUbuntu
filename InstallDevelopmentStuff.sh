@@ -5,7 +5,7 @@
 # Before running this sript on a fresh Ubuntu installation, I recommend you to try it on a virtual machine
 # where you may have installed that Ubuntu image.
 
-set -e 
+set -e
 
 echo "[Updating list of available packages]"
 sudo apt update -y -q &> /dev/null
@@ -19,7 +19,7 @@ echo
 echo "[Installing Git]"
 sudo apt-get install -y -q git tig &> /dev/null
 
-echo "[Installing meld, tkdiff and diffuse]" #Tell git which one to use! meld or diffuse
+echo "[Installing meld, tkdiff and diffuse]" # TODO: Tell git which one to use! meld or diffuse
 sudo apt-get install -y -q meld tkdiff diffuse &> /dev/null  #Install kdiff3? needs kde runtime :S
 
 echo "[Installing Curl]"
