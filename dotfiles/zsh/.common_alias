@@ -19,6 +19,9 @@ go () { gnome-open $1 &> /dev/null & disown; }
 # History search (use: hs sometext)
 alias hs='history | grep -i $1'
 
+# History clean (until fix is provided by oh-my-zsh)
+alias history-c='truncate -s 0 $HISTFILE'
+
 # Clear terminal
 alias c='clear'
 
