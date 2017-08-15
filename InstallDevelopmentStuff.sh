@@ -46,9 +46,6 @@ sudo apt-get install -y -q screen &> /dev/null
 echo "[Installing Nmap]"
 sudo apt-get install -y -q nmap &> /dev/null
 
-echo "[Installing Ctags]"
-sudo apt-get install -y -q ctags &> /dev/null
-
 echo "[Installing OpenSSL]"
 sudo apt-get install -y -q openssl &> /dev/null
 
@@ -58,6 +55,9 @@ sudo apt-get install -y -q openssh-client openssh-server &> /dev/null
 echo "[Installing Python 2.7.*]"
 sudo apt-get install -y -q python &> /dev/null
 #sudo apt-get install -y -q python-dev &> /dev/null
+
+echo "[Installing Ctags]"
+sudo apt-get install -y -q ctags &> /dev/null
 
 echo "[Installing Python 3.5.*]"
 sudo apt-get install -y -q python3.5 &> /dev/null
@@ -169,8 +169,8 @@ sudo apt-get install -y -q dstat &> /dev/null
 #    rm -rf "$tmpDir"
 #    sudo ln -s /opt/dstat/share/dstat/  /opt/dstat/bin/plugins
 #    export PATH="$PATH:/opt/dstat/bin"
-#    echo "" >> ~/.bashsrc
-#    echo 'export PATH="$PATH:/opt/dstat/bin"' >> ~/.bashrc
+#    echo "" >> ~/.environment
+#    echo 'export PATH="$PATH:/opt/dstat/bin"' >> ~/.environment
 
 sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
