@@ -1,0 +1,41 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/.pyc": true
+    },
+    "editor.fontFamily": "'Ubuntu Mono'",
+    "editor.fontSize": 18,
+    "editor.lineHeight": 19,
+    "editor.rulers": [
+        79,
+        109
+    ],
+    "editor.minimap.enabled": false,
+    "editor.mouseWheelScrollSensitivity": 2,
+    "editor.folding": false,
+
+    "files.trimTrailingWhitespace": true,
+    "files.useExperimentalFileWatcher": true,
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true
+    },
+
+    "markdown.preview.fontSize": 19,
+
+    "extensions.autoUpdate": true,
+
+    "terminal.integrated.fontSize": 18,
+    "terminal.integrated.scrollback": 1,
+
+    "telemetry.enableTelemetry": false,
+    "window.zoomLevel": 0,
+
+    "workbench.colorTheme": "Dracula"
+}
+

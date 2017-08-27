@@ -188,7 +188,7 @@ cat <<EOF > $HOME/.atom/config.cson
   editor:
     atomicSoftTabs: false
     lineHeight: 1.3
-    preferredLineLength: 110
+    preferredLineLength: 79
     showIndentGuide: true
     tabLength: 4
     tabType: "soft"
@@ -240,7 +240,7 @@ gsettings set org.gnome.gedit.preferences.editor insert-spaces true
 gsettings set org.gnome.gedit.preferences.editor tabs-size 4
 gsettings set org.gnome.gedit.preferences.editor auto-indent true
 gsettings set org.gnome.gedit.preferences.editor display-right-margin true
-gsettings set org.gnome.gedit.preferences.editor right-margin-position 110
+gsettings set org.gnome.gedit.preferences.editor right-margin-position 79
 gsettings set org.gnome.gedit.preferences.editor scheme 'oblivion'
 gsettings set org.gnome.gedit.preferences.editor use-default-font false #true
 gsettings set org.gnome.gedit.preferences.editor editor-font 'Ubuntu Mono Regular 15'
