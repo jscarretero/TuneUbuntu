@@ -14,7 +14,7 @@ if ! [ "$XDG_CURRENT_DESKTOP" == "Unity" ] ; then
 fi
 
 echo "[Updating list of available packages]"
-sudo apt-get install -y -q zsh &> /dev/null
+sudo  apt-get install -y -q zsh &> /dev/null
 sudo apt update -y -q &> /dev/null
 
 #echo "[Upgrading system packages. This will take a while...]"

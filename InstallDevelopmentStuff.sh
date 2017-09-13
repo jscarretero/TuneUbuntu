@@ -8,7 +8,7 @@
 set -e
 
 echo "[Updating list of available packages]"
-sudo apt update -y -q &> /dev/null
+sudo  apt update -y -q &> /dev/null
 
 #echo
 #echo "[Upgrading system packages. This will take a while...]"
@@ -143,15 +143,6 @@ sudo apt-get install -y -q clang &> /dev/null
 
 #echo "[Installing OpenMPI bin-common and libdev]"
 #sudo apt-get install -y -q openmpi-bin openmpi-common libopenmpi-dev &> /dev/null
-
-echo "[Installing Java Open JDK 8]"
-#https://ubunlog.com/instalar-configurar-java-ubuntu-17-04/
-sudo apt-get install -y -q default-jdk &> /dev/null #Open JDK 8
-#sudo add-apt-repository -y ppa:webupd8team/java &> /dev/null
-#sudo apt update -y -q &> /dev/null
-#sudo apt-get install -y -q oracle-java9-installer # &> /dev/null
-#https://www.digitalocean.com/community/tutorials/como-instalar-java-con-apt-get-en-ubuntu-16-04-es
-# sudo update-alternatives --config java # To choose java version to use
 
 echo "[Installing Dstat (system-level performance monitor)]"
 sudo apt-get install -y -q dstat &> /dev/null
