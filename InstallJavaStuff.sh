@@ -22,17 +22,12 @@ sudo add-apt-repository -r ppa:webupd8team/java
 # sudo apt install oracle-java8-set-default #does more things than the commands below
 echo >> ~/.environment
 JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
-echo "export JAVA_HOME=$JAVA_HOME" >> ~/.environment
+echo "export JAVA_HOME=$JAVA_HOME" >> ~/.environment   #FIXME siempre?
 
-#TODO
-alias useJava8=yes | sudo apt-get install  -y -q oracle-java8-set-default &> /dev/null && export JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
+echo "      source ~/.java_alias" >> ~/.zshrc
 
 # Install Maven
-
-    # Install Gradle
-
-    # Install Ant
-
+sudo apt-get install -y -q maven &> /dev/null
 
 echo "[Installing IntelliJ IDEA]"
 # https://stackoverflow.com/questions/30130934/how-to-install-intellij-idea-on-ubuntu
@@ -45,33 +40,49 @@ FILE=$(basename ${URL})
 DEST=~/Downloads/$FILE
 DIR="/opt/idea-I$ed-$VERSION"
 BIN="$DIR/bin"
-DESK=/usr/share/applications/IDEA.desktop
+DESK=/usr/share/applications/IDEA.desktop #CHANGE FIXME
 
-wget -cO ${DEST} ${URL} --read-timeout=5 --tries=0
+wget -qcO ${DEST} ${URL} --read-timeout=5 --tries=0
 
-if mkdir ${DIR}; then
-    tar -xzf ${DEST} -C ${DIR} --strip-components=1
-fi
+sudo mkdir -p ${DIR} &> /dev/null
+sudo tar -xzf ${DEST} -C ${DIR} --strip-components=1
+sudo chmod -R +rwx ${DIR}
 
-chmod -R +rwx ${DIR}
-#echo "[Desktop Entry]\nEncoding=UTF-8\nName=IntelliJ IDEA\nComment=IntelliJ IDEA\nExec=${BIN}/idea.sh\nIcon=${BIN}/idea.png\nTerminal=false\nStartupNotify=true\nType=Application" -e > c
+echo "[Desktop Entry]\nEncoding=UTF-8\nName=IntelliJ IDEA\nComment=IntelliJ IDEA\nExec=${BIN}/idea.sh\nIcon=${BIN}/idea.png\nTerminal=false\nStartupNotify=true\nType=Application" -e | sudo tee ${DESK} &> /dev/null
 
-#TODO: check
-cat <<EOF > ${DESK}
+DESK=$HOME/.local/share/applications/IDEA.desktop
+cat <<EOF > $DESK
 [Desktop Entry]
 Encoding=UTF-8
 Name=IntelliJ IDEA
 Comment=IntelliJ IDEA
-Exec=${BIN}/idea.sh
+Exec=${BIN}/bin/idea.sh
 Icon=${BIN}/idea.png
 Terminal=false
 StartupNotify=true
 Type=Application
 EOF
 
-ln -s ${BIN}/idea.sh /usr/local/bin/idea
+sudo ln -s -f ${BIN}/idea.sh /usr/local/bin/idea
 
-#TODO: Add to dock bar
+# Add IDEA.desktop to docky bar (if docky exists)
+if which docky &> /dev/null ;
+then
+    killall docky &> /dev/null || true
+    launchers=$(gconftool-2 --get /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers)
+    sortlist=$(gconftool-2 --get /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList)
+    launchers=${launchers::-1}
+    launcher="file://$DESK"
+    launchers="$launchers,$launcher"]
+    sortlist=${sortlist::-1}
+    newsorted="$DESK"
+    sortlist="$sortlist,$newsorted"]
+    gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/Launchers $launchers
+    gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList $sortlist
+    echo $launchers
+    echo $sortlist
+    nohup docky &> /dev/null &
+fi
 
 sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null

@@ -5,9 +5,9 @@
 
       # Bundles from the default repo (robbyrussell's oh-my-zsh). Check them :)
       antigen bundle command-not-found
-      antigen bundle git
-      antigen bundle git-extras
-      antigen bundle git-flow
+      #antigen bundle git
+      #antigen bundle git-extras
+      #antigen bundle git-flow
       # antigen bundle pip
       # antigen bundle pyenv
       # antigen bundle python # what does it do?
@@ -43,11 +43,7 @@
       # Exports.
       export EDITOR='nano'
 
-      # Other.
-      source ~/.apt_alias
-      source ~/.common_alias
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=black,bold' #fixes guake color clash for zsh-users autosuggestions
-      source ~/.environment
 
       export HISTSIZE=300              #History size
       export SAVEHIST=300              #Saved history size after logout
@@ -55,3 +51,9 @@
       setopt INC_APPEND_HISTORY        #Append into history file
       setopt HIST_IGNORE_DUPS          #Save only one command if 2 common are same and consistent
       setopt EXTENDED_HISTORY          #Add timestamp for each entry
+
+
+      # Other.
+      source ~/.environment
+      source ~/.apt_alias
+      source ~/.common_alias
