@@ -260,7 +260,8 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
   #Change keybindings to move to new tab from Ctl+Alt+PgUp/Down to Ctrl+PgUp/Down (plugin)
   git clone https://github.com/jefferyto/gedit-control-your-tabs.git &> /dev/null
   cp ./gedit-control-your-tabs/controlyourtabs.plugin ~/.local/share/gedit/plugins
-  cp ./gedit-control-your-tabs/controlyourtabs.py ~/.local/share/gedit/plugins
+  #cp -rf gedit-control-your-tabs/ ~/.local/share/gedit/plugins/
+  #cp ./gedit-control-your-tabs/controlyourtabs.py ~/.local/share/gedit/plugins
   \rm -rf gedit-control-your-tabs
   plugins=`gsettings get org.gnome.gedit.plugins active-plugins` ; plugins=${plugins::-1} ;
   plugins="$plugins, 'controlyourtabs']"
