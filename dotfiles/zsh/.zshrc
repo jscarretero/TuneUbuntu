@@ -55,5 +55,5 @@
 
       # Other.
       source ~/.environment
-      source ~/.apt_alias
-      source ~/.common_alias
+      source ~/.sourced
+

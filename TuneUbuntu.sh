@@ -275,10 +275,10 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 
   #TODO: more color schemes here: https://delightlylinux.wordpress.com/2015/03/25/gedit-themes/
 
-echo "[Installing GitKraken (GIT client)]"
-wget -q https://release.gitkraken.com/linux/gitkraken-amd64.deb
-sudo dpkg -i gitkraken-amd64.deb &> /dev/null
-\rm -rf gitkraken-amd64.deb
+#echo "[Installing GitKraken (GIT client)]"
+#wget -q https://release.gitkraken.com/linux/gitkraken-amd64.deb
+#sudo dpkg -i gitkraken-amd64.deb &> /dev/null
+#\rm -rf gitkraken-amd64.deb
 
 echo "[Installing Gnome-Terminal and configuring it]"
 sudo apt-get install -y -q gnome-terminal &> /dev/null
@@ -329,21 +329,24 @@ mv antigen .antigen &> /dev/null
 git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions &> /dev/null
 
 #Backup .zshrc if it exists
-if [ -f "~/.zshrc" ] ; then
+if [ -f ~/.zshrc ] ; then
     echo "...backing up .zshrc file to $HOME/.antigen/.zshrc_bck"
-    cp ~/.zshrc $HOME/.antigen/.zshrc_bck
+    cp -f ~/.zshrc $HOME/.antigen/.zshrc_bck
 fi
 
 rm -rf ~/.zshrc
 
 # Create alias soft links
 ln -s ~/TuneUbuntu/dotfiles/zsh/.zshrc ~/.zshrc  &> /dev/null
-declare -a arr=(".common_alias" ".apt_alias" ".environment")
+declare -a arr=(".common_alias" ".apt_alias")
 for i in "${arr[@]}"
 do
     ln -s ~/TuneUbuntu/dotfiles/zsh/$i ~/$i  &> /dev/null
 done
 popd &> /dev/null
+
+echo "source .common_alias" >> $HOME/.sourced
+echo "source .apt_alias" >> $HOME/.sourced
 
 echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null

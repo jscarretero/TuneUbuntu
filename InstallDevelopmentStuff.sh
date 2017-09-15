@@ -86,7 +86,7 @@ Terminal=false
 StartupWMClass=jetbrains-pycharm-ce
 EOF
 
-grep -q "PyCharm" ~/.environment || echo "export PATH=\$PATH:$pycharmPath" >> ~/.environment
+echo "export PATH=\$PATH:$pycharmPath" >> ~/.environment
 
 # Add pycharm.desktop to docky bar (if docky exists)
 if which docky &> /dev/null ;
@@ -146,7 +146,7 @@ sudo apt-get install -y -q clang &> /dev/null
 
 echo "[Installing Dstat (system-level performance monitor)]"
 sudo apt-get install -y -q dstat &> /dev/null
-#    echo "[Installing Dstat (system-level performance monitor)]"
+#    echo "[Installing Dstat (system-level performance monitor) - manual install]"
 #    tmpDir=`mktemp -d`
 #    pushd . &> /dev/null
 #    cd "$tmpDir"
