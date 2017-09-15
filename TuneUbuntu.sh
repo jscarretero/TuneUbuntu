@@ -271,7 +271,7 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
   wget --quiet -O $HOME/.local/share/gedit/styles/dracula.xml https://raw.githubusercontent.com/dracula/gedit/master/dracula.xml
   #Patch the 'selection' color to not clash with 'current-line' color (black color) ... fuck that
   sed -i '/selection" value/c\    \<color name="selection" value="#000000"/\>' $HOME/.local/share/gedit/styles/dracula.xml
-  gsettings set org.gnome.gedit.preferences.editor scheme 'dracula'
+  #gsettings set org.gnome.gedit.preferences.editor scheme 'dracula'
 
   #TODO: more color schemes here: https://delightlylinux.wordpress.com/2015/03/25/gedit-themes/
 
