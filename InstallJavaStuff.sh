@@ -87,6 +87,8 @@ sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
 sudo apt-get -y -q autoclean &> /dev/null
 
+# TODO: Install Tomcat or use Embedded Tomcat?
+
 echo "[ DONE! ]"
 notify-send " DONE!!     :)"
 
