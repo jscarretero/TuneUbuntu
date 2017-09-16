@@ -67,3 +67,9 @@ pip install -q --upgrade pip &> /dev/null
 echo "[Installing Python Virtualenv]"
 pip install --user -q virtualenv &> /dev/null
 
+sudo apt autoremove -y -q &> /dev/null
+sudo apt clean -y -q &> /dev/null
+sudo apt-get -y -q autoclean &> /dev/null
+echo "[ DONE! ]"
+
+notify-send " DONE!!     :)"

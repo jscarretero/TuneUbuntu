@@ -64,9 +64,6 @@ Type=Application
 StartupWMClass=jetbrains-idea-ce
 EOF
 
-#FIXME: add to PATH
-#sudo ln -s -f ${BIN}/idea.sh /usr/local/bin/idea
-
 # Add IDEA.desktop to docky bar (if docky exists)
 if which docky &> /dev/null ;
 then
@@ -83,6 +80,8 @@ then
     gconftool-2 --type list --list-type string --set /apps/docky-2/Docky/Interface/DockPreferences/Dock1/SortList $sortlist
     nohup docky &> /dev/null &
 fi
+
+echo "export PATH=\$PATH:${BIN}" >> ~/.environment
 
 sudo apt autoremove -y -q &> /dev/null
 sudo apt clean -y -q &> /dev/null
