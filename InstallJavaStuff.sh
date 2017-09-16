@@ -25,7 +25,8 @@ sudo add-apt-repository -y -r ppa:webupd8team/java &> /dev/null
 JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
 echo "export JAVA_HOME=$JAVA_HOME" >> ~/.environment
 
-echo "      source ~/.java_alias" >> ~/.sourced
+echo "source ~/.java_alias" >> ~/.sourced
+ln -s ~/TuneUbuntu/dotfiles/zsh/.java_alias ~/.java_alias  &> /dev/null
 
 # Install Maven
 echo "[Installing Maven for project building]"
@@ -35,7 +36,7 @@ echo "[Installing IntelliJ IDEA Community version]"
 # https://stackoverflow.com/questions/30130934/how-to-install-intellij-idea-on-ubuntu
 # http://breandan.net/2014/08/18/shell-script/
 
-# FIXME?: Install to $HOME/IntelliJ insteaad to /opt ?
+# FIXME?: Install to $HOME/IntelliJ instead to /opt ?
 ed=C  # IMPORTANT: Enter 'U' for Ultimate or 'C' for Community:
 VERSION=$(wget "https://www.jetbrains.com/intellij-repository/releases" -qO- | grep -P -o -m 1 "(?<=https://www.jetbrains.com/intellij-repository/releases/com/jetbrains/intellij/idea/BUILD/)[^/]+(?=/)")
 URL="https://download.jetbrains.com/idea/ideaI$ed-$VERSION.tar.gz"
