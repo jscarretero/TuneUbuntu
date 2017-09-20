@@ -12,8 +12,10 @@ Then, execute the following commands:
 $ cd TuneUbuntu
 $ ./TuneUbuntu.sh
 $ ./InstallDevelopmentStuff.sh
+$ ./InstallJavaStuff.sh
+$ ./InstallPythonStuff.sh
 ```
-Omit running the script ``` InstallDevelopmentStuff.sh ``` if you do not want programming tools and apps to be installed.
+Omit running the scripts ``` Install*Stuff.sh ``` if you do not want programming tools and apps to be installed.
 
 ## Notes
 
