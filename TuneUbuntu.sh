@@ -35,6 +35,12 @@ sudo apt-get install -y -q libgnome2-bin &> /dev/null
 sudo apt-get install -y -q tree &> /dev/null
 sudo apt-get install -y -q rar unace p7zip p7zip-full p7zip-rar unrar lzip lhasa arj sharutils mpack lzma lzop cabextract &> /dev/null
 
+echo
+echo "[Installing Ukuu (ubuntu kernel update utility)]" #ukuu-gtk
+sudo apt-add-repository -y ppa:teejee2008/ppa &> /dev/null
+sudo apt-get update -y -q &> /dev/null
+sudo apt-get install -y -q ukuu &> /dev/null
+
 echo "[Installing Chrome]"
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &> /dev/null
 sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
