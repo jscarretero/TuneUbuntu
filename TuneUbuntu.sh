@@ -205,8 +205,8 @@ do
 done
 popd &> /dev/null
 
-echo "source .common_alias" >> $HOME/.sourced
-echo "source .apt_alias" >> $HOME/.sourced
+echo "source ~/.common_alias" >> $HOME/.sourced
+echo "source ~/.apt_alias" >> $HOME/.sourced
 
 echo "[Installing Docky dock bar]"
 sudo apt-get install -y -q docky &> /dev/null
