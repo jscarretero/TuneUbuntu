@@ -160,23 +160,23 @@ sleep 1
 cd ..
 rm -rf ./gnome-terminal-colors-dracula
 
-echo "[Installing Guake (Ctr+F12 Terminal)]"
-sudo apt-get install -y -q guake &> /dev/null
-gconftool-2 --type Integer --set /apps/guake/general/window_height  100
-gconftool-2 --type Float   --set /apps/guake/general/window_height_f 100
-gconftool-2 --type Integer --set /apps/guake/general/window_width 100
-gconftool-2 --type Float   --set /apps/guake/general/window_width_f 100
-gconftool-2 --type Integer --set /apps/guake/style/background/transparency 0
-gconftool-2 --type Boolean --set /apps/guake/general/use_visible_bell  True
-gconftool-2 --type Boolean --set /apps/guake/general/window_losefocus False
-gconftool-2 --type Boolean --set /apps/guake/general/window_ontop False
-gconftool-2 --type string  --set /apps/guake/style/font/palette_name 'Dracula'
-gconftool-2 --type Boolean --set /apps/guake/general/use_default_font False
-gconftool-2 --type string  --set /apps/guake/style/font/style 'Ubuntu Mono Regular 15'
-gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
-timeout 2.5 guake-prefs &> /dev/null  || true
-#Add guake to startup applications
-sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
+#echo "[Installing Guake (Ctr+F12 Terminal)]"
+#sudo apt-get install -y -q guake &> /dev/null
+#gconftool-2 --type Integer --set /apps/guake/general/window_height  100
+#gconftool-2 --type Float   --set /apps/guake/general/window_height_f 100
+#gconftool-2 --type Integer --set /apps/guake/general/window_width 100
+#gconftool-2 --type Float   --set /apps/guake/general/window_width_f 100
+#gconftool-2 --type Integer --set /apps/guake/style/background/transparency 0
+#gconftool-2 --type Boolean --set /apps/guake/general/use_visible_bell  True
+#gconftool-2 --type Boolean --set /apps/guake/general/window_losefocus False
+#gconftool-2 --type Boolean --set /apps/guake/general/window_ontop False
+#gconftool-2 --type string  --set /apps/guake/style/font/palette_name 'Dracula'
+#gconftool-2 --type Boolean --set /apps/guake/general/use_default_font False
+#gconftool-2 --type string  --set /apps/guake/style/font/style 'Ubuntu Mono Regular 15'
+#gconftool-2 --type Boolean --set /apps/guake/general/use_popup False
+#vtimeout 2.5 guake-prefs &> /dev/null  || true
+##Add guake to startup applications
+#sudo ln -s /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
  # https://github.com/zsh-users/
  # https://github.com/zsh-users/antigen
